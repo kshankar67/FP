@@ -612,7 +612,7 @@
                 if ($('input[name=IsDOB]:checked').val() == "2") {
                     $('#BFYDOB').val('');
                     if ($('#BFYDOBYear').val()) {
-                        BeneficiaryModel.BFYDOBYear = toDate($('#BFYDOBYear').val());
+                        BeneficiaryModel.BFYDOBYear = $('#BFYDOBYear').val();
                     }
                 }
                 BeneficiaryModel.IsPregnant = $('input[name=IsPregnant]:checked').val();
