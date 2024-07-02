@@ -229,7 +229,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "समूह";
+                    CN = "क्लस्टर";
                 }
                 return CN;
             }
