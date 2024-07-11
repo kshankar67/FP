@@ -43,6 +43,7 @@ namespace FP
                             foreach (DataRow dr in dt.Rows)
                             {
                                 User.Id = dr["UId"].ToString();
+                                User.EId = dr["EId"].ToString();
                                 User.Name = dr["Name"].ToString();
                                 User.Email = dr["Email"].ToString();
                                 User.UserName = dr["UserName"].ToString();

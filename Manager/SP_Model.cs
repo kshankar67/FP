@@ -55,6 +55,17 @@ namespace FP.Manager
             DataTable dt = sp.ExecuteDataSet().Tables[0];
             return dt;
         }
+        public static DataTable SPCM(int DistrictId, int BlockId, int CLFId, int PanchayatId, int VOId)
+        {
+            StoredProcedure sp = new StoredProcedure("SP_CM");
+            sp.Command.AddParameter("@DistrictId", DistrictId, DbType.Int32);
+            sp.Command.AddParameter("@BlockId", BlockId, DbType.Int32);
+            sp.Command.AddParameter("@CLFId", CLFId, DbType.Int32);
+            sp.Command.AddParameter("@PanchayatId", PanchayatId, DbType.Int32);
+            sp.Command.AddParameter("@VOId", VOId, DbType.Int32);
+            DataTable dt = sp.ExecuteDataSet().Tables[0];
+            return dt;
+        }
         public static DataTable SpUserDetails(string Roleid, string CutUser)
         {
             FilterModel model = new FilterModel();
@@ -135,6 +146,7 @@ namespace FP.Manager
             sp.Command.AddParameter("@CLFId", model.CLFId, DbType.String);
             sp.Command.AddParameter("@PytId", model.PanchayatId, DbType.String);
             sp.Command.AddParameter("@VoId", model.VOId, DbType.String);
+            sp.Command.AddParameter("@CMID", model.CMID, DbType.String);
             sp.Command.AddParameter("@Month", model.Month, DbType.String);
             sp.Command.AddParameter("@Year", model.Year, DbType.String);
             sp.Command.AddParameter("@Role", MvcApplication.CUser.Role, DbType.String);
@@ -166,6 +178,7 @@ namespace FP.Manager
             sp.Command.AddParameter("@CLFId", model.CLFId, DbType.String);
             sp.Command.AddParameter("@PytId", model.PanchayatId, DbType.String);
             sp.Command.AddParameter("@VoId", model.VOId, DbType.String);
+            sp.Command.AddParameter("@CMID", model.CMID, DbType.String);
             sp.Command.AddParameter("@Month", model.Month, DbType.String);
             sp.Command.AddParameter("@Year", model.Year, DbType.String);
             sp.Command.AddParameter("@Role", MvcApplication.CUser.Role, DbType.String);
@@ -181,6 +194,7 @@ namespace FP.Manager
             sp.Command.AddParameter("@CLFId", model.CLFId, DbType.String);
             sp.Command.AddParameter("@PytId", model.PanchayatId, DbType.String);
             sp.Command.AddParameter("@VoId", model.VOId, DbType.String);
+            sp.Command.AddParameter("@CMID", model.CMID, DbType.String);
             sp.Command.AddParameter("@Month", model.Month, DbType.String);
             sp.Command.AddParameter("@Year", model.Year, DbType.String);
             sp.Command.AddParameter("@Role", MvcApplication.CUser.Role, DbType.String);
@@ -543,6 +557,7 @@ namespace FP.Manager
             sp.Command.AddParameter("@BlkId", model.BlockId, DbType.String);
             sp.Command.AddParameter("@PytId", model.PanchayatId, DbType.String);
             sp.Command.AddParameter("@VoId", model.VOId, DbType.String);
+            sp.Command.AddParameter("@CMID", model.CMID, DbType.String);
             sp.Command.AddParameter("@Month", model.Month, DbType.String);
             sp.Command.AddParameter("@Year", model.Year, DbType.String);
             sp.Command.AddParameter("@Role", model.RoleId, DbType.String);

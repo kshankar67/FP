@@ -39,6 +39,11 @@ namespace FP.Controllers
                     model.CLFId_fk = tbl.CLFId_fk;
                     model.PanchayatId_fk = tbl.PanchayatId_fk;
                     model.VillageOId_fk = tbl.VillageOId_fk;
+                    model.CMID = tbl.CMID;
+                    if (string.IsNullOrWhiteSpace(model.CMID) && CommonModel.RoleNameCont.CM == MvcApplication.CUser.Role)
+                    {
+                        model.CMID = MvcApplication.CUser.EId;
+                    }
                     model.ReportingMonth = tbl.ReportingMonth;
                     model.ReportingYear = tbl.ReportingYear;
                     model.HealthCenter = tbl.HealthCenter;
@@ -155,15 +160,19 @@ namespace FP.Controllers
                         tbl.Q20 = item.Q20;
                         tbl.Q21 = item.Q21;
                         tbl.IsActive = true;
+
+                        tbl.BlockId_fk = item.BlockId_fk;
+                        tbl.CLFId_fk = item.CLFId_fk;
+                        tbl.PanchayatId_fk = item.PanchayatId_fk;
+                        tbl.VillageOId_fk = item.VillageOId_fk;
+                        tbl.CMID = item.CMID;
+
                         if (item.Beneficiary_Id_pk == Guid.Empty)
                         {
                             tbl.Beneficiary_Id_pk = Guid.NewGuid();
                             tbl.HindiEng = item.HindiEng;
                             tbl.DistrictId_fk = item.DistrictId_fk;
-                            tbl.BlockId_fk = item.BlockId_fk;
-                            tbl.CLFId_fk = item.CLFId_fk;
-                            tbl.PanchayatId_fk = item.PanchayatId_fk;
-                            tbl.VillageOId_fk = item.VillageOId_fk;
+                            
                             tbl.CreatedBy = MvcApplication.CUser.Id;
                             tbl.CreatedOn = DateTime.Now;
                             tbl.UpdatedBy = MvcApplication.CUser.Id;
@@ -172,10 +181,6 @@ namespace FP.Controllers
                         }
                         else
                         {
-                            tbl.BlockId_fk = item.BlockId_fk;
-                            tbl.CLFId_fk = item.CLFId_fk;
-                            tbl.PanchayatId_fk = item.PanchayatId_fk;
-                            tbl.VillageOId_fk = item.VillageOId_fk;
                             tbl.UpdatedBy = MvcApplication.CUser.Id;
                             tbl.UpdatedOn = DateTime.Now;
                             res += _db.SaveChanges();

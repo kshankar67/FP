@@ -38,8 +38,12 @@ namespace FP.Models
         public Nullable<int> VillageOId_fk { get; set; }
 
         [Required]
+        [Display(Name = "CM")]
+        public string CMID { get; set; }
+
+        [Required]
         [Display(Name = "Reporting Month")]
-        public Nullable<int> ReportingMonth { get; set; }
+        public int ReportingMonth { get; set; }
 
         [Required]
         [Display(Name = "Reporting Year")]
@@ -66,7 +70,7 @@ namespace FP.Models
 
         [Required]
         [Display(Name = " ")]
-        public int IsDOB { get; set; }
+        public int IsDOB { get; set; } = 1;
 
         [RequiredIf("IsDOB", 1)]
         [Display(Name = "Date Of Birth")]
@@ -85,7 +89,7 @@ namespace FP.Models
 
         [Required]
         [Display(Name = "Date of marriage / Year")]
-        public Nullable<int> Q6DOMYear { get; set; }
+        public Nullable<int> Q6DOMYear { get; set; } = 2;
 
         [RequiredIf("Q6DOMYear", 1)]
         [Display(Name = "Date of marriage")]
@@ -100,7 +104,7 @@ namespace FP.Models
 
         [Required]
         [Display(Name = "SHG Affiliation")]
-        public Nullable<int> Q8 { get; set; }
+        public Nullable<int> Q8 { get; set; } = 1;
 
         [RequiredIf("Q8", 2)]
         [Display(Name = "Beneficiary's family member name who is associated with the SHG group")]
@@ -114,6 +118,8 @@ namespace FP.Models
         [Display(Name = "No of female child at present")]
         public Nullable<int> Q11 { get; set; }
 
+
+
         [Display(Name = "Age of youngest child (Year/months)")]
         public Nullable<double> Q12 { get; set; }
 
@@ -125,6 +131,7 @@ namespace FP.Models
         [Required]
         [Display(Name = "Youngest child gender (Boy/Girl)")]
         public string Q12_1 { get; set; }
+
 
         [Required]
         [Display(Name = "Code no of related AWC")]
@@ -152,9 +159,9 @@ namespace FP.Models
 
         public Nullable<int> Q19 { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Number of SHGs where module was rolled out")]
-        public Nullable<int> Q20 { get; set; }
+        public Nullable<int> Q20 { get; set; } = 0;
 
         [Required]
         [Display(Name = "Medium of module rollout")]
@@ -266,6 +273,22 @@ namespace FP.Models
                 return CN;
             }
         }
+        public string DCM
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "CM";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "सीएम";
+                }
+                return CN;
+            }
+        }
         public string HealthCD
         {
             get
@@ -362,30 +385,77 @@ namespace FP.Models
                 return CN;
             }
         }
-        public string Q4D
+        #region "Benificiary DOB"
+        public string BFYDOB_TD
         {
             get
             {
                 string CN = string.Empty;
                 if (HindiEng == 1)
                 {
-                    CN = "Date of birth beneficiary";
+                    CN = "Beneficiary Date of birth";
                 }
                 else if (HindiEng == 2)
                 {
                     CN = "लाभार्थी की जन्मतिथि";
                 }
-                //if (HindiEng == 1)
-                //{
-                //    CN = "Age of Beneficiary (In year/Month)";
-                //}
-                //else if (HindiEng == 2)
-                //{
-                //    CN = "लाभार्थी का उम्र (वर्ष में/माह)";
-                //}
+                
                 return CN;
             }
         }
+        public string Q4_TD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Beneficiary Year of birth";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "लाभार्थी की जन्मवर्ष";
+                }
+
+                return CN;
+            }
+        }
+        public string BFYDOBD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Date of birth";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "जन्म का तिथि";
+                }
+                
+                return CN;
+            }
+        }
+        public string BFYDOBYearD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Year of Birth";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "जन्म का वर्ष";
+                }
+                
+                return CN;
+            }
+        }
+        #endregion
+
         public string Q5D
         {
             get
@@ -402,6 +472,42 @@ namespace FP.Models
                 return CN;
             }
         }
+
+        #region Benificiray DOM
+        public string Q6_Date_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Marriage Date";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "शादी की तिथि";
+                }
+                return CN;
+            }
+        }
+
+        public string Q6_Year_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Marriage Year";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "शादी की वर्ष";
+                }
+                return CN;
+            }
+        }
+
         public string Q6_YearD
         {
             get
@@ -409,11 +515,11 @@ namespace FP.Models
                 string CN = string.Empty;
                 if (HindiEng == 1)
                 {
-                    CN = "Year";
+                    CN = "Year of marriage";
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "लाभार्थी के शादी की वर्ष";
+                    CN = "लाभार्थी की शादी की वर्ष";
                 }
                 return CN;
             }
@@ -429,11 +535,12 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "लाभार्थी के शादी की तिथि";
+                    CN = "लाभार्थी की शादी की तिथि";
                 }
                 return CN;
             }
         }
+        #endregion
 
         public string Q7D
         {
@@ -451,6 +558,8 @@ namespace FP.Models
                 return CN;
             }
         }
+
+        #region "SHG Affiliation"
         public string Q8D
         {
             get
@@ -467,6 +576,39 @@ namespace FP.Models
                 return CN;
             }
         }
+        public string Q8_Self_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Self";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "स्वयं";
+                }
+                return CN;
+            }
+        }
+        public string Q8_Other_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Any Other family member";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "परिवार का कोई अन्य सदस्य";
+                }
+                return CN;
+            }
+        }
+
         public string Q9D
         {
             get
@@ -483,6 +625,8 @@ namespace FP.Models
                 return CN;
             }
         }
+        #endregion
+
         public string Q10D
         {
             get
@@ -515,6 +659,8 @@ namespace FP.Models
                 return CN;
             }
         }
+
+        #region "Q12"
         public string Q12D
         {
             get
@@ -528,33 +674,60 @@ namespace FP.Models
                 {
                     CN = "सबसे छोटे बच्चे की जन्मतिथि";
                 }
-                //if (HindiEng == 1)
-                //{
-                //    CN = "Age of youngest child (Year/months)";
-                //}
-                //else if (HindiEng == 2)
-                //{
-                //    CN = "सबसे छोटे बच्चे की उम्र";
-                //}
                 return CN;
             }
         }
-        //public string QDOBYearD
-        //{
-        //    get
-        //    {
-        //        string CN = string.Empty;
-        //        if (HindiEng == 1)
-        //        {
-        //            CN = "Date of Birth (Youngest Child)";
-        //        }
-        //        else if (HindiEng == 2)
-        //        {
-        //            CN = "सबसे छोटे बच्चे की जन्मतिथि";
-        //        }
-        //        return CN;
-        //    }
-        //}
+
+        public string Q12_No_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "No";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "नहीं";
+                }
+                return CN;
+            }
+        }
+        public string Q12_Girl_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Girl";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "लड़की";
+                }
+                return CN;
+            }
+        }
+        public string Q12_Boy_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Boy";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "लड़का";
+                }
+                return CN;
+            }
+        }
+
+
         public string Q12_1D
         {
             get
@@ -571,6 +744,8 @@ namespace FP.Models
                 return CN;
             }
         }
+        #endregion
+
         public string Q13D
         {
             get
@@ -716,6 +891,39 @@ namespace FP.Models
             }
         }
 
+
+        public string Q_Yes_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "Yes";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "हाँ";
+                }
+                return CN;
+            }
+        }
+        public string Q_No_RD
+        {
+            get
+            {
+                string CN = string.Empty;
+                if (HindiEng == 1)
+                {
+                    CN = "No";
+                }
+                else if (HindiEng == 2)
+                {
+                    CN = "नहीं";
+                }
+                return CN;
+            }
+        }
 
     }
 }

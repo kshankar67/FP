@@ -192,6 +192,7 @@ namespace FP.Models
     public class UserViewModel
     {
         public string Id { get; set; }
+        public string EId { get; set; }
         public string PhoneNumber { get; set; }
         public string DistrictId { get; set; }
         public string District { get; set; }

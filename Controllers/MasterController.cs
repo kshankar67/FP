@@ -257,6 +257,23 @@ namespace FP.Controllers
                 return Json(new { IsSuccess = false, res = "There was a communication error." }, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult GetCMList(int DistrictId, int BlockId, int CLFId, int PanchayatId, int VOId)
+        {
+            try
+            {
+                var items = SP_Model.SPCM(DistrictId, BlockId, CLFId, PanchayatId, VOId);
+                if (items != null)
+                {
+                    var data = JsonConvert.SerializeObject(items);
+                    return Json(new { IsSuccess = true, res = data }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { IsSuccess = false, res = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new { IsSuccess = false, res = "There was a communication error." }, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult GetActivityList()
         {
             try

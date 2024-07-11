@@ -983,14 +983,14 @@ namespace FP.Manager
             list.Add(new SelectListItem { Value = "2", Text = "Year of marriage" });
             return list.OrderByDescending(x => x.Text).ToList();
         }
-        public static List<SelectListItem> GetDOBYear()
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            //list.Add(new SelectListItem { Value = "", Text = "Select" });
-            list.Add(new SelectListItem { Value = "1", Text = "Date of Birth", Selected = true });
-            list.Add(new SelectListItem { Value = "2", Text = "Year of Birth" });
-            return list.OrderByDescending(x => x.Text).ToList();
-        }
+        //public static List<SelectListItem> GetDOBYear()
+        //{
+        //    List<SelectListItem> list = new List<SelectListItem>();
+        //    //list.Add(new SelectListItem { Value = "", Text = "Select" });
+        //    list.Add(new SelectListItem { Value = "1", Text = "Date of Birth", Selected = true });
+        //    list.Add(new SelectListItem { Value = "2", Text = "Year of Birth" });
+        //    return list.OrderByDescending(x => x.Text).ToList();
+        //}
         public static List<SelectListItem> GetActivity()
         {
             FP_DBEntities dBE = new FP_DBEntities();
@@ -1949,6 +1949,7 @@ namespace FP.Manager
             public const string VO = "Village Org.";
             public const string Activities = "Activities";
             public const string VOFull = "Village Organization";
+            public const string CMID = "CM";
             public const string Month = "Month";
             public const string Year = "Year";
             public const string FromDate = "From Date";
