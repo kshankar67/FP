@@ -16,14 +16,15 @@
 </style>
 <div class="table-responsive">
     <table class="table table-bordered table-striped" id="tblbfy">
-        <thead class="text-center">
+        <thead >
             <tr>
                 <th>
                     Check All <br />
                     <input type="checkbox" class="allChecked" name="selectAll" id="selectAll" value="all" onchange="CheckUnchecked(this)" />
                 </th>
-                <th>Srno.</th>
                 <th>Beneficiary</th>
+                <th>Mobile No.</th>
+                <th>Husband</th>
             </tr>
         </thead>
         <tbody>
@@ -38,9 +39,9 @@
                                 <input type="checkbox" class="check" name="check" id="check@(srno)" onchange="CheckUnchecked(this)"
                                        data-bfyid="@item.Beneficiary_Id_pk" />
                             </td>
-                            <td class="text-center">@(srno++)</td>
-
-                            <td class="text-left">@item.Q2</td>
+                            <td class="text-left">@item.Q3</td>
+                            <td class="text-left">@item.Q7</td>
+                            <td class="text-left">@item.Q5</td>
                         </tr>
                     }
                 }

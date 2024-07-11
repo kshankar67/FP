@@ -610,6 +610,13 @@
                 success: function (res) {
                     if (res.IsSuccess) {
                         $("#modal-div-bfy").html(res.Data);
+
+                        if ($.fn.dataTable.isDataTable('#tbl')) {
+                            $("#tblbfy").dataTable().fnDestroy();
+                        }
+                        table = $('#tblbfy').DataTable({
+                            pageLength: 100,
+                        });
                     }
                     else {
                         $("#modal-div-bfy").html(res.Data);

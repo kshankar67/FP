@@ -21,7 +21,8 @@ namespace FP.Models
         public Nullable<int> CLFId_fk { get; set; }
         public Nullable<int> PanchayatId_fk { get; set; }
         public Nullable<int> VillageOId_fk { get; set; }
-        public Nullable<int> ReportingMonth { get; set; }
+        public string CMID { get; set; }
+        public int ReportingMonth { get; set; }
         public Nullable<int> ReportingYear { get; set; }
         public string HealthCenter { get; set; }
         public string BFYVillageName { get; set; }

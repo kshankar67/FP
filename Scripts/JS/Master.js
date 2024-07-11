@@ -24,6 +24,7 @@ $(function () {
         //maxdate: "+1m +10d",
         changemonth: true,
         changeyear: true,
+        yearRange: "-100:+0",
     });
     $.validator.methods.date = function (value, element) {
         return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
@@ -451,6 +452,40 @@ function GetVillage(Ele, Sel, Para1, Para2, Para3, Para4) {
     });
     $('#' + Ele).trigger("chosen:updated");
 }
+//CM List
+function GetCMList(Ele, Sel, Para1, Para2, Para3, Para4, Para5) {
+    $('#' + Ele).empty();
+    $('#' + Ele).prop("disabled", false);
+    $('#' + Ele).append($("<option>").val('').text('Select'));
+    $.ajax({
+        url: document.baseURI + "/Master/GetCMList",
+        type: "Post",
+        data: JSON.stringify({ 'DistrictId': Para1, 'BlockId': Para2, 'CLFId': Para3, 'PanchayatId': Para4, 'VOId': Para5, }),
+        contentType: "application/json; charset=utf-8",
+        global: false,
+        async: false,
+        dataType: "json",
+        success: function (resp) {
+            if (resp.IsSuccess) {
+                var data = JSON.parse(resp.res);
+                $.each(data, function (i, exp) {
+                    $('#' + Ele).append($("<option>").val(exp.Value).text(exp.Text));
+                });
+                if (data.length == 1) {
+                    $('#' + Ele).val(data[0].Value);
+                }
+            }
+        },
+        error: function (req, error) {
+            if (error === 'error') { error = req.statusText; }
+            var errormsg = 'There was a communication error: ' + error;
+            //Do To Message display
+        }
+    });
+    $('#' + Ele).trigger("chosen:updated");
+}
+
+
 
 function GetVOrg(Ele, Sel, Para1, Para2, Para3, Para4) {
     $(Ele).empty();

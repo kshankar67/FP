@@ -25,7 +25,7 @@
 </style>
 <div class="breadcrumb">
     <h2>Beneficiary Lists (Follow up)</h2>
-    <p><a href="~/Beneficiary/Beneficiary">Beneficiary </a> / Beneficiary Lists</p>
+    <p><a href="~/Beneficiary/Beneficiary?HindiEng=2">Beneficiary </a> / Beneficiary Lists</p>
 </div>
 <div class="container-fluid pt-4 px-4">
     <fieldset class="border rounded-3 p-3">
@@ -66,21 +66,28 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="position-relative form-group">
                                     @Html.LabelFor(model => model.VOId, htmlAttributes: new { @class = "control-label" })
                                     @Html.DropDownListFor(m => m.VOId, new List<SelectListItem>(), null, new { @class = "form-select " })
                                     @Html.ValidationMessageFor(model => model.VOId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
+                                <div class="position-relative form-group">
+                                    @Html.LabelFor(model => model.CMID, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownListFor(m => m.CMID, new List<SelectListItem>(), null, new { @class = "form-select " })
+                                    @Html.ValidationMessageFor(model => model.CMID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
                                 <div class="position-relative form-group">
                                     @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label" })
                                     @Html.DropDownListFor(m => m.Year, new List<SelectListItem>(), null, new { @class = "form-select " })
                                     @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="position-relative form-group">
                                     @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label" })
                                     @Html.DropDownListFor(m => m.Month, new List<SelectListItem>(), null, new { @class = "form-select " })
@@ -284,8 +291,11 @@
             $('#PanchayatId').change(function () {
                 GetVillage("VOId", 0, $('#DistrictId').val(), $('#BlockId').val(), $('#CLFId').val(), $(this).val());
             });
+            $('#VOId').change(function () {
+                GetCMList("CMID", 0, $('#DistrictId').val(), $('#BlockId').val(), $('#CLFId').val(), $('#PanchayatId').val(), $(this).val());
+            });
             /* Role Wise */
-            BindRolewise("DistrictId", "BlockId","CLFId", "PanchayatId", "VOId");
+            BindRolewise("DistrictId", "BlockId","CLFId", "PanchayatId", "VOId", "CMID");
 
             BindData();
 
@@ -380,6 +390,7 @@
             cmfollowupmodel.CLFId = $('#CLFId').val() == '' ? '' : $('#CLFId').val();
             cmfollowupmodel.PanchayatId = $('#PanchayatId').val() == '' ? '' : $('#PanchayatId').val();
             cmfollowupmodel.VoId = $('#VOId').val() == '' ? '' : $('#VOId').val();
+            cmfollowupmodel.CMID = $('#CMID').val() == '' ? '' : $('#CMID').val();
             cmfollowupmodel.Year = $('#Year').val() == '' ? '' : $('#Year').val();
             cmfollowupmodel.Month = $('#Month').val() == '' ? '' : $('#Month').val();
             var formData = $('#formid').serialize();

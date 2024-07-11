@@ -75,6 +75,11 @@
                         @Html.ValidationMessageFor(m => m.VillageOId_fk, "", new { @class = "text-danger" })
                     </div>
                     <div class="mb-3">
+                        @Html.Label(Model.DCM, htmlAttributes: new { @class = "" })
+                        @Html.DropDownListFor(m => m.CMID, new List<SelectListItem>(), null, new { @class = "form-select mb-3" })
+                        @Html.ValidationMessageFor(m => m.CMID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3">
                         @Html.Label(Model.ReportingDtD, htmlAttributes: new { @class = "" })
                         <div class="row">
                             <div class="col-md-6">
@@ -107,22 +112,28 @@
                     <div class="mb-3">
                         <div class="position-relative form-group">
                             <div class="checkbox">
-                                @foreach (var item in CommonModel.GetDOBYear())
-                                {
-                                    <span class="check-spacer">
-                                        @Html.RadioButtonFor(model => model.IsDOB, item.Value, new { id = "Q6DOBYear" + item.Value, @required = "required" }) @item.Text
-                                    </span>
-                                }
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.IsDOB, 1, new { id = "Q6DOBYear1", @required = "required", selected = true }) @Model.BFYDOBD
+                                </span>
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.IsDOB, 2, new { id = "Q6DOBYear2", @required = "required" }) @Model.BFYDOBYearD
+                                </span>
+                                @*@foreach (var item in CommonModel.GetDOBYear())
+                                    {
+                                        <span class="check-spacer">
+                                            @Html.RadioButtonFor(model => model.IsDOB, item.Value, new { id = "Q6DOBYear" + item.Value, @required = "required" }) @item.Text
+                                        </span>
+                                    }*@
                                 @Html.ValidationMessageFor(model => model.IsDOB, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        @Html.Label(Model.Q4D, htmlAttributes: new { @class = "cl-BFYDOB" })
+                        @Html.Label(Model.BFYDOB_TD, htmlAttributes: new { @class = "cl-BFYDOB" })
                         @Html.EditorFor(m => m.BFYDOB, new { htmlAttributes = new { @class = "form-control col-md-4 date_picker clage cl-BFYDOB" } })@*//, minlength = "10", maxlength = "10"*@
                         <strong id="bfyage" class="text-success"></strong>
                         @Html.ValidationMessageFor(m => m.BFYDOB, "", new { @class = "text-danger" })
-                        @Html.LabelFor(m => m.BFYDOBYear, htmlAttributes: new { @class = "cl-BFYDOBYear", @style = "display:none;" })
+                        @Html.Label(Model.Q4_TD, htmlAttributes: new { @class = "cl-BFYDOBYear", @style = "display:none;" })
                         @Html.EditorFor(m => m.BFYDOBYear, new { htmlAttributes = new { @class = "form-control col-md-4 numbersOnly cl-BFYDOBYear", min = "4", maxlength = "4", @style = "display:none;" } })
                         @Html.ValidationMessageFor(m => m.BFYDOBYear, "", new { @class = "text-danger cl-BFYDOBYear" })
                     </div>
@@ -135,22 +146,29 @@
                     <div class="mb-3">
                         <div class="position-relative form-group">
                             <div class="checkbox">
-                                @foreach (var item in CommonModel.GetDOMYear())
-                                {
-                                    <span class="check-spacer">
-                                        @Html.RadioButtonFor(model => model.Q6DOMYear, item.Value, new { id = "Q6DOMYear" + item.Value, @required = "required" }) @item.Text
-                                    </span>
-                                }
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.Q6DOMYear, 1, new { id = "Q6DOMYear1", @required = "required" }) @Model.Q6_Date_RD
+                                </span>
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.Q6DOMYear, 2, new { id = "Q6DOMYear2", @required = "required" }) @Model.Q6_Year_RD
+                                </span>
+                                @*@foreach (var item in CommonModel.GetDOMYear())
+                                    {
+                                        <span class="check-spacer">
+                                            @Html.RadioButtonFor(model => model.Q6DOMYear, item.Value, new { id = "Q6DOMYear" + item.Value, @required = "required" }) @item.Text
+                                        </span>
+                                    }*@
                                 @Html.ValidationMessageFor(model => model.Q6DOMYear, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3" id="Q6-div" style="display:none;">
+                    <div class="mb-3" id="Q6-div">
                         @Html.Label(Model.Q6D, htmlAttributes: new { @class = "cl-Q6", @style = "display:none;" })
                         @Html.EditorFor(m => m.Q6, new { htmlAttributes = new { @class = "form-control col-md-4 date_picker cl-Q6", maxlength = "12", @style = "display:none;" } })
                         @Html.ValidationMessageFor(m => m.Q6, "", new { @class = "text-danger cl-Q6", @style = "display:none;" })
-                        @Html.Label(Model.Q6_YearD, htmlAttributes: new { @class = "cl-Q6_Year", @style = "display:none;" })
-                        @Html.EditorFor(m => m.Q6_Year, new { htmlAttributes = new { @class = "form-control col-md-4 numbersOnly cl-Q6_Year", min = "4", maxlength = "4", @style = "display:none;" } })
+
+                        @Html.Label(Model.Q6_YearD, htmlAttributes: new { @class = "cl-Q6_Year", @style = "display:block;" })
+                        @Html.EditorFor(m => m.Q6_Year, new { htmlAttributes = new { @class = "form-control col-md-4 numbersOnly cl-Q6_Year", min = "4", maxlength = "4", @style = "display:block;" } })
                         @Html.ValidationMessageFor(m => m.Q6_Year, "", new { @class = "text-danger cl-Q6_Year" })
                     </div>
 
@@ -165,12 +183,18 @@
                         <div class="position-relative form-group">
                             @Html.Label(Model.Q8D, htmlAttributes: new { @class = "" })
                             <div class="checkbox">
-                                @foreach (var item in CommonModel.GetSHGAffiliation())
-                                {
-                                    <span class="check-spacer">
-                                        @Html.RadioButtonFor(model => model.Q8, item.Value, new { id = "Q8" + item.Value, @required = "required" }) @item.Text
-                                    </span>
-                                }
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.Q8, 1, new { id = "Q81", @required = "required" }) @Model.Q8_Self_RD
+                                </span>
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.Q8, 2, new { id = "Q82", @required = "required" }) @Model.Q8_Other_RD
+                                </span>
+                                @*@foreach (var item in CommonModel.GetSHGAffiliation())
+                                    {
+                                        <span class="check-spacer">
+                                            @Html.RadioButtonFor(model => model.Q8, item.Value, new { id = "Q8" + item.Value, @required = "required" }) @item.Text
+                                        </span>
+                                    }*@
                                 @Html.ValidationMessageFor(model => model.Q8, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -194,12 +218,18 @@
                         @Html.Label(Model.DPregnant, htmlAttributes: new { @class = "" })
                         <div class="position-relative form-group">
                             <div class="checkbox">
-                                @foreach (var item in CommonModel.GetYesNotrue())
-                                {
-                                    <span class="check-spacer">
-                                        @Html.RadioButtonFor(model => model.IsPregnant, item.Value, new { id = "IsPregnant" + item.Value, @required = "required" }) @item.Text
-                                    </span>
-                                }
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.IsPregnant, true, new { id = "IsPregnanttrue", @required = "required" }) @Model.Q_Yes_RD
+                                </span>
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.IsPregnant, false, new { id = "IsPregnantfalse", @required = "required" }) @Model.Q_No_RD
+                                </span>
+                                @*@foreach (var item in CommonModel.GetYesNotrue())
+                                    {
+                                        <span class="check-spacer">
+                                            @Html.RadioButtonFor(model => model.IsPregnant, item.Value, new { id = "IsPregnant" + item.Value, @required = "required" }) @item.Text
+                                        </span>
+                                    }*@
                                 @Html.ValidationMessageFor(model => model.IsPregnant, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -208,12 +238,22 @@
                         @Html.Label(Model.Q12_1D, htmlAttributes: new { @class = "" })
                         <div class="position-relative form-group">
                             <div class="checkbox">
-                                @foreach (var item in CommonModel.GetBoyGirl())
-                                {
-                                    <span class="check-spacer">
-                                        @Html.RadioButtonFor(model => model.Q12_1, item.Value, new { id = "Q12_1" + item.Value, @required = "required" }) @item.Text
-                                    </span>
-                                }
+
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.Q12_1, "No", new { id = "Q12_1No", @required = "required" }) @Model.Q12_No_RD
+                                </span>
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.Q12_1, "Girl", new { id = "Q12_1Girl", @required = "required" }) @Model.Q12_Girl_RD
+                                </span>
+                                <span class="check-spacer">
+                                    @Html.RadioButtonFor(model => model.Q12_1, "Boy", new { id = "Q12_1Boy", @required = "required" }) @Model.Q12_Boy_RD
+                                </span>
+                                @*@foreach (var item in CommonModel.GetBoyGirl())
+                                    {
+                                        <span class="check-spacer">
+                                            @Html.RadioButtonFor(model => model.Q12_1, item.Value, new { id = "Q12_1" + item.Value, @required = "required" }) @item.Text
+                                        </span>
+                                    }*@
                                 @Html.ValidationMessageFor(model => model.Q12_1, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -259,12 +299,12 @@
                         @Html.EditorFor(m => m.Q18, new { htmlAttributes = new { @class = "form-control col-md-4" } })
                         @Html.ValidationMessageFor(m => m.Q18, "", new { @class = "text-danger" })
                     </div>
-                    <div class="mb-3" >
+                    <div class="mb-3" style="display:none;">
                         @Html.Label(Model.Q20D, htmlAttributes: new { @class = "" })
                         @Html.EditorFor(m => m.Q20, new { htmlAttributes = new { @class = "form-control col-md-4 numbersOnly", min = "0", oninput = "maxLengthCheck(this)", max = "999", maxlength = "3" } })
                         @Html.ValidationMessageFor(m => m.Q20, "", new { @class = "text-danger" })
                     </div>
-                    <div class="mb-3" >
+                    <div class="mb-3">
                         @Html.Label(Model.Q21D, htmlAttributes: new { @class = "" })
                         @Html.DropDownListFor(m => m.Q21, CommonModel.GetModuleRollout(), "Select", new { @class = "form-control col-md-4" })
                         @Html.ValidationMessageFor(m => m.Q21, "", new { @class = "text-danger" })
@@ -277,7 +317,7 @@
                         <input type="submit" name="btnsubmit" id="btnsubmit" class="btn btn-primary" value="Submit" />
                     </span>
                     <span class="check-spacer">
-                        <a href="~/Beneficiary/Beneficiary" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</a>
+                        <a href="~/Beneficiary/Beneficiary?HindiEng=2" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</a>
                     </span>
                 </div>
             </div>
@@ -293,7 +333,7 @@
               rel='stylesheet'>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>*@
 
-<script>
+    <script>
         $(document).ready(function () {
 
             $('.count-input').unbind('keyup change input paste').bind('keyup change input paste', function (e) {
@@ -315,6 +355,7 @@
                 //maxDate: "+1M +10D",
                 changeMonth: true,
                 changeYear: true,
+                yearRange: "-100:+0",
             });
             //$('.test-input').unbind('keyup change input paste').bind('keyup change input paste', function (e) {
             //    debugger
@@ -345,7 +386,7 @@
             });
             $('input[name=Q6DOMYear]').click(function () {
                 $('#Q6-div').css('display', 'block');
-                $('#Q6').val(''); $('#Q6_Year').val(''); $('.cl-Q6').css('display', 'none'); $('.cl-Q6_Year').css('display', 'none');
+                $('.cl-Q6').css('display', 'none'); $('.cl-Q6_Year').css('display', 'none');
                 $('#Q6').removeAttr('required'); $('#Q6_Year').removeAttr('required');
                 if ($(this).val() == "1") {
                     $('.cl-Q6').css('display', 'block');
@@ -358,7 +399,7 @@
             });
             $('input[name=IsDOB]').click(function () {
                 $('#div-BFYDOBYear').css('display', 'block');
-                $('#BFYDOB').val(''); $('#BFYDOBYear').val(''); $('.cl-BFYDOB').css('display', 'none'); $('.cl-BFYDOBYear').css('display', 'none');
+                $('.cl-BFYDOB').css('display', 'none'); $('.cl-BFYDOBYear').css('display', 'none');
                 $('#BFYDOB').removeAttr('required'); $('#BFYDOBYear').removeAttr('required');
                 if ($(this).val() == "1") {
                     $('.cl-BFYDOB').css('display', 'block');
@@ -405,6 +446,9 @@
             $('#PanchayatId_fk').change(function () {
                 GetVillage("VillageOId_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $('#CLFId_fk').val(), $(this).val());
             });
+            $('#VillageOId_fk').change(function () {
+                GetCMList("CMID", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $('#CLFId_fk').val(), $('#PanchayatId_fk').val(), $(this).val());
+            });
 
             $('#Q15').change(function () {
                 $('#Q18').val('');
@@ -445,7 +489,7 @@
             })
 
             /* Role Wise */
-            BindRolewise("DistrictId_fk", "BlockId_fk","CLFId_fk", "PanchayatId_fk", "VillageOId_fk");
+            BindRolewise("DistrictId_fk", "BlockId_fk", "CLFId_fk", "PanchayatId_fk", "VillageOId_fk", "CMID");
 
             if ('@Model.Beneficiary_Id_pk' != '00000000-0000-0000-0000-000000000000') {
                 BindEdit();
@@ -522,8 +566,6 @@
         }
 
         function CUData() {
-            debugger;
-
             //$("#btnsubmit").prop("disabled", true);
             //var vl = $.validator.unobtrusive.parse("#formid");
            //var Isvalid= $("#formid").validate();
@@ -546,7 +588,11 @@
                 IsCheck = false;
             }
             if ($('#VillageOId_fk').val() == '') {
-                toastr.error("Error", 'Please enter Village Organization');
+                toastr.error("Error", 'Please Select Village Organization');
+                IsCheck = false;
+            }
+            if ($('#CMID').val() == '') {
+                toastr.error("Error", 'Please Select CM');
                 IsCheck = false;
             }
 
@@ -589,20 +635,23 @@
 
             if (isvalid && IsCheck) {
                 document.getElementById("btnsubmit").disabled = true;
-            var BeneficiaryModel = {};var model = [];
-            BeneficiaryModel.Beneficiary_Id_pk = $('#Beneficiary_Id_pk').val();
-            BeneficiaryModel.HindiEng = $('#HindiEng').val();
-            BeneficiaryModel.DistrictId_fk = $('#DistrictId_fk').val();
-            BeneficiaryModel.BlockId_fk = $('#BlockId_fk').val();
-            BeneficiaryModel.CLFId_fk = $('#CLFId_fk').val();
-            BeneficiaryModel.PanchayatId_fk = $('#PanchayatId_fk').val();
-            BeneficiaryModel.VillageOId_fk = $('#VillageOId_fk').val();
-            BeneficiaryModel.ReportingMonth = $('#ReportingMonth').val();
-            BeneficiaryModel.ReportingYear = $('#ReportingYear').val();
-            BeneficiaryModel.HealthCenter = $('#HealthCenter').val();
-            BeneficiaryModel.Q1= $('#Q1').val();
-            BeneficiaryModel.Q2= $('#Q2').val();
+                var BeneficiaryModel = {};var model = [];
+                BeneficiaryModel.Beneficiary_Id_pk = $('#Beneficiary_Id_pk').val();
+                BeneficiaryModel.HindiEng = $('#HindiEng').val();
+                BeneficiaryModel.DistrictId_fk = $('#DistrictId_fk').val();
+                BeneficiaryModel.BlockId_fk = $('#BlockId_fk').val();
+                BeneficiaryModel.CLFId_fk = $('#CLFId_fk').val();
+                BeneficiaryModel.PanchayatId_fk = $('#PanchayatId_fk').val();
+                BeneficiaryModel.VillageOId_fk = $('#VillageOId_fk').val();
+                BeneficiaryModel.CMID = $('#CMID').val();
+                BeneficiaryModel.ReportingMonth = $('#ReportingMonth').val();
+                BeneficiaryModel.ReportingYear = $('#ReportingYear').val();
+                BeneficiaryModel.HealthCenter = $('#HealthCenter').val();
+                BeneficiaryModel.Q1= $('#Q1').val();
+                BeneficiaryModel.Q2= $('#Q2').val();
                 BeneficiaryModel.Q3 = $('#Q3').val();
+
+                BeneficiaryModel.IsDOB = $('input[name=IsDOB]:checked').val();
                 if ($('input[name=IsDOB]:checked').val() == "1") {
                     $('#BFYDOBYear').val('');
                     if ($('#BFYDOB').val()) {
@@ -615,34 +664,36 @@
                         BeneficiaryModel.BFYDOBYear = $('#BFYDOBYear').val();
                     }
                 }
+
                 BeneficiaryModel.IsPregnant = $('input[name=IsPregnant]:checked').val();
+                BeneficiaryModel.Q5 = $('#Q5').val();
 
-            BeneficiaryModel.Q5 = $('#Q5').val();
-            BeneficiaryModel.Q6DOMYear = $('input[name=Q6DOMYear]:checked').val();
-            if ($('#Q6').val()) {
-                BeneficiaryModel.Q6 = toDate($('#Q6').val());
-            }
-            BeneficiaryModel.Q6_Year = $('#Q6_Year').val();
-            BeneficiaryModel.Q7= $('#Q7').val();
-            BeneficiaryModel.Q8= $('input[name=Q8]:checked').val();
-            BeneficiaryModel.Q9= $('#Q9').val();
-            BeneficiaryModel.Q10= $('#Q10').val();
-            BeneficiaryModel.Q11 = $('#Q11').val();
-            if ($('#YoungestDOB').val()) {
-                BeneficiaryModel.YoungestDOB = toDate($('#YoungestDOB').val());
-            }
-            BeneficiaryModel.Q12_1 = $('input[name=Q12_1]:checked').val();
-            BeneficiaryModel.Q13 = $('#Q13').val();
-            BeneficiaryModel.BFYVillageName = $('#BFYVillageName').val();
-            BeneficiaryModel.Q14= $('#Q14').val();
-            BeneficiaryModel.Q15= $('#Q15').val();
-            BeneficiaryModel.Q16= $('#Q16').val();
-            BeneficiaryModel.Q17= $('#Q17').val();
-            BeneficiaryModel.Q18= $('#Q18').val();
-            BeneficiaryModel.Q20 = $('#Q20').val();
-            BeneficiaryModel.Q21 = $('#Q21').val();
+                BeneficiaryModel.Q6DOMYear = $('input[name=Q6DOMYear]:checked').val();
+                if ($('#Q6').val()) {
+                    BeneficiaryModel.Q6 = toDate($('#Q6').val());
+                }
+                BeneficiaryModel.Q6_Year = $('#Q6_Year').val();
 
-            model.push(BeneficiaryModel);
+                BeneficiaryModel.Q7= $('#Q7').val();
+                BeneficiaryModel.Q8= $('input[name=Q8]:checked').val();
+                BeneficiaryModel.Q9= $('#Q9').val();
+                BeneficiaryModel.Q10= $('#Q10').val();
+                BeneficiaryModel.Q11 = $('#Q11').val();
+                if ($('#YoungestDOB').val()) {
+                    BeneficiaryModel.YoungestDOB = toDate($('#YoungestDOB').val());
+                }
+                BeneficiaryModel.Q12_1 = $('input[name=Q12_1]:checked').val();
+                BeneficiaryModel.Q13 = $('#Q13').val();
+                BeneficiaryModel.BFYVillageName = $('#BFYVillageName').val();
+                BeneficiaryModel.Q14= $('#Q14').val();
+                BeneficiaryModel.Q15= $('#Q15').val();
+                BeneficiaryModel.Q16= $('#Q16').val();
+                BeneficiaryModel.Q17= $('#Q17').val();
+                BeneficiaryModel.Q18= $('#Q18').val();
+                BeneficiaryModel.Q20 = $('#Q20').val();
+                BeneficiaryModel.Q21 = $('#Q21').val();
+
+                model.push(BeneficiaryModel);
 
                 $.ajax({
                     url: document.baseURI + "/Beneficiary/PostBeneficiary",
@@ -662,7 +713,7 @@
                             //$("#formid")[0].reset();
                            // InputClear();
                             //$("#btnsubmit").attr("disabled", false);
-                            location.href = '/Beneficiary/Beneficiary';
+                            location.href = '/Beneficiary/Beneficiary?HindiEng=2';
                         }
                         else {
                             toastr.error("Error", resp.Message);
@@ -686,40 +737,41 @@
         }
 
         function BindEdit() {
-            debugger
-             $('#Beneficiary_Id_pk').val('@Model.Beneficiary_Id_pk');
-             $('#HindiEng').val('@Model.HindiEng');
-             $('#DistrictId_fk').val('@Model.DistrictId_fk');
-             GetBlock("BlockId_fk", 0, $('#DistrictId_fk').val());
-             $('#BlockId_fk').val('@Model.BlockId_fk');
-             GetCLF("CLFId_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val());
-             $('#CLFId_fk').val('@Model.CLFId_fk');
+            $('#Beneficiary_Id_pk').val('@Model.Beneficiary_Id_pk');
+            $('#HindiEng').val('@Model.HindiEng');
+            $('#DistrictId_fk').val('@Model.DistrictId_fk');
+            GetBlock("BlockId_fk", 0, $('#DistrictId_fk').val());
+            $('#BlockId_fk').val('@Model.BlockId_fk');
+            GetCLF("CLFId_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val());
+            $('#CLFId_fk').val('@Model.CLFId_fk');
             GetPanchayat("PanchayatId_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $('#CLFId_fk').val());
-             $('#PanchayatId_fk').val('@Model.PanchayatId_fk');
+            $('#PanchayatId_fk').val('@Model.PanchayatId_fk');
             GetVillage("VillageOId_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $('#CLFId_fk').val(), $('#PanchayatId_fk').val());
-             $('#VillageOId_fk').val('@Model.VillageOId_fk');
-           $('#ReportingMonth').val('@Model.ReportingMonth');
-           $('#ReportingYear').val('@Model.ReportingYear');
-             $('#HealthCenter').val('@Model.HealthCenter');
-             $('#Q1').val('@Model.Q1');
-             $('#Q2').val('@Model.Q2');
-             $('#Q3').val('@Model.Q3');
-            $('#div-BFYDOBYear').css('dispaly', 'block');
+            $('#VillageOId_fk').val('@Model.VillageOId_fk');
+            GetCMList("CMID", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $('#CLFId_fk').val(), $('#PanchayatId_fk').val(), $('#VillageOId_fk').val());
+            $('#CMID').val('@Model.CMID');
+            $('#ReportingMonth').val('@Model.ReportingMonth');
+            $('#ReportingYear').val('@Model.ReportingYear');
+            $('#HealthCenter').val('@Model.HealthCenter');
+            $('#Q1').val('@Model.Q1');
+            $('#Q2').val('@Model.Q2');
+            $('#Q3').val('@Model.Q3');
+
+            $('#IsDOB').val('@Model.IsDOB');
+            $('#div-BFYDOBYear').css('display', 'block');
             if ($('input[name=IsDOB]:checked').val() == "1") {
                 $('#BFYDOBYear').val('');
-                $('.cl-BFYDOBYear').css('dispaly', 'none');
-                $('.cl-BFYDOB').css('dispaly', 'block');
-                if ($('#BFYDOB').val()) {
-                    $('#BFYDOB').val(moment('@Model.BFYDOB').format("DD/MM/YYYY"));
-                }
+                $('.cl-BFYDOBYear').css('display', 'none');
+                $('.cl-BFYDOB').css('display', 'block');
+                $('#BFYDOB').val(moment('@Model.BFYDOB').format("DD/MM/YYYY"));
             }
             if ($('input[name=IsDOB]:checked').val() == "2") {
                 $('#BFYDOB').val('');
-                $('.cl-BFYDOB').css('dispaly', 'none'); $('.cl-BFYDOBYear').css('dispaly', 'block');
-                if ($('#BFYDOBYear').val()) {
-                    $('#BFYDOBYear').val('@Model.BFYDOBYear');
-                }
+                $('.cl-BFYDOB').css('display', 'none');
+                $('.cl-BFYDOBYear').css('display', 'block');
+                $('#BFYDOBYear').val('@Model.BFYDOBYear');
             }
+
             $('input[name=IsPregnant]:checked').val('@Model.IsPregnant');
             //var DOB = getAge($('#BFYDOB').val());
             //$('#bfyage').html(DOB);
@@ -737,20 +789,20 @@
                 $('#Q6_Year').val('@Model.Q6_Year');
             }
 
-             $('#Q7').val('@Model.Q7');
-             $("#Q8" + '@Model.Q8').attr('checked', true);
-             //$('input[name=Q8]:checked').val('@Model.Q8')
+            $('#Q7').val('@Model.Q7');
+            $("#Q8" + '@Model.Q8').attr('checked', true);
+            //$('input[name=Q8]:checked').val('@Model.Q8')
             // $('#Q8').val('@Model.Q8');
-             if ($('input[name=Q8]:checked').val() == "2") {
-                 $('#div-q9').show();
-                 $('#Q9').val('@Model.Q9');
-                 $('#Q9').attr('required', 'required');
-             }
-             else {
-                 $('#div-q9').hide(); $('#Q9').val('');
-                 $('#Q9').removeAttr('required');
-             }
-             $('#Q10').val('@Model.Q10');
+            if ($('input[name=Q8]:checked').val() == "2") {
+                $('#div-q9').show();
+                $('#Q9').val('@Model.Q9');
+                $('#Q9').attr('required', 'required');
+            }
+            else {
+                $('#div-q9').hide(); $('#Q9').val('');
+                $('#Q9').removeAttr('required');
+            }
+            $('#Q10').val('@Model.Q10');
             $('#Q11').val('@Model.Q11');
 
             $('input[name=Q12_1]:checked').val('@Model.Q12_1');
@@ -766,48 +818,49 @@
                 $('#YoungestDOB').val(''); $('#YoungestDOB').removeAttr('required');
             }
 
-             $('#Q13').val('@Model.Q13');
-             $('#BFYVillageName').val('@Model.BFYVillageName');
-             $('#Q14').val('@Model.Q14');
-             $('#Q15').val('@Model.Q15');
+            $('#Q13').val('@Model.Q13');
+            $('#BFYVillageName').val('@Model.BFYVillageName');
+            $('#Q14').val('@Model.Q14');
+            $('#Q15').val('@Model.Q15');
 
             $('#Q18').val('');
             $('#Q16').removeAttr('required');
             $('#Q17').removeAttr('required');
             $('#Q18').removeAttr('required');
-             GetContraceptiveChildList("Q16", 0, "");
-             GetContraceptiveChildList("Q17", 0, "");
-             if ($('#Q15').val() == "1") {
-                 GetContraceptiveChildList("Q16", 0, 1);
-                 $('#div-Q18').css('display', 'none');
-                 $('#div-Q17').css('display', 'none');
-                 $('#div-Q16').css('display', 'block');
-                 $('#Q16').val('@Model.Q16');
-                 $('#Q16').attr('required', 'required');
-             }
-             else if ($('#Q15').val() == "2") {
-                 GetContraceptiveChildList("Q17", 0, 2);
-                 $('#div-Q18').css('display', 'none');
-                 $('#div-Q17').css('display', 'block');
-                 $('#div-Q16').css('display', 'none');
-                 $('#Q17').val('@Model.Q17');
-                 $('#Q17').attr('required', 'required');
-             }
-             else if ($('#Q15').val() == "4") {
-                 $('#div-Q18').css('display', 'block');
-                 $('#div-Q17').css('display', 'none');
-                 $('#div-Q16').css('display', 'none');
-                 $('#Q18').val('@Model.Q18');
-                 $('#Q18').attr('required', 'required');
-             }
-             else {
-                 $('#div-Q18').css('display', 'none');
-                 $('#div-Q17').css('display', 'none');
-                 $('#div-Q16').css('display', 'none');
-           }
+            GetContraceptiveChildList("Q16", 0, "");
+            GetContraceptiveChildList("Q17", 0, "");
+            if ($('#Q15').val() == "1") {
+                GetContraceptiveChildList("Q16", 0, 1);
+                $('#div-Q18').css('display', 'none');
+                $('#div-Q17').css('display', 'none');
+                $('#div-Q16').css('display', 'block');
+                $('#Q16').val('@Model.Q16');
+                $('#Q16').attr('required', 'required');
+            }
+            else if ($('#Q15').val() == "2") {
+                GetContraceptiveChildList("Q17", 0, 2);
+                $('#div-Q18').css('display', 'none');
+                $('#div-Q17').css('display', 'block');
+                $('#div-Q16').css('display', 'none');
+                $('#Q17').val('@Model.Q17');
+                $('#Q17').attr('required', 'required');
+            }
+            else if ($('#Q15').val() == "4") {
+                $('#div-Q18').css('display', 'block');
+                $('#div-Q17').css('display', 'none');
+                $('#div-Q16').css('display', 'none');
+                $('#Q18').val('@Model.Q18');
+                $('#Q18').attr('required', 'required');
+            }
+            else {
+                $('#div-Q18').css('display', 'none');
+                $('#div-Q17').css('display', 'none');
+                $('#div-Q16').css('display', 'none');
+        }
             $('#Q20').val('@Model.Q20');
             $('#Q21').val('@Model.Q21');
-    }
+        }
+
         function InputClear() {
         $('#Beneficiary_Id_pk').val('@Guid.Empty');
         $('#HindiEng').val('1');
@@ -885,9 +938,8 @@
         }
 
         /* Role Wise */
-        BindRolewise("DistrictId_fk", "BlockId_fk", "PanchayatId_fk", "VillageOId_fk");
-
+        BindRolewise("DistrictId_fk", "BlockId_fk", "PanchayatId_fk", "VillageOId_fk", "CMID");
     }
 
-</script>
+    </script>
 }

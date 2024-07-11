@@ -25,7 +25,7 @@
 </style>
 <div class="breadcrumb">
     <h2>Beneficiary Lists (Follow up List)</h2>
-    <p><a href="~/Beneficiary/Beneficiary">Beneficiary </a> / Beneficiary Lists</p>
+    <p><a href="~/Beneficiary/Beneficiary?HindiEng=2">Beneficiary </a> / Beneficiary Lists</p>
 </div>
 <div class="container-fluid pt-4 px-4">
     <fieldset class="border rounded-3 p-3">
@@ -66,21 +66,28 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="position-relative form-group">
                                     @Html.LabelFor(model => model.VOId, htmlAttributes: new { @class = "control-label" })
                                     @Html.DropDownListFor(m => m.VOId, new List<SelectListItem>(), null, new { @class = "form-select " })
                                     @Html.ValidationMessageFor(model => model.VOId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
+                                <div class="position-relative form-group">
+                                    @Html.LabelFor(model => model.CMID, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DropDownListFor(m => m.CMID, new List<SelectListItem>(), null, new { @class = "form-select " })
+                                    @Html.ValidationMessageFor(model => model.CMID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
                                 <div class="position-relative form-group">
                                     @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label" })
                                     @Html.DropDownListFor(m => m.Year, new List<SelectListItem>(), null, new { @class = "form-select " })
                                     @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="position-relative form-group">
                                     @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label" })
                                     @Html.DropDownListFor(m => m.Month, new List<SelectListItem>(), null, new { @class = "form-select " })
@@ -148,8 +155,11 @@
             $('#PanchayatId').change(function () {
                 GetVillage("VOId", 0, $('#DistrictId').val(), $('#BlockId').val(), $('#CLFId').val(), $(this).val());
             });
+            $('#VOId').change(function () {
+                GetCMList("CMID", 0, $('#DistrictId').val(), $('#BlockId').val(), $('#CLFId').val(), $('#PanchayatId').val(), $(this).val());
+            });
             /* Role Wise */
-            BindRolewise("DistrictId", "BlockId", "CLFId", "PanchayatId", "VOId");
+            BindRolewise("DistrictId", "BlockId", "CLFId", "PanchayatId", "VOId", "CMID");
 
             BindData();
 
@@ -229,62 +239,63 @@
         });
 
     function BindData() {
-            $("#subdata").html('');
-            var cmfollowupmodel  = new Object();
-            cmfollowupmodel.DistrictId = $('#DistrictId').val() == '' ? '' : $('#DistrictId').val();
-            cmfollowupmodel.BlockId = $('#BlockId').val() == '' ? '' : $('#BlockId').val();
-            cmfollowupmodel.CLFId = $('#CLFId').val() == '' ? '' : $('#CLFId').val();
-            cmfollowupmodel.PanchayatId = $('#PanchayatId').val() == '' ? '' : $('#PanchayatId').val();
-            cmfollowupmodel.VoId = $('#VOId').val() == '' ? '' : $('#VOId').val();
-            cmfollowupmodel.Year = $('#Year').val() == '' ? '' : $('#Year').val();
-            cmfollowupmodel.Month = $('#Month').val() == '' ? '' : $('#Month').val();
-            var formData = $('#formid').serialize();
+        $("#subdata").html('');
+        var cmfollowupmodel  = new Object();
+        cmfollowupmodel.DistrictId = $('#DistrictId').val() == '' ? '' : $('#DistrictId').val();
+        cmfollowupmodel.BlockId = $('#BlockId').val() == '' ? '' : $('#BlockId').val();
+        cmfollowupmodel.CLFId = $('#CLFId').val() == '' ? '' : $('#CLFId').val();
+        cmfollowupmodel.PanchayatId = $('#PanchayatId').val() == '' ? '' : $('#PanchayatId').val();
+        cmfollowupmodel.VoId = $('#VOId').val() == '' ? '' : $('#VOId').val();
+        cmfollowupmodel.CMID = $('#CMID').val() == '' ? '' : $('#CMID').val();
+        cmfollowupmodel.Year = $('#Year').val() == '' ? '' : $('#Year').val();
+        cmfollowupmodel.Month = $('#Month').val() == '' ? '' : $('#Month').val();
+        var formData = $('#formid').serialize();
 
-            $.ajax({
-                type: "GET",
-                url: document.baseURI + "/Beneficiary/GetFollowupList",
-                data: cmfollowupmodel,//JSON.stringify({ 'Roles': '' }),
-                //cache: false,
-                success: function (res) {
-                    if (res.IsSuccess) {
-                        $("#subdata").html(res.Data);
+        $.ajax({
+            type: "GET",
+            url: document.baseURI + "/Beneficiary/GetFollowupList",
+            data: cmfollowupmodel,//JSON.stringify({ 'Roles': '' }),
+            //cache: false,
+            success: function (res) {
+                if (res.IsSuccess) {
+                    $("#subdata").html(res.Data);
 
-                        if ($.fn.dataTable.isDataTable('#tbl')) {
-                            $("#tbl").dataTable().fnDestroy();
-                        }
-                        table = $('#tbl').DataTable({
-                            //scrollY: "400px",
-                            //scrollX: true,
-                            //scrollCollapse: true,
-                            //paging: false,
-                            pageLength: 100,
-                            fixedColumns: {
-                                leftColumns: 1,
-                                rightColumns: 1
-                            },
-                            buttons: [{
-                                extend: 'excel', text: '<span><i class="fa fa-download"></i>Export</span>', title: 'Beneficiary Lists',//$('#IDDistrict option:selected').text() +
-                                className: 'btn btn-primary button-icon mr-3 mt-1 mb-1',
-                                filename: 'Beneficiary List',
-                                exportOptions: { modifier: { page: 'all' } }
-                            }],
-                        });
-                        $('.dataTables_filter input[type="search"]').css(
-                            { 'width': '500px', 'display': 'inline-block' }
-                        );
-                        $('#div-download').empty();
-                        table.buttons().container().appendTo($('#div-download'));
+                    if ($.fn.dataTable.isDataTable('#tbl')) {
+                        $("#tbl").dataTable().fnDestroy();
                     }
-                    else {
-                        $("#subdata").html(res.Data);
-                    }
-                },
-                error: function (req, error) {
-                    if (error === 'error') { error = req.statusText; }
-                    var errormsg = 'There was a communication error: ' + error;
-                    //Do To Message display
+                    table = $('#tbl').DataTable({
+                        //scrollY: "400px",
+                        //scrollX: true,
+                        //scrollCollapse: true,
+                        //paging: false,
+                        pageLength: 100,
+                        fixedColumns: {
+                            leftColumns: 1,
+                            rightColumns: 1
+                        },
+                        buttons: [{
+                            extend: 'excel', text: '<span><i class="fa fa-download"></i>Export</span>', title: 'Beneficiary Lists',//$('#IDDistrict option:selected').text() +
+                            className: 'btn btn-primary button-icon mr-3 mt-1 mb-1',
+                            filename: 'Beneficiary List',
+                            exportOptions: { modifier: { page: 'all' } }
+                        }],
+                    });
+                    $('.dataTables_filter input[type="search"]').css(
+                        { 'width': '500px', 'display': 'inline-block' }
+                    );
+                    $('#div-download').empty();
+                    table.buttons().container().appendTo($('#div-download'));
                 }
-            });
+                else {
+                    $("#subdata").html(res.Data);
+                }
+            },
+            error: function (req, error) {
+                if (error === 'error') { error = req.statusText; }
+                var errormsg = 'There was a communication error: ' + error;
+                //Do To Message display
+            }
+        });
         }
     </script>
 }

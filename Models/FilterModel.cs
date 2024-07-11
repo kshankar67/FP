@@ -25,6 +25,8 @@ namespace FP.Models
         public string PanchayatId { get; set; }
         [Display(Name = CommonModel.DispLevel.VOFull)]
         public string VOId { get; set; }
+        [Display(Name = CommonModel.DispLevel.CMID)]
+        public string CMID { get; set; }
         [Display(Name = CommonModel.DispLevel.FromDate)]
         public string FromDt { get; set; }
         [Display(Name = CommonModel.DispLevel.ToDate)]

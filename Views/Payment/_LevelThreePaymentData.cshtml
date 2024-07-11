@@ -61,9 +61,9 @@
                                 foreach (DataRow dr in dtg.Rows)
                                 {
                                     var clam = 0;var appvam = 0; var appvItem = 0;
-                                    string EmpName = Convert.ToString(dr["EmpName"]);
-                                    string Emp_ID = Convert.ToString(dr["Emp_ID"]);
-                                    int peerGM = dr["Peer group meeting"] is DBNull ? 0 : Convert.ToInt32(dr["Peer group meeting"]);
+                                    string EmpName = dr["EmpName"] == DBNull.Value ? "" : dr["EmpName"].ToString();
+                                    string Emp_ID = dr["Emp_ID"] == DBNull.Value ? "" : dr["Emp_ID"].ToString();
+                                    int peerGM = dr["Peer group meeting"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Peer group meeting"]);
                                     var CLFValidation = dr["CLFValidation"] is DBNull ? false : Convert.ToBoolean(dr["CLFValidation"]);
                                     string CLFValidationDate = (dr["CLFValidationDate"] is DBNull || dr["CLFValidationDate"] == null) ? "" : Convert.ToDateTime(dr["CLFValidationDate"].ToString()).ToDateTimeddMMyyyy();
                                     var CLFLeadersPresident = dr["CLFLeadersPresident"] is DBNull ? false : Convert.ToBoolean(dr["CLFLeadersPresident"]);
