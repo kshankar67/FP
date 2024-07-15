@@ -432,38 +432,48 @@ namespace FP.Controllers
         public JsonResult CLFMaster(CLFModel model)
         {
             JsonResponseData response = new JsonResponseData();
-
-            var tbl = model.CLF_ID_pk != 0 ? db.CLF_Master.Find(model.CLF_ID_pk) : new CLF_Master();
-            if (tbl != null && model != null)
+            var isExists = db.CLF_Master.FirstOrDefault(x => x.DistrictId_fk == model.DistrictId_fk && x.BlockId_fk == model.BlockId_fk && string.Compare(x.CLFName.Trim(), model.
+                CLFName.Trim(), true) == 0 && x.CLF_ID_pk != model.CLF_ID_pk);
+            if (isExists == null)
             {
-                tbl.CLFName = model.CLFName.Trim();
-                tbl.IsActive = true;
-                if (model.CLF_ID_pk == 0)
+                var tbl = model.CLF_ID_pk != 0 ? db.CLF_Master.Find(model.CLF_ID_pk) : new CLF_Master();
+                if (tbl != null && model != null)
                 {
-                    tbl.DistrictId_fk = model.DistrictId_fk;
-                    tbl.BlockId_fk = model.BlockId_fk;
-                    tbl.CreatedBy = MvcApplication.CUser.Id;
-                    tbl.CreatedOn = DateTime.Now;
-                    db.CLF_Master.Add(tbl);
-                }
-                else
-                {
-                    tbl.UpdatedBy = MvcApplication.CUser.Id;
-                    tbl.UpdatedOn = DateTime.Now;
-                }
-                int res = db.SaveChanges();
-                if (res > 0)
-                {
-                    response = new JsonResponseData { StatusType = eAlertType.success.ToString(), Message = "Record Submitted Successfully!!!", Data = null };
-                    var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
-                    resResponse3.MaxJsonLength = int.MaxValue;
-                    return resResponse3;
-                    //ModelState.AddModelError("", Record Submitted Successfully!!!");
-                }
-                else
-                {
+                    tbl.CLFName = model.CLFName.Trim();
+                    tbl.IsActive = true;
+                    if (model.CLF_ID_pk == 0)
+                    {
+                        tbl.DistrictId_fk = model.DistrictId_fk;
+                        tbl.BlockId_fk = model.BlockId_fk;
+                        tbl.CreatedBy = MvcApplication.CUser.Id;
+                        tbl.CreatedOn = DateTime.Now;
+                        db.CLF_Master.Add(tbl);
+                    }
+                    else
+                    {
+                        tbl.UpdatedBy = MvcApplication.CUser.Id;
+                        tbl.UpdatedOn = DateTime.Now;
+                    }
+                    int res = db.SaveChanges();
+                    if (res > 0)
+                    {
+                        response = new JsonResponseData { StatusType = eAlertType.success.ToString(), Message = "Record Submitted Successfully!!!", Data = null };
+                        var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
+                        resResponse3.MaxJsonLength = int.MaxValue;
+                        return resResponse3;
+                        //ModelState.AddModelError("", Record Submitted Successfully!!!");
+                    }
+                    else
+                    {
 
+                    }
                 }
+            }
+            else
+            {
+                response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = "CLF already exists!!!", Data = null };
+                var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
+                return resResponse3;
             }
             return Json(new { IsSuccess = false, res = "" }, JsonRequestBehavior.AllowGet);
             //return Json();
@@ -474,7 +484,7 @@ namespace FP.Controllers
             try
             {
                 bool IsCheck = false;
-                var tbllist = SP_Model.SPVillagelist(DistrictId, BlockId, CLFId,PanchayatId);
+                var tbllist = SP_Model.SPVillagelist(DistrictId, BlockId, CLFId, PanchayatId);
                 if (tbllist.Rows.Count > 0)
                 {
                     IsCheck = true;
@@ -518,39 +528,50 @@ namespace FP.Controllers
             //var MS_model = this.Request.Unvalidated.Form["v_model"];
             //model = JsonConvert.DeserializeObject<VillageModel>(MS_model);
 
-            var tbl = model.Void_pk != 0 ? db.VO_Master.Find(model.Void_pk) : new VO_Master();
-            if (tbl != null && model != null)
+            var isExists = db.VO_Master.FirstOrDefault(x => x.DistrictId_fk == model.DistrictId_fk && x.BlockId_fk == model.BlockId_fk && x.Panchayatid_fk == model.Panchayatid_fk && string.Compare(x.Village_Organization.Trim(), model.
+                 Village_Organization.Trim(), true) == 0 && x.Void_pk != model.Void_pk);
+            if (isExists == null)
             {
-                tbl.Village_Organization = model.Village_Organization.Trim();
-                tbl.IsActive = true;
-                if (model.Void_pk == 0)
+                var tbl = model.Void_pk != 0 ? db.VO_Master.Find(model.Void_pk) : new VO_Master();
+                if (tbl != null && model != null)
                 {
-                    tbl.DistrictId_fk = model.DistrictId_fk;
-                    tbl.BlockId_fk = model.BlockId_fk;
-                    tbl.CLF_Id_fk = model.CLF_Id_fk;
-                    tbl.Panchayatid_fk = model.Panchayatid_fk;
-                    tbl.CreatedBy = MvcApplication.CUser.Id;
-                    tbl.CreatedOn = DateTime.Now;
-                    db.VO_Master.Add(tbl);
-                }
-                else
-                {
-                    tbl.UpdatedBy = MvcApplication.CUser.Id;
-                    tbl.UpdatedOn = DateTime.Now;
-                }
-                int res = db.SaveChanges();
-                if (res > 0)
-                {
-                    response = new JsonResponseData { StatusType = eAlertType.success.ToString(), Message = "Record Submitted Successfully!!!", Data = null };
-                    var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
-                    resResponse3.MaxJsonLength = int.MaxValue;
-                    return resResponse3;
-                    //ModelState.AddModelError("", Record Submitted Successfully!!!");
-                }
-                else
-                {
+                    tbl.Village_Organization = model.Village_Organization.Trim();
+                    tbl.IsActive = true;
+                    if (model.Void_pk == 0)
+                    {
+                        tbl.DistrictId_fk = model.DistrictId_fk;
+                        tbl.BlockId_fk = model.BlockId_fk;
+                        tbl.CLF_Id_fk = model.CLF_Id_fk;
+                        tbl.Panchayatid_fk = model.Panchayatid_fk;
+                        tbl.CreatedBy = MvcApplication.CUser.Id;
+                        tbl.CreatedOn = DateTime.Now;
+                        db.VO_Master.Add(tbl);
+                    }
+                    else
+                    {
+                        tbl.UpdatedBy = MvcApplication.CUser.Id;
+                        tbl.UpdatedOn = DateTime.Now;
+                    }
+                    int res = db.SaveChanges();
+                    if (res > 0)
+                    {
+                        response = new JsonResponseData { StatusType = eAlertType.success.ToString(), Message = "Record Submitted Successfully!!!", Data = null };
+                        var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
+                        resResponse3.MaxJsonLength = int.MaxValue;
+                        return resResponse3;
+                        //ModelState.AddModelError("", Record Submitted Successfully!!!");
+                    }
+                    else
+                    {
 
+                    }
                 }
+            }
+            else
+            {
+                response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = "Village Organization already exists!!!", Data = null };
+                var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
+                return resResponse3;
             }
             return Json(new { IsSuccess = false, res = "" }, JsonRequestBehavior.AllowGet);
             //return Json();
@@ -612,28 +633,40 @@ namespace FP.Controllers
                     resResponse3.MaxJsonLength = int.MaxValue;
                     return resResponse3;
                 }
-                var tbl = model.Panchayatid_pk != 0 ? db.Panchayat_Master.Find(model.Panchayatid_pk) : new Panchayat_Master();
 
-                if (tbl != null)
+                var isExists = db.Panchayat_Master.FirstOrDefault(x => x.DistrictId_fk == model.DistrictId_fk && x.Blockid_fk == model.Blockid_fk && string.Compare(x.Panchayat.Trim(), model.
+                 Panchayat.Trim(), true) == 0 && x.Panchayatid_pk != model.Panchayatid_pk);
+                if (isExists == null)
                 {
-                    tbl.DistrictId_fk = model.DistrictId_fk;
-                    tbl.Blockid_fk = model.Blockid_fk;
-                    tbl.CLF_Id_fk = model.CLF_Id_fk;
-                    tbl.Panchayat = !string.IsNullOrWhiteSpace(model.Panchayat) ? model.Panchayat.Trim() : null;
-                    if (model.Panchayatid_pk == 0)
+                    var tbl = model.Panchayatid_pk != 0 ? db.Panchayat_Master.Find(model.Panchayatid_pk) : new Panchayat_Master();
+
+                    if (tbl != null)
                     {
-                        db.Panchayat_Master.Add(tbl);
+                        tbl.DistrictId_fk = model.DistrictId_fk;
+                        tbl.Blockid_fk = model.Blockid_fk;
+                        tbl.CLF_Id_fk = model.CLF_Id_fk;
+                        tbl.Panchayat = !string.IsNullOrWhiteSpace(model.Panchayat) ? model.Panchayat.Trim() : null;
+                        if (model.Panchayatid_pk == 0)
+                        {
+                            db.Panchayat_Master.Add(tbl);
+                        }
+                    }
+
+                    int res = db.SaveChanges();
+                    if (res > 0)
+                    {
+                        response = new JsonResponseData { StatusType = eAlertType.success.ToString(), Message = "Record Submitted Successfully!!!", Data = null };
+                        var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
+                        resResponse3.MaxJsonLength = int.MaxValue;
+                        return resResponse3;
+                        //ModelState.AddModelError("", Record Submitted Successfully!!!");
                     }
                 }
-
-                int res = db.SaveChanges();
-                if (res > 0)
+                else
                 {
-                    response = new JsonResponseData { StatusType = eAlertType.success.ToString(), Message = "Record Submitted Successfully!!!", Data = null };
+                    response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = "Panchayat already exists!!!", Data = null };
                     var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
-                    resResponse3.MaxJsonLength = int.MaxValue;
                     return resResponse3;
-                    //ModelState.AddModelError("", Record Submitted Successfully!!!");
                 }
             }
 

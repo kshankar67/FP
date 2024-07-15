@@ -406,6 +406,8 @@
           <Property Name="CLFId_fks" Type="nvarchar(max)" />
           <Property Name="PanchayatId" Type="int" />
           <Property Name="VOId_fk" Type="int" />
+          <Property Name="NoOfSHG" Type="int" />
+          <Property Name="NameOfSHGs" Type="nvarchar" MaxLength="500" />
           <Property Name="VillageName" Type="nvarchar" MaxLength="500" />
           <Property Name="EmpName" Type="nvarchar" MaxLength="500" />
           <Property Name="Gender" Type="nvarchar" MaxLength="20" />
@@ -721,7 +723,6 @@
           <EntitySet Name="Panchayat_Master" EntityType="FP_DBModel.Panchayat_Master" />
           <EntitySet Name="VO_Master" EntityType="FP_DBModel.VO_Master" />
           <EntitySet Name="tbl_CLF_Emp" EntityType="FP_DBModel.tbl_CLF_Emp" />
-          <EntitySet Name="TBL_Emp" EntityType="FP_DBModel.TBL_Emp" />
           <EntitySet Name="tbl_CLFPlanReject" EntityType="FP_DBModel.tbl_CLFPlanReject" />
           <EntitySet Name="tbl_Plan" EntityType="FP_DBModel.tbl_Plan" />
           <EntitySet Name="tbl_Achievement_Log" EntityType="FP_DBModel.tbl_Achievement_Log" />
@@ -731,6 +732,7 @@
           <EntitySet Name="tbl_BFYService" EntityType="FP_DBModel.tbl_BFYService" />
           <EntitySet Name="tbl_AchievementPlan" EntityType="FP_DBModel.tbl_AchievementPlan" />
           <EntitySet Name="TBL_Beneficiary" EntityType="FP_DBModel.TBL_Beneficiary" />
+          <EntitySet Name="TBL_Emp" EntityType="FP_DBModel.TBL_Emp" />
         </EntityContainer>
         <EntityType Name="Contraceptive_Child_Master">
           <Key>
@@ -894,29 +896,6 @@
           <Property Name="EmpId_fk" Type="Guid" />
           <Property Name="UserId_fk" Type="Guid" />
           <Property Name="CLFIdfk" Type="Int32" />
-        </EntityType>
-        <EntityType Name="TBL_Emp">
-          <Key>
-            <PropertyRef Name="EmpID_pk" />
-          </Key>
-          <Property Name="EmpID_pk" Type="Guid" Nullable="false" />
-          <Property Name="UserID_fk" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="RoleID_fk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DistrictID" Type="Int32" />
-          <Property Name="BlockID" Type="Int32" />
-          <Property Name="CLFId_fk" Type="Int32" />
-          <Property Name="CLFId_fks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PanchayatId" Type="Int32" />
-          <Property Name="VOId_fk" Type="Int32" />
-          <Property Name="VillageName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="EmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tbl_CLFPlanReject">
           <Key>
@@ -1186,6 +1165,31 @@
           <Property Name="ServicedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ServicedOn" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="TBL_Emp">
+          <Key>
+            <PropertyRef Name="EmpID_pk" />
+          </Key>
+          <Property Name="EmpID_pk" Type="Guid" Nullable="false" />
+          <Property Name="UserID_fk" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID_fk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DistrictID" Type="Int32" />
+          <Property Name="BlockID" Type="Int32" />
+          <Property Name="CLFId_fk" Type="Int32" />
+          <Property Name="CLFId_fks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PanchayatId" Type="Int32" />
+          <Property Name="VOId_fk" Type="Int32" />
+          <Property Name="NoOfSHG" Type="Int32" />
+          <Property Name="NameOfSHGs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VillageName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1421,30 +1425,6 @@
                 <ScalarProperty Name="UserId_fk" ColumnName="UserId_fk" />
                 <ScalarProperty Name="EmpId_fk" ColumnName="EmpId_fk" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBL_Emp">
-            <EntityTypeMapping TypeName="FP_DBModel.TBL_Emp">
-              <MappingFragment StoreEntitySet="TBL_Emp">
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
-                <ScalarProperty Name="VillageName" ColumnName="VillageName" />
-                <ScalarProperty Name="VOId_fk" ColumnName="VOId_fk" />
-                <ScalarProperty Name="PanchayatId" ColumnName="PanchayatId" />
-                <ScalarProperty Name="CLFId_fks" ColumnName="CLFId_fks" />
-                <ScalarProperty Name="CLFId_fk" ColumnName="CLFId_fk" />
-                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
-                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
-                <ScalarProperty Name="RoleID_fk" ColumnName="RoleID_fk" />
-                <ScalarProperty Name="UserID_fk" ColumnName="UserID_fk" />
-                <ScalarProperty Name="EmpID_pk" ColumnName="EmpID_pk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1722,6 +1702,32 @@
                 <ScalarProperty Name="DistrictId_fk" ColumnName="DistrictId_fk" />
                 <ScalarProperty Name="HindiEng" ColumnName="HindiEng" />
                 <ScalarProperty Name="Beneficiary_Id_pk" ColumnName="Beneficiary_Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Emp">
+            <EntityTypeMapping TypeName="FP_DBModel.TBL_Emp">
+              <MappingFragment StoreEntitySet="TBL_Emp">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="VillageName" ColumnName="VillageName" />
+                <ScalarProperty Name="NameOfSHGs" ColumnName="NameOfSHGs" />
+                <ScalarProperty Name="NoOfSHG" ColumnName="NoOfSHG" />
+                <ScalarProperty Name="VOId_fk" ColumnName="VOId_fk" />
+                <ScalarProperty Name="PanchayatId" ColumnName="PanchayatId" />
+                <ScalarProperty Name="CLFId_fks" ColumnName="CLFId_fks" />
+                <ScalarProperty Name="CLFId_fk" ColumnName="CLFId_fk" />
+                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="RoleID_fk" ColumnName="RoleID_fk" />
+                <ScalarProperty Name="UserID_fk" ColumnName="UserID_fk" />
+                <ScalarProperty Name="EmpID_pk" ColumnName="EmpID_pk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

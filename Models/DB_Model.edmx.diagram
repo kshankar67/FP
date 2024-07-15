@@ -26,17 +26,17 @@
         <EntityTypeShape EntityType="FP_DBModel.Panchayat_Master" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="FP_DBModel.VO_Master" Width="1.5" PointX="13.375" PointY="12.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_CLF_Emp" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="FP_DBModel.TBL_Emp" Width="1.5" PointX="14.375" PointY="0.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_CLFPlanApprove" Width="1.5" PointX="8.375" PointY="14.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_CLFPlanReject" Width="1.5" PointX="15.375" PointY="6.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_Plan" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_Achievement_Log" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_PaymentHistory" Width="1.5" PointX="15.375" PointY="9.75" />
-        <EntityTypeShape EntityType="FP_DBModel.TBL_Beneficiary" Width="1.5" PointX="15.375" PointY="15.75" />
         <EntityTypeShape EntityType="FP_DBModel.Activities_Master" Width="1.5" PointX="3.375" PointY="9.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_CMMIncentivePayment" Width="1.5" PointX="9.375" PointY="14.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_BFYService" Width="1.5" PointX="6.125" PointY="11.75" />
         <EntityTypeShape EntityType="FP_DBModel.tbl_AchievementPlan" Width="1.5" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="FP_DBModel.TBL_Beneficiary" Width="1.5" PointX="15.375" PointY="15.75" />
+        <EntityTypeShape EntityType="FP_DBModel.TBL_Emp" Width="1.5" PointX="14.25" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -170,6 +170,8 @@ namespace FP.Controllers
                 model.CLFId_fk = tblemp.CLFId_fk;
                 model.PanchayatId = tblemp.PanchayatId;
                 model.VOId_fk = tblemp.VOId_fk;
+                model.NoOfSHG = tblemp.NoOfSHG;
+                model.NameOfSHGs = tblemp.NameOfSHGs;
                 model.VillageName = tblemp.VillageName;
                 model.EmpName = tblemp.EmpName;
             }
@@ -198,6 +200,8 @@ namespace FP.Controllers
                     tbLe.CLFId_fk = model.CLFId_fk;
                     tbLe.PanchayatId = model.PanchayatId;
                     tbLe.VOId_fk = model.VOId_fk;
+                    tbLe.NoOfSHG = model.NoOfSHG;
+                    tbLe.NameOfSHGs = model.NameOfSHGs;
 
                     tbLe.EmpName = model.EmpName;
                     tbLe.Gender = model.Gender;
@@ -281,6 +285,8 @@ namespace FP.Controllers
                             tbl.CLFId_fk = model.CLFId_fk != null ? model.CLFId_fk : null;
                             tbl.PanchayatId = model.PanchayatId;
                             tbl.VOId_fk = model.VOId_fk;
+                            tbl.NoOfSHG = model.NoOfSHG;
+                            tbl.NameOfSHGs = model.NameOfSHGs;
                             tbl.EmpName = model.EmpName.Trim();
                             tbl.VillageName = model.VillageName;
                             tbl.Gender = model.Gender;

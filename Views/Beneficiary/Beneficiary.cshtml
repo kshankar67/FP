@@ -130,7 +130,7 @@
                     </div>
                     <div class="mb-3">
                         @Html.Label(Model.BFYDOB_TD, htmlAttributes: new { @class = "cl-BFYDOB" })
-                        @Html.EditorFor(m => m.BFYDOB, new { htmlAttributes = new { @class = "form-control col-md-4 date_picker clage cl-BFYDOB" } })@*//, minlength = "10", maxlength = "10"*@
+                        @Html.EditorFor(m => m.BFYDOB, new { htmlAttributes = new { @class = "form-control col-md-4 date_picker clage cl-BFYDOB", @readonly= "readonly" } })@*//, minlength = "10", maxlength = "10"*@
                         <strong id="bfyage" class="text-success"></strong>
                         @Html.ValidationMessageFor(m => m.BFYDOB, "", new { @class = "text-danger" })
                         @Html.Label(Model.Q4_TD, htmlAttributes: new { @class = "cl-BFYDOBYear", @style = "display:none;" })
@@ -164,7 +164,7 @@
                     </div>
                     <div class="mb-3" id="Q6-div">
                         @Html.Label(Model.Q6D, htmlAttributes: new { @class = "cl-Q6", @style = "display:none;" })
-                        @Html.EditorFor(m => m.Q6, new { htmlAttributes = new { @class = "form-control col-md-4 date_picker cl-Q6", maxlength = "12", @style = "display:none;" } })
+                        @Html.EditorFor(m => m.Q6, new { htmlAttributes = new { @class = "form-control col-md-4 date_picker cl-Q6", @readonly = "readonly", maxlength = "12", @style = "display:none;" } })
                         @Html.ValidationMessageFor(m => m.Q6, "", new { @class = "text-danger cl-Q6", @style = "display:none;" })
 
                         @Html.Label(Model.Q6_YearD, htmlAttributes: new { @class = "cl-Q6_Year", @style = "display:block;" })

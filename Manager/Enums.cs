@@ -92,7 +92,7 @@ namespace FP.Manager
         {
             [Description("MRP-CLF")]
             MRP = 1,
-            [Description("CC")]
+            [Description("AC")]
             CC = 2,
             [Description("BPIU")]//BPMU
             BPIU = 3,

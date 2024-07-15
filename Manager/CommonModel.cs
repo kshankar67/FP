@@ -335,6 +335,10 @@ namespace FP.Manager
                 {
                     items = new SelectList(db_.AspNetRoles.Where(x => x.Name == RoleNameCont.CNRP || x.Name == RoleNameCont.CM || x.Name == RoleNameCont.BPIU), "ID", "Name").OrderBy(x => x.Text).ToList();
                 }
+                else if (HttpContext.Current.User.IsInRole(RoleNameCont.District))
+                {
+                    items = new SelectList(db_.AspNetRoles.Where(x => x.Name != RoleNameCont.Admin && x.Name != RoleNameCont.State && x.Name != RoleNameCont.District), "ID", "Name").OrderBy(x => x.Text).ToList();
+                }
                 else
                 {
                     items = new SelectList(db_.AspNetRoles, "ID", "Name").OrderBy(x => x.Text).ToList();
@@ -1936,7 +1940,7 @@ namespace FP.Manager
             public const string BPIU = "BPIU";
             public const string CLF = "CLF";//1st Level Parallel Cluster
             public const string MRP = "MRP-CLF";//2nd Level Parallel  Cluster
-            public const string CC = "CC";//3rd Level Parallel Cluster
+            public const string CC = "AC";//3rd Level Parallel Cluster
             public const string CNRP = "CNRP";
             public const string CM = "CM";
         }
@@ -1949,6 +1953,8 @@ namespace FP.Manager
             public const string VO = "Village Org.";
             public const string Activities = "Activities";
             public const string VOFull = "Village Organization";
+            public const string NoOfSHG = "No of SHG";
+            public const string NameOfSHGs = "SHG Names";
             public const string CMID = "CM";
             public const string Month = "Month";
             public const string Year = "Year";

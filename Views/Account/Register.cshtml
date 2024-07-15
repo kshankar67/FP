@@ -9,7 +9,6 @@
         background: #FFFFFF;
         border-color: #009CFF;
     }
-
 </style>
 <div class="breadcrumb">
     <h2>User Registration</h2>
@@ -70,6 +69,20 @@
                             @Html.DropDownListFor(m => m.VOId_fk, new List<SelectListItem>(), null, new { @class = "form-select mb-3" })
                         </div>
                     </div>
+                    <div class="row" id="div-noShg" style="display:none">
+                        <label class="col-md-12 col-form-label">No of SHG <span class="text-danger">*</span></label>
+                        @*@Html.LabelFor(m => m.VillageName, new { @class = "form-label" })<span class="text-danger">*</span>*@
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.NoOfSHG, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row" id="div-nameShgs" style="display:none">
+                        <label class="col-md-12 col-form-label">SHG Names <span class="text-danger">*</span></label>
+                        @*@Html.LabelFor(m => m.VillageName, new { @class = "form-label" })<span class="text-danger">*</span>*@
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.NameOfSHGs, new { @class = "form-control" })
+                        </div>
+                    </div>
                     <div class="row" id="div-voorg" style="display:none">
                         <label class="col-md-12 col-form-label">Village Name <span class="text-danger">*</span></label>
                         @*@Html.LabelFor(m => m.VillageName, new { @class = "form-label" })<span class="text-danger">*</span>*@
@@ -117,14 +130,12 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/JS/Master.js"></script>
     @*<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>*@
 
-<script>
+    <script>
     $(document).ready(function () {
 
         $('#Roles').change(function () {
-           // var url = '@Url.Action("Register", "Account")';
-            // window.location.href = url + '?Roles=' + $(this).val();
             var rolen = $("#Roles option:selected").text();
             $('#VillageName').val(''); $('#Password').val('');
             if (rolen == '@CommonModel.RoleNameCont.Admin' || rolen== '@CommonModel.RoleNameCont.State') {
@@ -137,10 +148,7 @@
             }
             else if (rolen == '@CommonModel.RoleNameCont.CM' || rolen == '@CommonModel.RoleNameCont.CNRP') {
                 GetVillage("VOId_fk", 0, $('#DistrictId').val(), $('#BlockId').val(), $('#CLFId_fk').val(), $('#PanchayatId').val());
-                //$(".js-select2").select2({
-                //    maximumSelectionLength: 1
-                //});
-                //$('select option:nth-child(1)').attr("selected", "selected");
+
             }
             else {
                 $('#div-pass').css('display', 'none'); $('#Password').removeAttr('required');
@@ -163,13 +171,6 @@
         });
 
         if ('@Model.UserID_fk' != '') {
-            debugger;
-
-            //$('#ComponentID').val(['e54e6352-b38b-43aa-8569-0dd897d66cf2',
-            //    '0e73c2eb-3aca-41a1-9c6b-3352780db37c', '1e7e8b7d-4323-4977-a714-6477ad911575', 'ab299025-f2d5-4b85-a69e-7175388343f5',
-            //    '06fc8a68-e904-489c-a464-72eb7d065796']).multiselect('refresh');
-
-           // var CLFids = '@Html.Raw(string.Join(",", Model.CLFId_fks.ToList()))';
             $('#Roles').val('@Model.RoleID_fk');
             BindRole();
             $('#DistrictId').val('@Model.DistrictId');
@@ -181,6 +182,8 @@
             $('#PanchayatId').val('@Model.PanchayatId');
             GetVillage("VOId_fk", 0, $('#DistrictId').val(), $('#BlockId').val(), $('#CLFId_fk').val(), $('#PanchayatId').val());
             $('#VOId_fk').val('@Model.VOId_fk');
+            $('#NoOfSHG').val('@Model.NoOfSHG');
+            $('#NameOfSHGs').val('@Model.NameOfSHGs');
             $('#EmpName').val('@Model.EmpName');
             $('#VillageName').val('@Model.VillageName');
             $('#MobileNo').val('@Model.MobileNo');
@@ -195,8 +198,6 @@
 
         if ('@MvcApplication.CUser' != 'null') {
             if ('@CommonModel.RoleNameCont.CNRP' === '@MvcApplication.CUser.Role') {
-                //$('#Roles').val('@MvcApplication.CUser.RoleId');
-                // $('#Roles').attr("style", "pointer-events: none;");
                 BindRole();
             }
          }
@@ -211,6 +212,8 @@
                 $('#div-clf').css('display', 'flex');
                 $('#div-vid').show();
                 $('#div-voorg').show();
+                $('#div-noShg').show();
+                $('#div-nameShgs').show();
                 $('#Gender').val('Female');
                 $('#Gender').attr('readonly', true);
             }
@@ -221,6 +224,8 @@
                 $('#div-panchid').css('display', 'flex');
                 $('#div-voorg').hide();
                 $('#div-vid').hide();
+                $('#div-noShg').hide();
+                $('#div-nameShgs').hide();
                 $('#Gender').val('Female');
                 $('#Gender').attr('readonly', true);
             }
@@ -231,6 +236,8 @@
                 $('#div-panchid').hide();
                 $('#div-voorg').hide();
                 $('#div-vid').hide();
+                $('#div-noShg').hide();
+                $('#div-nameShgs').hide();
                 $('#Gender').val('Female');
                 $('#Gender').attr('readonly', true);
             }
@@ -241,15 +248,20 @@
                 $('#div-clf').css('display', 'none');
                 $('#div-voorg').hide();
                 $('#div-vid').hide();
+                $('#div-noShg').hide();
+                $('#div-nameShgs').hide();
                 $('#Gender').val('Female');
                 $('#Gender').attr('readonly', false);
             }
             else if (rolen == '@CommonModel.RoleNameCont.District') {
+                $('#div-dis').css('display', 'flex');
                 $('#div-blk').css('display', 'none');
                 $('#div-panchid').css('display', 'none');
                 $('#div-clf').css('display', 'none');
                 $('#div-voorg').hide();
                 $('#div-vid').hide();
+                $('#div-noShg').hide();
+                $('#div-nameShgs').hide();
                 $('#Gender').val('Female');
                 $('#Gender').attr('readonly', false);
             }
@@ -257,11 +269,13 @@
                 $('#div-panchid').css('display', 'none');
                 $('#div-vid').hide();
                 $('#div-voorg').hide();
+                $('#div-noShg').hide();
+                $('#div-nameShgs').hide();
                 $('#Gender').attr('readonly', false);
                 $('#div-clf').css('display', 'none');
                 $('#div-blk').css('display', 'none');
                 $('#div-dis').css('display', 'none');
             }
         }
-</script>
+    </script>
 }

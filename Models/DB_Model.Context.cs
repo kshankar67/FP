@@ -43,7 +43,6 @@ namespace FP.Models
         public virtual DbSet<Panchayat_Master> Panchayat_Master { get; set; }
         public virtual DbSet<VO_Master> VO_Master { get; set; }
         public virtual DbSet<tbl_CLF_Emp> tbl_CLF_Emp { get; set; }
-        public virtual DbSet<TBL_Emp> TBL_Emp { get; set; }
         public virtual DbSet<tbl_CLFPlanReject> tbl_CLFPlanReject { get; set; }
         public virtual DbSet<tbl_Plan> tbl_Plan { get; set; }
         public virtual DbSet<tbl_Achievement_Log> tbl_Achievement_Log { get; set; }
@@ -53,5 +52,6 @@ namespace FP.Models
         public virtual DbSet<tbl_BFYService> tbl_BFYService { get; set; }
         public virtual DbSet<tbl_AchievementPlan> tbl_AchievementPlan { get; set; }
         public virtual DbSet<TBL_Beneficiary> TBL_Beneficiary { get; set; }
+        public virtual DbSet<TBL_Emp> TBL_Emp { get; set; }
     }
 }

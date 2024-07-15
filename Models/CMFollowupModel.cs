@@ -23,6 +23,7 @@ namespace FP.Models
         public string PanchayatId { get; set; }
         [Display(Name = "Village Organization")]
         public string VOId { get; set; }
+        [Display(Name = "CM")]
         public string CMID { get; set; }
         public string Month { get; set; }
         public string Year { get; set; }

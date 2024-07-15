@@ -23,6 +23,8 @@ namespace FP.Models
         public string CLFId_fks { get; set; }
         public Nullable<int> PanchayatId { get; set; }
         public Nullable<int> VOId_fk { get; set; }
+        public Nullable<int> NoOfSHG { get; set; }
+        public string NameOfSHGs { get; set; }
         public string VillageName { get; set; }
         public string EmpName { get; set; }
         public string Gender { get; set; }

@@ -108,6 +108,12 @@ namespace FP.Models
         public Nullable<int> PanchayatId { get; set; }
         [Display(Name = CommonModel.DispLevel.VOFull)]
         public Nullable<int> VOId_fk { get; set; }
+
+        [Display(Name = CommonModel.DispLevel.NoOfSHG)]
+        public Nullable<int> NoOfSHG { get; set; }
+        [Display(Name = CommonModel.DispLevel.NameOfSHGs)]
+        public string NameOfSHGs { get; set; }
+
         [Display(Name = "Village Name")]
         public string VillageName { get; set; }
         [Required]

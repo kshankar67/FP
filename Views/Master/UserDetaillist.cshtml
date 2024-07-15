@@ -51,21 +51,23 @@
 
 <script>
     $(document).ready(function () {
-      
-       
+
+
         $('#RoleId').change(function (e) {
             BindData();
         });
-        if ('@CommonModel.RoleNameCont.CNRP' === '@MvcApplication.CUser.Role'
-        || '@CommonModel.RoleNameCont.District' === '@MvcApplication.CUser.Role'
-        || '@CommonModel.RoleNameCont.BPIU' === '@MvcApplication.CUser.Role'
-        || '@CommonModel.RoleNameCont.BPM' === '@MvcApplication.CUser.Role'
-        || '@CommonModel.RoleNameCont.District' === '@MvcApplication.CUser.Role'
-        ) {
+
+        if ('@CommonModel.RoleNameCont.Admin' === '@MvcApplication.CUser.Role') {
             $('#RoleId').val('@MvcApplication.CUser.RoleId');
-            $('select option:first-child').attr("selected", "selected");
+            //$('select option:first-child').attr("selected", "selected");
             // $('#RoleId').attr("style", "pointer-events: none;");
-            BindData();
+        } else if ('@CommonModel.RoleNameCont.District' === '@MvcApplication.CUser.Role') {
+            $('#RoleId').val('727C58E2-8A14-4804-AB53-4762EC323A76');
+            //$('#RoleId').attr("style", "pointer-events: none;");
+        }
+        else if ('@CommonModel.RoleNameCont.CNRP' === '@MvcApplication.CUser.Role') {
+            $('#RoleId').val('727C58E2-8A14-4804-AB53-4762EC323A76');
+            $('#RoleId').attr("style", "pointer-events: none;");
         }
         BindData();
     });
