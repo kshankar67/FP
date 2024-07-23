@@ -112,19 +112,19 @@ namespace FP.Models
     }
     public static class DisplayAchBFY
     {
-        public const string ServiceYearId = "Year";
-        public const string ServiceMonthId = "Month";
-        public const string IsPPresent = "Availed contraception after meeting/HV";
-        public const string IsFUpHV = "FollowUp/HV in Current Month";
-        public const string IsPPrIsCt = "Want to use contraception after meeting/HV";
-        public const string Ct = "Method of contraception";
-        public const string Ctusemethod = "Use method";
-        public const string CtusemethodOther = "Other use method ";
-        public const string Isservice = "Linked to ASHA for service";
-        public const string ServiceRevcDt = "Service Received Date";
-        public const string ServiceProvider = "Service Provider";
-        public const string Location = "Facility Name (Location)";
-        public const string AashaName = "Aasha Name";
+        public const string ServiceYearId = "Year (वर्ष)";
+        public const string ServiceMonthId = "Month (महीना)";
+        public const string IsPPresent = "Availed contraception after meeting/HV (मीटिंग/एचवी के बाद गर्भनिरोधक का लाभ उठाया)";
+        public const string IsFUpHV = "FollowUp/HV in Current Month (वर्तमान माह में फॉलोअप/एचवी)";
+        public const string IsPPrIsCt = "Want to use contraception after meeting/HV (मीटिंग/एचवी के बाद गर्भनिरोधक का उपयोग करना चाहते हैं)";
+        public const string Ct = "Method of contraception (गर्भनिरोधन की विधि)";
+        public const string Ctusemethod = "Use method (विधि का प्रयोग करें)";
+        public const string CtusemethodOther = "Other use method (अन्य उपयोग विधि)";
+        public const string Isservice = "Linked to ASHA for service (सेवा के लिए आशा से जुड़े)";
+        public const string ServiceRevcDt = "Service Received Date (सेवा प्राप्त होने की तिथि)";
+        public const string ServiceProvider = "Service Provider (सेवा प्रदाता)";
+        public const string Location = "Facility Name (Location) (सुविधा का नाम(स्थान))";
+        public const string AashaName = "Aasha Name (आशा नाम)";
         public const string CMEligible = "CM Eligible for Incentive";//If Copper T/Antara inj/Permanent 20
         public const string CNRPEligible = "CNRP Eligible for Incentive";// 80
     }

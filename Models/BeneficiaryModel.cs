@@ -163,7 +163,7 @@ namespace FP.Models
         [Display(Name = "Number of SHGs where module was rolled out")]
         public Nullable<int> Q20 { get; set; } = 0;
 
-        [Required]
+        //[Required]
         [Display(Name = "Medium of module rollout")]
         public Nullable<int> Q21 { get; set; }
 

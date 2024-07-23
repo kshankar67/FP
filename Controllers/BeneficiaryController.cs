@@ -172,7 +172,7 @@ namespace FP.Controllers
                             tbl.Beneficiary_Id_pk = Guid.NewGuid();
                             tbl.HindiEng = item.HindiEng;
                             tbl.DistrictId_fk = item.DistrictId_fk;
-                            
+
                             tbl.CreatedBy = MvcApplication.CUser.Id;
                             tbl.CreatedOn = DateTime.Now;
                             tbl.UpdatedBy = MvcApplication.CUser.Id;
@@ -230,16 +230,23 @@ namespace FP.Controllers
         {
             try
             {
-                bool IsCheck = false;
-                var tbllist = SP_Model.SPBFYList(model);
-                if (tbllist.Rows.Count > 0)
+                if (CommonModel.ValidateFilterModelByRole(model))
                 {
-                    IsCheck = true;
+                    bool IsCheck = false;
+                    var tbllist = SP_Model.SPBFYList(model);
+                    if (tbllist.Rows.Count > 0)
+                    {
+                        IsCheck = true;
+                    }
+                    var html = ConvertViewToString("_BFYData", tbllist);
+                    var res = Json(new { IsSuccess = IsCheck, Data = html }, JsonRequestBehavior.AllowGet);
+                    res.MaxJsonLength = int.MaxValue;
+                    return res;
                 }
-                var html = ConvertViewToString("_BFYData", tbllist);
-                var res = Json(new { IsSuccess = IsCheck, Data = html }, JsonRequestBehavior.AllowGet);
-                res.MaxJsonLength = int.MaxValue;
-                return res;
+                else
+                {
+                    return Json(new { IsSuccess = false, Data = Enums.GetEnumDescription(Enums.eReturnReg.SelectAllRequiredField), Message = Enums.GetEnumDescription(Enums.eReturnReg.SelectAllRequiredField) }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
@@ -275,23 +282,30 @@ namespace FP.Controllers
         }
         public ActionResult FollowupList()
         {
-            CMFollowupModel model = new CMFollowupModel();
+            FilterModel model = new FilterModel();
             return View(model);
         }
-        public ActionResult GetFollowupList(CMFollowupModel model)
+        public ActionResult GetFollowupList(FilterModel model)
         {
             try
             {
-                bool IsCheck = false;
-                var tbllist = SP_Model.SPFollowUpDataList(model);
-                if (tbllist.Rows.Count > 0)
+                if (CommonModel.ValidateFilterModelByRole(model))
                 {
-                    IsCheck = true;
+                    bool IsCheck = false;
+                    var tbllist = SP_Model.SPFollowUpDataList(model);
+                    if (tbllist.Rows.Count > 0)
+                    {
+                        IsCheck = true;
+                    }
+                    var html = ConvertViewToString("_FollowDataList", tbllist);
+                    var res = Json(new { IsSuccess = IsCheck, Data = html }, JsonRequestBehavior.AllowGet);
+                    res.MaxJsonLength = int.MaxValue;
+                    return res;
                 }
-                var html = ConvertViewToString("_FollowDataList", tbllist);
-                var res = Json(new { IsSuccess = IsCheck, Data = html }, JsonRequestBehavior.AllowGet);
-                res.MaxJsonLength = int.MaxValue;
-                return res;
+                else
+                {
+                    return Json(new { IsSuccess = false, Data = Enums.GetEnumDescription(Enums.eReturnReg.SelectAllRequiredField), Message = Enums.GetEnumDescription(Enums.eReturnReg.SelectAllRequiredField) }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
@@ -304,22 +318,30 @@ namespace FP.Controllers
         public ActionResult BFYFollow()
         {
             CMFollowupModel model = new CMFollowupModel();
+            model.Month = "";
             return View(model);
         }
-        public ActionResult GetBFYFollowList(CMFollowupModel model)
+        public ActionResult GetBFYFollowList(FilterModel model)
         {
             try
             {
-                bool IsCheck = false;
-                var tbllist = SP_Model.SPBFYFUpMonthList(model);
-                if (tbllist.Rows.Count > 0)
+                if (CommonModel.ValidateFilterModelByRole(model))
                 {
-                    IsCheck = true;
+                    bool IsCheck = false;
+                    var tbllist = SP_Model.SPBFYFUpMonthList(model);
+                    if (tbllist.Rows.Count > 0)
+                    {
+                        IsCheck = true;
+                    }
+                    var html = ConvertViewToString("_BFYFollowData", tbllist);
+                    var res = Json(new { IsSuccess = IsCheck, Data = html }, JsonRequestBehavior.AllowGet);
+                    res.MaxJsonLength = int.MaxValue;
+                    return res;
                 }
-                var html = ConvertViewToString("_BFYFollowData", tbllist);
-                var res = Json(new { IsSuccess = IsCheck, Data = html }, JsonRequestBehavior.AllowGet);
-                res.MaxJsonLength = int.MaxValue;
-                return res;
+                else
+                {
+                    return Json(new { IsSuccess = false, Data = Enums.GetEnumDescription(Enums.eReturnReg.SelectAllRequiredField), Message = Enums.GetEnumDescription(Enums.eReturnReg.SelectAllRequiredField) }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {

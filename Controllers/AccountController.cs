@@ -79,6 +79,10 @@ namespace FP.Controllers
                 return View(model);
             }
 
+            var Passwordh = model.Password;
+            var passwordHasher = new Microsoft.AspNet.Identity.PasswordHasher();
+            var password = passwordHasher.HashPassword(Passwordh);
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -86,7 +90,8 @@ namespace FP.Controllers
             {
                 case SignInStatus.Success:
                     //return RedirectToLocal(returnUrl);
-                    return RedirectToAction("BFYList", "Beneficiary");
+                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("BFYList", "Beneficiary");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -253,9 +258,9 @@ namespace FP.Controllers
                 }
                 else
                 {
-                  
-                    var tblrole_name = dbe.AspNetRoles.Where(x=>x.Id==model.Roles)?.FirstOrDefault().Name;
-                    if (FP.Manager.CommonModel.RoleNameCont.State== tblrole_name 
+
+                    var tblrole_name = dbe.AspNetRoles.Where(x => x.Id == model.Roles)?.FirstOrDefault().Name;
+                    if (FP.Manager.CommonModel.RoleNameCont.State == tblrole_name
                         || FP.Manager.CommonModel.RoleNameCont.Admin == tblrole_name
                         || FP.Manager.CommonModel.RoleNameCont.Viewer == tblrole_name)
                     {

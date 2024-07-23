@@ -170,7 +170,7 @@ namespace FP.Manager
             DataSet ds = sp.ExecuteDataSet();
             return ds;
         }
-        public static DataTable SPBFYFUpMonthList(CMFollowupModel model)
+        public static DataTable SPBFYFUpMonthList(FilterModel model)
         {
             StoredProcedure sp = new StoredProcedure("SP_BFYFUpMonthList");
             sp.Command.AddParameter("@DisId", model.DistrictId, DbType.String);
@@ -186,7 +186,7 @@ namespace FP.Manager
             DataTable dt = sp.ExecuteDataSet().Tables[0];
             return dt;
         }
-        public static DataTable SPFollowUpDataList(CMFollowupModel model)
+        public static DataTable SPFollowUpDataList(FilterModel model)
         {
             StoredProcedure sp = new StoredProcedure("SP_BFYFollowUpDataList");
             sp.Command.AddParameter("@DisId", model.DistrictId, DbType.String);

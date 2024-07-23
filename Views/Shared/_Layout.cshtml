@@ -234,7 +234,9 @@
         function BindRoleCurrent(Roleid) {
             $('#' + Roleid).val(('@MvcApplication.CUser.RoleId').toLowerCase());
         }
-        function BindRolewise(DistrictId_fk, BlockId_fk,CLFId_fk, PanchayatId_fk, VoId_fk, CMID) {
+        function BindRolewise(DistrictId_fk, BlockId_fk, CLFId_fk, PanchayatId_fk, VoId_fk, CMID) {
+            $('#' + "Month").val('');
+
             if ('@Session["CUser"]' !== 'null' && '@Session["CUser"]' !=='') {
                 if ('@User.Identity.IsAuthenticated' === 'True') {
                      if ('@CommonModel.RoleNameCont.CM' === '@MvcApplication.CUser.Role') {
@@ -261,6 +263,9 @@
                              $('#' + VoId_fk).val());
                          $('#' + CMID).val(('@MvcApplication.CUser.EId').toLowerCase());
                          $('#' + CMID).attr("style", "pointer-events: none;");
+
+
+                         
                     }
                      else if ('@CommonModel.RoleNameCont.CNRP' === '@MvcApplication.CUser.Role') {
                         $('#' + DistrictId_fk).val(('@MvcApplication.CUser.DistrictId').toLowerCase());

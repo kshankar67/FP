@@ -45,7 +45,8 @@
                             <tr>
                                 <td class="text-center">@(srno++)</td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0);" onclick="BFYDetailView('@dr["BpkID"]')" class="btn btn-success btn-sm"><i class="fa fa-view"></i>@dr["BFYID"]</a>
+                                    <a href="javascript:void(0);" onclick="BFYDetailView('@dr["BpkID"]')" class="btn btn-success btn-sm">
+                                    <i class="fa fa-view"></i>@dr["BFYID"]</a>
                                 </td>
                                 @if (CommonModel.RoleNameCont.CNRP == MvcApplication.CUser.Role || CommonModel.RoleNameCont.CM == MvcApplication.CUser.Role)
                                 {
@@ -64,10 +65,19 @@
                                     <td class="text-center">@dr["CMName"]</td>
                                 }
                                 <td class="text-center">
-                                    @if (CommonModel.RoleNameCont.CM != MvcApplication.CUser.Role
-                                                || (MvcApplication.CUser.EId == (dr["CMID"] == DBNull.Value ? "" : dr["CMID"].ToString())))
+                                    @if ((dr["Q15"] == DBNull.Value ? "" : dr["Q15"].ToString()) != "2")
                                     {
-                                        <a href="~/Beneficiary/Beneficiary?id=@dr["BpkID"]&&HindiEng=2" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                        if (CommonModel.RoleNameCont.CM != MvcApplication.CUser.Role
+                                         || (MvcApplication.CUser.EId == (dr["CMID"] == DBNull.Value ? "" : dr["CMID"].ToString())))
+                                        {
+                                            <a href="~/Beneficiary/Beneficiary?id=@dr["BpkID"]&&HindiEng=2" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @dr["C_Name"]
                                     }
                                 </td>
                             </tr>

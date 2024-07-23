@@ -672,7 +672,7 @@ function GetMonthList(Ele, Sel, IsAll = 0) {
                     $('#' + Ele).append($("<option>").val(exp.Value).text(exp.Text));
                 });
                 $('#' + Ele + ' option[value="' + GetCurrentMonth() + '"]').prop('selected', true);
-
+                console.log('Month Loaded');
             }
         },
         error: function (req, error) {

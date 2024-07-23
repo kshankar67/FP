@@ -383,24 +383,45 @@
             //    }
             //});
 
-            for (var i = 1; i <= 10; i++) {
-                $(document).on('focus', "input[id=mdt-" + i + "]", function () {
+            for (var i = 1; i <= 20; i++) {
+                $(document).on('focus', "input[data-item=mdt-" + i + "]", function () {
                     $(this).datepicker({
                         dateFormat: 'dd/mm/yy',
                         changeMonth: true,
                         changeYear: true,
                         maxdate: new Date(),
-                        onSelect: function (dateText, inst) {
-                            //$(this).val(moment(dateText).format("DD-MM-YYYY"));
-                            console.log(dateText);
-                            var dt = moment(dateText).format("DD-MM-YYYY");
-                            console.log(inst);
-                            console.log(dt);
-                            //document.getElementById(this.id).value = `${dt.selectedDay}-${dt.selectedMonth+1}-${dt.selectedYear}`;
-                        }
+                        //onSelect: function (dateText, inst) {
+                        //    //$(this).val(moment(dateText).format("DD-MM-YYYY"));
+                        //    console.log(dateText);
+                        //    var dt = moment(dateText).format("DD-MM-YYYY");
+                        //    console.log(inst);
+                        //    console.log(dt);
+                        //    //document.getElementById(this.id).value = `${dt.selectedDay}-${dt.selectedMonth+1}-${dt.selectedYear}`;
+                        //}
                     });
                 });
             }
+
+            //$(document).on('focus', "input[name='MDt']", function () {
+            //    var id = $(this).attr('id');
+            //    $("#" + id).datepicker("destroy");
+            //    $('#' + id).datepicker({
+            //        dateFormat: 'dd/mm/yy',
+            //        changeMonth: true,
+            //        changeYear: true,
+            //        maxdate: new Date(),
+            //        onSelect: function (dateText, inst) {
+            //            //$(this).val(moment(dateText).format("DD-MM-YYYY"));
+            //            console.log(dateText);
+            //            var dt = moment(dateText).format("DD-MM-YYYY");
+            //            console.log(inst);
+            //            console.log(dt);
+            //            //document.getElementById(this.id).value = `${dt.selectedDay}-${dt.selectedMonth+1}-${dt.selectedYear}`;
+            //        }
+            //    });
+            //});
+
+
 
         });
 
@@ -495,9 +516,9 @@
                         var parts = vogids.split(',');
                         if ((actid == 1 || actid == 2) && parts.length) {
                             vogid = parts[0];
-                        }
-                        var existingIndex = tblpushdata.findIndex(x => moment(x.Meetingheld).isSame(moment(toDate(mdt))) && x.VoId_fk == vogid);
-                        if (existingIndex == -1 || (actid == 1 || actid == 2)) {
+                        }// 23-07-2024
+                        //var existingIndex = tblpushdata.findIndex(x => moment(x.Meetingheld).isSame(moment(toDate(mdt))) && x.VoId_fk == vogid);
+                        //if (existingIndex == -1 || (actid == 1 || actid == 2)) {
                             tblpushdata.push({
                                 AchieveId_pk: id,
                                 VoId_fk: vogid,
@@ -507,16 +528,12 @@
                                 Meetingheld: toDate(mdt),
                                 Noofparticipant: noofpart,
                             });
-                        }
-                        else {
-                            isValidRows = false;
-                            return;
-                        }
+                        //}
+                        //else {
+                        //    isValidRows = false;
+                        //    return;
+                        //}
                     }
-                    //else {
-                    //    rowDatavalid = false;
-                    //    return;
-                    //}
                 });
             });
 
@@ -524,14 +541,11 @@
                 toastr.error("Error", "Please fill at least one Village Org,\n Meeting Date & No of Participant.");
                 return false;
             }
-            else if (!isValidRows) {
-                toastr.error("Error", "Please select unique Village Org,\n Meeting Date per row.");
-                return false;
-            }
-            //else if (!rowDatavalid) {
-            //    toastr.error("Error", "Please remove not filled row.");
+            //else if (!isValidRows) {
+            //    toastr.error("Error", "Please select unique Village Org,\n Meeting Date per row.");
             //    return false;
             //}
+           
 
             formData.append('AVPlanModel', JSON.stringify(tblpushdata));
 

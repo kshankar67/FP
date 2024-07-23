@@ -302,6 +302,73 @@ namespace FP.Manager
             public string UserName { get; set; }
         }
 
+        public static bool ValidateFilterModelByRole(FilterModel model)
+        {
+            if (model.Month == "0")
+            {
+                model.Month = string.Empty;
+            }
+            var isSuccess = false;
+            switch (MvcApplication.CUser.Role)
+            {
+                case RoleNameCont.Admin:
+                    isSuccess = true;
+                    break;
+                case RoleNameCont.BPIU:
+                case RoleNameCont.BPM:
+                    if (!string.IsNullOrWhiteSpace(model.DistrictId) && !string.IsNullOrWhiteSpace(model.BlockId))
+                    {
+                        isSuccess = true;
+                    }
+                    break;
+                case RoleNameCont.CC:
+                    if (!string.IsNullOrWhiteSpace(model.DistrictId) && !string.IsNullOrWhiteSpace(model.BlockId) && !string.IsNullOrWhiteSpace(model.CLFId))
+                    {
+                        isSuccess = true;
+                    }
+                    break;
+                case RoleNameCont.CLF:
+                    if (!string.IsNullOrWhiteSpace(model.DistrictId) && !string.IsNullOrWhiteSpace(model.BlockId) && !string.IsNullOrWhiteSpace(model.CLFId))
+                    {
+                        isSuccess = true;
+                    }
+                    break;
+                case RoleNameCont.CM:
+                    if (!string.IsNullOrWhiteSpace(model.DistrictId) && !string.IsNullOrWhiteSpace(model.BlockId) && !string.IsNullOrWhiteSpace(model.CLFId) && !string.IsNullOrWhiteSpace(model.PanchayatId) && !string.IsNullOrWhiteSpace(model.VOId) && !string.IsNullOrWhiteSpace(model.CMID))
+                    {
+                        isSuccess = true;
+                    }
+                    break;
+                case RoleNameCont.CNRP:
+                    if (!string.IsNullOrWhiteSpace(model.DistrictId) && !string.IsNullOrWhiteSpace(model.BlockId) && !string.IsNullOrWhiteSpace(model.CLFId) && !string.IsNullOrWhiteSpace(model.PanchayatId))
+                    {
+                        isSuccess = true;
+                    }
+                    break;
+                case RoleNameCont.District:
+                    if (!string.IsNullOrWhiteSpace(model.DistrictId))
+                    {
+                        isSuccess = true;
+                    }
+                    break;
+                case RoleNameCont.MRP:
+                    if (!string.IsNullOrWhiteSpace(model.DistrictId) && !string.IsNullOrWhiteSpace(model.BlockId) && !string.IsNullOrWhiteSpace(model.CLFId))
+                    {
+                        isSuccess = true;
+                    }
+                    break;
+                case RoleNameCont.State:
+                    isSuccess = true;
+                    break;
+                case RoleNameCont.Viewer:
+                    isSuccess = true;
+                    break;
+                default:
+                    isSuccess = true;
+                    break;
+            }
+            return isSuccess;
+        }
         #endregion
 
         #region Master 
@@ -1985,7 +2052,7 @@ namespace FP.Manager
             public const string ApprovedDTMRP = "Validate MRP";//\r\n
             public const string ApprovedDTCC = "Checked CC";//\r\n
             public const string ApprovedD3 = "Approved BPM";//\r\n
-          
+
         }
     }
 }

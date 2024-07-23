@@ -15,18 +15,22 @@ function addRow(tbl) {
     let rowfyable = tbl;
     let lastRow = $('tfoot tr:last', rowfyable).clone(true).off();
     var index = parseInt($('tbody tr', rowfyable).length) + 1;
-    if (index <= 10) {
+    if (index <= 15) {
         $(lastRow).attr('data-index', index);
         $(lastRow).attr('data-id', '');
         $('input', lastRow).val('');
 
+        var lasMDRow = $('tbody tr:last', rowfyable)
+        var lastDTIndex = $('input.mdt', lasMDRow).attr('data-item');
+        lastDTIndex = lastDTIndex.replace("mdt-", "");
+
         $('.index', lastRow).text(index);
 
-        $('input.mdt', lastRow).attr('id', 'mdt-' + index);
+        $('input.mdt', lastRow).attr('id', 'mdt-' + index).attr('data-item', 'mdt-' + (parseInt(lastDTIndex) + 1));
         $('select.ActivityId_fk', lastRow).attr('id', 'actid-' + index);
         $('select.Void_fk', lastRow).attr('id', 'void-' + index);
         $('input.noofpart', lastRow).attr('id', 'noofpart-' + index);
-        $('a.part-detail', lastRow).attr('id', 'part-detail-' + index).css('display','none');
+        $('a.part-detail', lastRow).attr('id', 'part-detail-' + index).css('display', 'none');
         $('span.Void_fk-Name', lastRow).attr('id', 'Void_fk-Name-' + index).css('display', 'none');
         $('span.NoofPart-multiple-VO', lastRow).attr('id', 'NoofPart-multiple-VO-' + index).css('display', 'none');
         $('input.NoofPart-multiple-BfyIds', lastRow).attr('id', 'NoofPart-multiple-BfyIds-' + index);
@@ -51,7 +55,20 @@ $(document).on('click', '.rowfy-deleterow', function () {
     $(this).closest('tr').remove();
     $('.rowfy').each(function () {
         $('tbody', this).find('tr').each(function (i, row) {
-            $('.index', row).text(i + 1);
+            index = i + 1;
+            $('.index', row).text(index);
+
+            $(row).attr('data-index', index);
+
+            $('input.mdt', row).attr('id', 'mdt-' + index);
+            $('select.ActivityId_fk', row).attr('id', 'actid-' + index);
+            $('select.Void_fk', row).attr('id', 'void-' + index);
+            $('input.noofpart', row).attr('id', 'noofpart-' + index);
+            $('a.part-detail', row).attr('id', 'part-detail-' + index);
+            $('span.Void_fk-Name', row).attr('id', 'Void_fk-Name-' + index);
+            $('span.NoofPart-multiple-VO', row).attr('id', 'NoofPart-multiple-VO-' + index);
+            $('input.NoofPart-multiple-BfyIds', row).attr('id', 'NoofPart-multiple-BfyIds-' + index);
+
         });
     });
 });
@@ -118,7 +135,8 @@ function BindDataTable() {
                     $(row).attr('data-id', item.AchieveId_pk);
                     $('.index', row).text(index);
 
-                    $('input.mdt', row).attr('id', 'mdt-' + index);
+                    $('input.mdt', row).attr('id', 'mdt-' + index).attr('data-item', 'mdt-' + index);
+
                     $('select.ActivityId_fk', row).attr('id', 'actid-' + index);
                     $('select.Void_fk', row).attr('id', 'void-' + index);
                     $('input.noofpart', row).attr('id', 'noofpart-' + index);
@@ -172,7 +190,7 @@ function BindDataTable() {
                 $(row).attr('data-id', '');
                 $('.index', row).text(index);
 
-                $('input.mdt', row).attr('id', 'mdt-' + index);
+                $('input.mdt', row).attr('id', 'mdt-' + index).attr('data-item', 'mdt-' + index);
                 $('select.ActivityId_fk', row).attr('id', 'actid-' + index);
                 $('select.Void_fk', row).attr('id', 'void-' + index);
                 $('input.noofpart', row).attr('id', 'noofpart-' + index);
@@ -184,7 +202,7 @@ function BindDataTable() {
                 $('select[id=void-' + index + ']', row).val('');
                 $('input[id=mdt-' + index + ']', row).val('');
                 $('input[id=noofpart-' + index + ']', row).val('');
-                $('span[id=Void_fk-Name-' + index + ']', row).text('').attr('data-ids','');
+                $('span[id=Void_fk-Name-' + index + ']', row).text('').attr('data-ids', '');
                 $('span[id=NoofPart-multiple-VO-' + index + ']', row).text('');
 
                 $(".rowfy tbody").append(row);
@@ -207,7 +225,7 @@ function BindDataTable() {
     });
 }
 
-function showHidenParticipantDetails(val,row) {
+function showHidenParticipantDetails(val, row) {
     if (val == 1 || val == 2) {
         $('a.part-detail', row).show();
         $('span.Void_fk-Name', row).show();

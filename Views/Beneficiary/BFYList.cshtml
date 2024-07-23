@@ -171,7 +171,7 @@
             /* Role Wise */
             BindRolewise("DistrictId", "BlockId", "CLFId", "PanchayatId", "VOId", "CMID");
 
-            BindData();
+            //BindData();
 
             $("#formid").submit(function (e) {
                 e.preventDefault();
@@ -231,6 +231,7 @@
                     }
                     else {
                         $("#subdata").html(res.Data);
+                        toastr.error("Error", res.Message);
                     }
                 },
                 error: function (req, error) {

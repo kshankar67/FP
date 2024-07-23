@@ -141,7 +141,7 @@
         $(document).ready(function () {
 
             GetYearList("Year", 0, 0);
-            GetMonthList("Month", 0, 0);
+            
             GetDistrict("DistrictId", 0);
             $('#DistrictId').change(function () {
                 GetBlock("BlockId", 0, $(this).val());
@@ -158,6 +158,7 @@
             //});
             /* Role Wise */
             BindRolewise("DistrictId", "BlockId", "CLFId");//, "PanchayatId", "VOId"
+            GetMonthList("Month", 0, 0);
 
             setTimeout(BindData, 2000);
             CheckUnchecked();

@@ -24,58 +24,64 @@
                         <th>District</th>
                         <th>Block</th>
                     }
-                        <th>Cluster</th>
-                        <th>Panchayat</th>
-                        <th>Village <br />Organization</th>
-                        <th>Reporting <br />Month</th>
-                        <th>Parity</th>
-                        <th>Name of<br />Beneficiary</th>
-                        <th>@FP.Models.DisplayFollowBFY.Ct</th>
-                        <th>@FP.Models.DisplayFollowBFY.Ctusemethod</th>
-                    </tr>
+                    <th>Cluster</th>
+                    <th>Panchayat</th>
+                    <th>Village <br />Organization</th>
+                    <th>Reporting <br />Month</th>
+                    <th>Parity</th>
+                    <th>Name of<br />Beneficiary</th>
+                    <th>@FP.Models.DisplayFollowBFY.Ct</th>
+                    <th>@FP.Models.DisplayFollowBFY.Ctusemethod</th>
+                </tr>
             </thead>
             <tbody>
                 @{
                     if (dt.Rows.Count > 0)
                     {
                         int srno = 1;
-                        var getcp = db.tbl_BFYFollowup.Where(x => x.ContraceptionId_fk == 2);
+                        // var getcp = db.tbl_BFYFollowup.Where(x => x.ContraceptionId_fk == 2);
                         foreach (DataRow dr in dt.Rows)
                         {
-                            var bfyid = Guid.Parse(dr["BpkID"].ToString());
-                            var conprnt = getcp.Any(x => x.BFYID_fk == bfyid);
-                                <tr>
-                                    <td class="text-center">@(srno++)</td>
-                                    <td class="text-center">
-                                        @if (!string.IsNullOrEmpty(dr["BpkID"].ToString()))
-                                        {
-                                            if (conprnt || (dr["Q15"].ToString() == "2"))
-                                            {
-                                                <strong style="text-wrap:normal">Method of contraception : <span class="text-success">Permanent</span></strong>
-                                            }
-                                            else
-                                            {
-                                                <a href="javascript:void(0);" onclick="DisplayPOP('@dr["BpkID"]','@dr["BFYID"]')" class="btn btn-primary btn-sm"><i class="fa fa-arrow-up"></i> Follow-up</a>
-                                            }
-                                        }
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="javascript:void(0);" onclick="BFYFollowDataView('@dr["BpkID"]','',1)" class="btn btn-success btn-sm"><i class="fa fa-view"></i>@dr["BFYID"]</a>
-                                    </td>
-                                    @if (CommonModel.RoleNameCont.CNRP == MvcApplication.CUser.Role || CommonModel.RoleNameCont.CM == MvcApplication.CUser.Role)
+                            //var bfyid = Guid.Parse(dr["BpkID"].ToString());
+                            //var conprnt = getcp.Any(x => x.BFYID_fk == bfyid);
+                            <tr>
+                                <td class="text-center">@(srno++)</td>
+                                <td class="text-center">
+                                    @if (!string.IsNullOrEmpty(dr["BpkID"].ToString()))
                                     {
-                                        <td class="text-left">@dr["DistrictName"]</td>
-                                        <td class="text-left">@dr["Block"]</td>
+                                        if ((dr["Q15"] != DBNull.Value && dr["Q15"].ToString() == "2"))
+                                        {
+                                            <strong style="text-wrap:normal">Method of contraception : <span class="text-success">Permanent</span></strong>
+                                        }
+                                        else
+                                        {
+                                            <a href="javascript:void(0);" onclick="DisplayPOP('@dr["BpkID"]','@dr["BFYID"]')"
+                                               class="btn btn-@(Convert.ToString(@dr["IsFollowupInCurrentMonth"]) == "1" ? "success" : "primary") btn-sm"
+                                               data-last-fu="@dr["LatestFMonthName"]-@dr["LatestFYear"])">
+                                                <i class="fa fa-arrow-up"></i> Follow-up
+                                            </a>
+                                        }
                                     }
-                                        <td class="text-left">@dr["CLFName"]</td>
-                                        <td class="text-left">@dr["Panchayat"]</td>
-                                        <td class="text-left">@dr["VO"]</td>
-                                        <td class="text-center">@dr["ReportingDate"]</td>
-                                        <td class="text-center">@dr["Parity"]</td>
-                                        <td class="text-left">@dr["BFYName"]</td>
-                                        <td class="text-center">@dr["C_Name"]</td>
-                                        <td class="text-center">@dr["Method_Name"]</td>
-                                    </tr>
+                                </td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0);" onclick="BFYFollowDataView('@dr["BpkID"]','',1)" class="btn btn-success btn-sm">
+                                        <i class="fa fa-view"></i>@dr["BFYID"]
+                                    </a>
+                                </td>
+                                @if (CommonModel.RoleNameCont.CNRP == MvcApplication.CUser.Role || CommonModel.RoleNameCont.CM == MvcApplication.CUser.Role)
+                                {
+                                    <td class="text-left">@dr["DistrictName"]</td>
+                                    <td class="text-left">@dr["Block"]</td>
+                                }
+                                <td class="text-left">@dr["CLFName"]</td>
+                                <td class="text-left">@dr["Panchayat"]</td>
+                                <td class="text-left">@dr["VO"]</td>
+                                <td class="text-center">@dr["ReportingDate"]</td>
+                                <td class="text-center">@dr["Parity"]</td>
+                                <td class="text-left">@dr["BFYName"]</td>
+                                <td class="text-center">@dr["C_Name"]</td>
+                                <td class="text-center">@dr["Method_Name"]</td>
+                            </tr>
                         }
                     }
                     else

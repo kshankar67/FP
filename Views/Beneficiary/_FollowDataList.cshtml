@@ -43,25 +43,25 @@
                         {
                             var bfyid = Guid.Parse(dr["BpkID"].ToString());
                             var conprnt = getcp.Any(x => x.BFYID_fk == bfyid);
-                                <tr>
-                                    <td class="text-center">@(srno++)</td>
-                                    <td class="text-center">
-                                        <a href="javascript:void(0);" onclick="BFYFollowDataView('@dr["BpkID"]','@dr["FollowupID_pk"]',2)" class="btn btn-success btn-sm"><i class="fa fa-view"></i>@dr["BFYID"]</a>
-                                    </td>
-                                    @if (CommonModel.RoleNameCont.CNRP == MvcApplication.CUser.Role || CommonModel.RoleNameCont.CM == MvcApplication.CUser.Role)
-                                    {
-                                        <td class="text-left">@dr["DistrictName"]</td>
-                                        <td class="text-left">@dr["Block"]</td>
-                                    }
-                                        <td class="text-left">@dr["CLFName"]</td>
-                                        <td class="text-left">@dr["Panchayat"]</td>
-                                        <td class="text-left">@dr["VO"]</td>
-                                        <td class="text-center">@dr["FollowupReportDate"]</td>
-                                        <td class="text-center">@dr["Parity"]</td>
-                                        <td class="text-left">@dr["BFYName"]</td>
-                                        <td class="text-center">@dr["C_Name"]</td>
-                                        <td class="text-center">@dr["Method_Name"]</td>
-                                    </tr>
+                            <tr>
+                                <td class="text-center">@(srno++)</td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0);" onclick="BFYFollowDataView('@dr["BpkID"]','@dr["FollowupID_pk"]',2)" class="btn btn-success btn-sm"><i class="fa fa-view"></i>@dr["BFYID"]</a>
+                                </td>
+                                @if (CommonModel.RoleNameCont.CNRP == MvcApplication.CUser.Role || CommonModel.RoleNameCont.CM == MvcApplication.CUser.Role)
+                                {
+                                    <td class="text-left">@dr["DistrictName"]</td>
+                                    <td class="text-left">@dr["Block"]</td>
+                                }
+                                <td class="text-left">@dr["CLFName"]</td>
+                                <td class="text-left">@dr["Panchayat"]</td>
+                                <td class="text-left">@dr["VO"]</td>
+                                <td class="text-center">@dr["FollowupReportDate"]</td>
+                                <td class="text-center">@dr["Parity"]</td>
+                                <td class="text-left">@dr["BFYName"]</td>
+                                <td class="text-center">@dr["C_Name"]</td>
+                                <td class="text-center">@dr["Method_Name"]</td>
+                            </tr>
                         }
                     }
                     else
