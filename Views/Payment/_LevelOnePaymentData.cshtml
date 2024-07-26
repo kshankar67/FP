@@ -64,6 +64,7 @@
                                     string EmpName = dr["EmpName"] == DBNull.Value ? "" : dr["EmpName"].ToString();
                                     string Emp_ID = dr["Emp_ID"] == DBNull.Value ? "" : dr["Emp_ID"].ToString();
                                     int peerGM = dr["Peer group meeting"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Peer group meeting"]);
+                                    int hv = dr["Home Visit"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Home Visit"]);
                                     var CLFValidation = dr["CLFValidation"] is DBNull ? false : Convert.ToBoolean(dr["CLFValidation"]);
                                     string CLFValidationDate = (dr["CLFValidationDate"] is DBNull || dr["CLFValidationDate"] == null) ? "" : Convert.ToDateTime(dr["CLFValidationDate"].ToString()).ToDateTimeddMMyyyy();
                                     var CLFLeadersPresident = dr["CLFLeadersPresident"] is DBNull ? false : Convert.ToBoolean(dr["CLFLeadersPresident"]);
@@ -81,10 +82,10 @@
                                         }
                                         else
                                         {
-                                            appvItem = peerGM;
+                                            appvItem = peerGM + hv;
                                         }
                                         appvam = CommonModel.GetClaimApprove(appvItem, CommonModel.RoleNameCont.CNRP);
-                                        clam = CommonModel.GetClaimApprove(peerGM, CommonModel.RoleNameCont.CNRP);
+                                        clam = CommonModel.GetClaimApprove(peerGM + hv, CommonModel.RoleNameCont.CNRP);
                                         <tr style="color:#1b6907;" data-empid="@Emp_ID">
                                             <td data-title="EmpName" class="@("empname-" + EmpName.Replace(" ", "_").ToLower())">@EmpName</td>
                                             @*<td data-title="NoOfMeetingHeld">@dr["NoOfMeetingHeld"]</td>*@

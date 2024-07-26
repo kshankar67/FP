@@ -2,8 +2,8 @@
 @using FP.Manager
 @{
     var indx = 0;
-    var dtRows1 = ((DataTable)Model).Select(@"ActivityId_fk <> 1");
-    var dtRows2 = ((DataTable)Model).Select(@"ActivityId_fk = 1");
+    var dtRows1 = ((DataTable)Model).Select(@"ActivityId_fk <> 1 AND  ActivityId_fk <> 2");
+    var dtRows2 = ((DataTable)Model).Select(@"ActivityId_fk = 1 OR ActivityId_fk = 2");
 
     if (dtRows2.Length > 0)
     {
@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <th></th>
+                    <th>Activity</th>
                     <th>Panchayat</th>
                     <th>VO</th>
                     <th>Meeting held</th>
@@ -35,27 +36,28 @@
                     ? "checked=checked" : dr1["IsLevel3Reject"].ToString() == "1" ? "" : "checked=checked";
                     var Level1AppvdDtMRP = dr1["IsLevel3Approve"].ToString() == appr ? dr1["Level3ApproveDt"].ToString() : "";
 
-                    <tr class="@("empname-" + EmpName.Replace(" ", "_").ToLower()) index-@indx @distbl">
+                <tr class="@("empname-" + EmpName.Replace(" ", "_").ToLower()) index-@indx @distbl">
 
-                        <td>
-                            <input type="checkbox" name="chkApprove" data-achvplanid="@dr1["AchieveId_pk"]"
-                                   data-uid="@dr1["UserID_fk"]" data-empid="@dr1["Emp_ID"]"
-                                   data-disid="@dr1["DistrictId_pk"]" data-blckid="@dr1["BlockId_pk"]"
-                                   data-clfid="@dr1["CLF_ID_pk"]" data-pchytid="@dr1["Panchayatid_pk"]" data-vorgid="@dr1["Void_pk"]"
-                                   data-planstatus="@dr1["PlanStatus"]"
-                                   value="@dr1["AchieveId_pk"]" @strchecked />
-                        </td>
-                        <td data-title="Panchayat">@dr1["Panchayat"]</td>
-                        <td data-title="VO">@dr1["VO"]</td>
-                        <td data-title="Meetingheld">@(CommonModel.FormateDtDMY(dr1["Meetingheld"].ToString()))</td>
-                        <td data-title="Noofparticipant">@dr1["Noofparticipant"]</td>
-                        <td data-title="Remark" width="300px">
-                            <textarea id="remark-@dr1["AchieveId_pk"]" name="Remark-@dr1["AchieveId_pk"]" class="form-control" rows="1" cols="12">@dr1["Remark2"].ToString()</textarea>
-                            <span id="remark-@dr1["AchieveId_pk"]-error" class="text-danger"></span>
-                            @dr1["Level3RejectDt"].ToString()
+                    <td>
+                        <input type="checkbox" name="chkApprove" data-achvplanid="@dr1["AchieveId_pk"]"
+                               data-uid="@dr1["UserID_fk"]" data-empid="@dr1["Emp_ID"]"
+                               data-disid="@dr1["DistrictId_pk"]" data-blckid="@dr1["BlockId_pk"]"
+                               data-clfid="@dr1["CLF_ID_pk"]" data-pchytid="@dr1["Panchayatid_pk"]" data-vorgid="@dr1["Void_pk"]"
+                               data-planstatus="@dr1["PlanStatus"]"
+                               value="@dr1["AchieveId_pk"]" @strchecked />
+                    </td>
+                    <td data-title="Activity">@dr1["Activity"]</td>
+                    <td data-title="Panchayat">@dr1["Panchayat"]</td>
+                    <td data-title="VO">@dr1["VO"]</td>
+                    <td data-title="Meetingheld">@(CommonModel.FormateDtDMY(dr1["Meetingheld"].ToString()))</td>
+                    <td data-title="Noofparticipant">@dr1["Noofparticipant"]</td>
+                    <td data-title="Remark" width="300px">
+                        <textarea id="remark-@dr1["AchieveId_pk"]" name="Remark-@dr1["AchieveId_pk"]" class="form-control" rows="1" cols="12">@dr1["Remark2"].ToString()</textarea>
+                        <span id="remark-@dr1["AchieveId_pk"]-error" class="text-danger"></span>
+                        @dr1["Level3RejectDt"].ToString()
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                     indx++;
                 }
             </tbody>
@@ -81,7 +83,7 @@
                 @foreach (DataRow dr1 in dtRows1)
                 {
                     <tr>
-                        <td>@dr1["Activity"]</td>
+                        <td data-title="Activity">@dr1["Activity"]</td>
                         <td data-title="Panchayat">@dr1["Panchayat"]</td>
                         <td data-title="VO">@dr1["VO"]</td>
                         <td data-title="Meetingheld">@(CommonModel.FormateDtDMY(dr1["Meetingheld"].ToString()))</td>

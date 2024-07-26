@@ -2007,7 +2007,7 @@ namespace FP.Manager
             public const string BPIU = "BPIU";
             public const string CLF = "CLF";//1st Level Parallel Cluster
             public const string MRP = "MRP-CLF";//2nd Level Parallel  Cluster
-            public const string CC = "AC";//3rd Level Parallel Cluster
+            public const string CC = "AC-CC";//3rd Level Parallel Cluster
             public const string CNRP = "CNRP";
             public const string CM = "CM";
         }

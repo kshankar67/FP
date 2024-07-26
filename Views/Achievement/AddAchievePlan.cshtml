@@ -437,6 +437,13 @@
             filtermodel.Month = $('#planMonth').val() == '' ? '' : $('#PlanMonth').val();
             //var formData = $('#formid').serialize();
 
+            if (isCurrentOrSpecialLastMonth(parseInt($('#PlanYear').text()), parseInt( filtermodel.Month))) {
+                $("#btnsubmit").show();
+            }
+            else {
+                $("#btnsubmit").hide();
+            }
+
             $.ajax({
                 type: "GET",
                 url: document.baseURI + "/Achievement/GetAchPlanList",
@@ -545,7 +552,7 @@
             //    toastr.error("Error", "Please select unique Village Org,\n Meeting Date per row.");
             //    return false;
             //}
-           
+
 
             formData.append('AVPlanModel', JSON.stringify(tblpushdata));
 
@@ -654,6 +661,30 @@
                     $("#modal-div-bfy").html(errormsg);
                 }
             });
+        }
+
+        function isCurrentOrSpecialLastMonth(year, month) {
+
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth(); // 0-indexed
+
+            // Check if the given year and month are the current year and month
+            if (year === currentYear && month === currentMonth + 1) {
+                return true;
+            }
+
+            // Check if the given year and month are the last month and current date is <= 8
+            if (currentDate.getDate() <= 8) {
+                const lastMonth = (currentMonth === 0) ? 12 : currentMonth;
+                const lastMonthYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+
+                if (year === lastMonthYear && month === lastMonth) {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
     </script>

@@ -243,7 +243,7 @@
             GetYearList("PlanYear", 0);
             GetMonthList("PlanMonth", 0);
             GetDistrict("DistrictId_fk", 0);
-            BindData();
+
             $('#DistrictId_fk').change(function () {
                 GetBlock("BlockId_fk", 0, $(this).val());
             });
@@ -264,10 +264,12 @@
             //}
             /* Role Wise */
             BindRolewise("DistrictId_fk", "BlockId_fk", "ClusterId_fk");//,"PanchayatId_fk", "VOId_fk"
+
             if ($('#DistrictId_fk').val() != "" && $('#BlockId_fk').val() != "" && $('#ClusterId_fk').val() != ""
                 && $('#PlanYear').val() != "" && $('#PlanMonth').val() != "") {
                 BindData();
             }
+
             $('#PlanYear').change(function () {
                 BindData();
             });
