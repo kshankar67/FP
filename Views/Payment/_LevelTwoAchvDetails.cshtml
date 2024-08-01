@@ -32,12 +32,26 @@
                     var Reject = Convert.ToInt16(Enums.eTypeApprove.Reject).ToString();
                     var distbl = dr1["IsLevel2Approve"].ToString() == appr ? "trdisableAprroved" :
                     dr1["IsLevel2Reject"].ToString() == "1" && dr1["PlanStatus"].ToString() == Reject ? "trdisableReject" : "trcolor";
-                    var strchecked = dr1["IsLevel2Approve"].ToString() == "1"
-                    ? "checked=checked" : dr1["IsLevel2Reject"].ToString() == "1" ? "" : "checked=checked";
                     var Level1AppvdDtMRP = dr1["IsLevel2Approve"].ToString() == appr ? dr1["Level2ApproveDt"].ToString() : "";
 
-                    <tr class="@("empname-" + EmpName.Replace(" ", "_").ToLower()) index-@indx @distbl">
+                    var strchecked = "";
+                    if (dr1["IsLevel2Approve"].ToString() == "1")
+                    {
+                        strchecked = "checked=checked";
+                    }
+                    else if (dr1["IsLevel2Reject"].ToString() == "1")
+                    {
+                        strchecked = "";
+                    }
+                    else
+                    {
+                        if (indx <= 9)
+                        {
+                            strchecked = "checked=checked";
+                        }
+                    }
 
+                    <tr class="@("empname-" + EmpName.Replace(" ", "_").ToLower()) index-@indx @distbl">
                         <td>
                             <input type="checkbox" name="chkApprove" data-achvplanid="@dr1["AchieveId_pk"]"
                                    data-uid="@dr1["UserID_fk"]" data-empid="@dr1["Emp_ID"]"

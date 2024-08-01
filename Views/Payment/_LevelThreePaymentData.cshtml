@@ -29,6 +29,7 @@
     .trcolor {
         color: #000;
     }
+
     .table-bordered > tbody > tr:hover {
         background: white;
         color: black;
@@ -60,16 +61,27 @@
                             {
                                 foreach (DataRow dr in dtg.Rows)
                                 {
-                                    var clam = 0;var appvam = 0; var appvItem = 0;
+                                    var clam = 0; var appvam = 0; var appvItem = 0;
                                     string EmpName = dr["EmpName"] == DBNull.Value ? "" : dr["EmpName"].ToString();
                                     string Emp_ID = dr["Emp_ID"] == DBNull.Value ? "" : dr["Emp_ID"].ToString();
                                     int peerGM = dr["Peer group meeting"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Peer group meeting"]);
                                     int hv = dr["Home Visit"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Home Visit"]);
+                                    var clamCount = peerGM + hv;
                                     var CLFValidation = dr["CLFValidation"] is DBNull ? false : Convert.ToBoolean(dr["CLFValidation"]);
                                     string CLFValidationDate = (dr["CLFValidationDate"] is DBNull || dr["CLFValidationDate"] == null) ? "" : Convert.ToDateTime(dr["CLFValidationDate"].ToString()).ToDateTimeddMMyyyy();
                                     var CLFLeadersPresident = dr["CLFLeadersPresident"] is DBNull ? false : Convert.ToBoolean(dr["CLFLeadersPresident"]);
                                     var CLFLeadersSecretary = dr["CLFLeadersSecretary"] is DBNull ? false : Convert.ToBoolean(dr["CLFLeadersSecretary"]);
                                     var CLFLeadersTreasurer = dr["CLFLeadersTreasurer"] is DBNull ? false : Convert.ToBoolean(dr["CLFLeadersTreasurer"]);
+
+                                    var Level3ApproveRejectDt = string.Empty;
+                                    if (dr["Level3ApproveDt"] != DBNull.Value)
+                                    {
+                                        Level3ApproveRejectDt = Convert.ToDateTime(dr["Level3ApproveDt"].ToString()).ToDateTimeddMMyyyy();
+                                    }
+                                    else if (dr["Level3RejectDt"] != DBNull.Value)
+                                    {
+                                        Level3ApproveRejectDt = Convert.ToDateTime(dr["Level3RejectDt"].ToString()).ToDateTimeddMMyyyy();
+                                    }
 
                                     if (!string.IsNullOrWhiteSpace(Emp_ID.ToLower()) && !string.IsNullOrWhiteSpace(EmpName.ToLower()))
                                     {
@@ -82,29 +94,38 @@
                                         }
                                         else
                                         {
-                                            appvItem = peerGM + hv;
+                                            appvItem = clamCount;
+                                        }
+                                        if (appvItem > 10)
+                                        {
+                                            appvItem = 10;
+                                        }
+                                        if (clamCount > 10)
+                                        {
+                                            clamCount = 10;
                                         }
                                         appvam = CommonModel.GetClaimApprove(appvItem, CommonModel.RoleNameCont.CNRP);
-                                        clam = CommonModel.GetClaimApprove(peerGM + hv, CommonModel.RoleNameCont.CNRP);
-                                                <tr style="color:#1b6907;" data-empid="@Emp_ID">
-                                                    <td data-title="EmpName" class="@("empname-" + EmpName.Replace(" ", "_").ToLower())">@EmpName</td>
-                                                    @*<td data-title="NoOfMeetingHeld">@dr["NoOfMeetingHeld"]</td>*@
-                                                    <td data-title="@CommonModel.DisAchvlbl.ClaimAmount">
-                                                        @clam
-                                                    </td>
-                                                    <td data-title="@CommonModel.DisAchvlbl.ApproveAmount">
-                                                        <strong id="appvamount-@Emp_ID">@appvam</strong>
-                                                        &nbsp;
-                                                        (<strong id="appvItem-@Emp_ID">@appvItem</strong>)
-                                                    </td>
-                                                    <td>@dr["Peer group meeting"]</td>
-                                                    <td>@dr["Home Visit"]</td>
-                                                    <td>@dr["Linkage of beneficiary with health service provider"]</td>
-                                                    <td>@dr["Participated in FP campaign"]</td>
-                                                    <td><a href="javascript:void(0);" class="btn btn-primary" onclick="AchievementDetailsByUser('@dr["Emp_ID"].ToString()', '@dr["EmpName"].ToString()', '@CLFValidation.ToString()', '@CLFValidationDate', '@CLFLeadersPresident.ToString()', '@CLFLeadersSecretary.ToString()', '@CLFLeadersTreasurer.ToString()' )">Details</a></td>
-                                                </tr>
+                                        clam = CommonModel.GetClaimApprove(clamCount, CommonModel.RoleNameCont.CNRP);
+                                        var bg = string.IsNullOrWhiteSpace(Level3ApproveRejectDt) ? "" : "background:#b5f1b4;";
+                                        <tr style="color: #1b6907; @bg" #b5f1b4" data-empid="@Emp_ID">
+                                            <td data-title="EmpName" class="@("empname-" + EmpName.Replace(" ", "_").ToLower())">@EmpName</td>
+                                            @*<td data-title="NoOfMeetingHeld">@dr["NoOfMeetingHeld"]</td>*@
+                                            <td data-title="@CommonModel.DisAchvlbl.ClaimAmount">
+                                                @clam
+                                            </td>
+                                            <td data-title="@CommonModel.DisAchvlbl.ApproveAmount">
+                                                <strong id="appvamount-@Emp_ID">@appvam</strong>
+                                                &nbsp;
+                                                (<strong id="appvItem-@Emp_ID">@appvItem</strong>)
+                                            </td>
+                                            <td>@dr["Peer group meeting"]</td>
+                                            <td>@dr["Home Visit"]</td>
+                                            <td>@dr["Linkage of beneficiary with health service provider"]</td>
+                                            <td>@dr["Participated in FP campaign"]</td>
+                                            <td><a href="javascript:void(0);" class="btn btn-primary" onclick="AchievementDetailsByUser('@dr["Emp_ID"].ToString()', '@dr["EmpName"].ToString()', '@CLFValidation.ToString()', '@CLFValidationDate', '@CLFLeadersPresident.ToString()', '@CLFLeadersSecretary.ToString()', '@CLFLeadersTreasurer.ToString()', '@Level3ApproveRejectDt' )">Details</a></td>
+                                        </tr>
                                     }
-                            }
+                                }
                             }
                             else
                             {
@@ -115,7 +136,7 @@
                     </tbody>
 
                 </table>
-               
+
             </div>
         </div>
     </div>

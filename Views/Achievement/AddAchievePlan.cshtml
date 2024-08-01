@@ -519,7 +519,9 @@
                     if ($('#DistrictId_fk').val() != '' && $('#BlockId_fk').val() != ''
                         && $('#ClusterId_fk').val() != '' && $('#PanchayatId_fk').val() != '' && actid
                         && $('#PlanYear').val() != '' && $('#PlanMonth').val() != ''
-                        && (mdt && mdt != '' && mdt != 'Invalid Date') && noofpart != '' && (((actid == 1 || actid == 2) && vogids) || vogid)) {
+                        && (mdt && mdt != '' && mdt != 'Invalid Date') && noofpart != ''
+                        && vogid //&& (((actid == 1 || actid == 2) && vogids) || vogid)
+                    ) {
                         var parts = vogids.split(',');
                         if ((actid == 1 || actid == 2) && parts.length) {
                             vogid = parts[0];

@@ -165,56 +165,69 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="modal-rowIndex" id="modal-rowIndex" />
-                    <div class="col-sm-12 col-xl-12">
-                        <div id="div-achv-table"></div>
+                    <div class="row">
+                        <div class="col-sm-12 col-xl-12">
+                            <div id="div-achv-table"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="col-sm-12 col-xl-12">
-                        <div class="position-relative form-group">
-                            <label class="" for="CLFValidation">CLF Validation</label>
-                            <div class="checkbox">
-                                <span class="check-spacer">
-                                    <input id="CLFValidationYes" name="CLFValidation" required="required" type="radio" value="1"> Yes
-                                </span>
-                                <span class="check-spacer">
-                                    <input id="CLFValidationNo" name="CLFValidation" required="required" type="radio" value="0"> No
-                                </span>
-                                <span class="text-danger" id="error-CLFValidation" style="display:none;">Required</span>
+                        <div class="row" style="width:100%">
+                            <div class="col-sm-4 col-xl-4">
+                                <div class="position-relative form-group">
+                                    <label class="" for="CLFValidation">CLF Validation</label>
+                                    <div class="checkbox">
+                                        <span class="check-spacer">
+                                            <input id="CLFValidationYes" name="CLFValidation" required="required" type="radio" value="1"> Yes
+                                        </span>
+                                        <span class="check-spacer">
+                                            <input id="CLFValidationNo" name="CLFValidation" required="required" type="radio" value="0"> No
+                                        </span>
+                                        <span class="text-danger" id="error-CLFValidation" style="display:none;">Required</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-8 col-xl-8" id="CLFValidationDateDiv" style="display:none;">
+                                <div class="position-relative form-group">
+                                    <label class="" for="CLFValidation">CLF Validation Date</label>
+                                    <input type="text" name="CLFValidationDate" value="" class="form-control col-md-4" id="CLFValidationDate">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-8 col-xl-8" id="CLFLeaders" style="display:none;">
+                                <div class="position-relative form-group">
+                                    <label class="" for="CLFLeaders">CLF Leaders</label>
+                                    <div class="checkbox">
+                                        <span class="check-spacer">
+                                            <input id="CLFLeadersPresident" name="CLFLeaders" type="checkbox" value="1"> President
+                                        </span>
+                                        <span class="check-spacer">
+                                            <input id="CLFLeadersSecretary" name="CLFLeaders" type="checkbox" value="2"> Secretary
+                                        </span>
+                                        <span class="check-spacer">
+                                            <input id="CLFLeadersTreasurer" name="CLFLeaders" type="checkbox" value="3"> Treasurer
+                                        </span>
+                                        <br />
+                                        <span class="text-danger" id="error-CLFLeaders" style="display:none">Please select atleast one leader</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-sm-12 col-xl-12" id="CLFValidationDateDiv" style="display:none;">
-                        <div class="position-relative form-group">
-                            <label class="" for="CLFValidation">CLF Validation Date</label>
-                            <input type="text" name="CLFValidationDate" value="" class="form-control col-md-4" id="CLFValidationDate">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-xl-12" id="CLFLeaders" style="display:none;">
-                        <div class="position-relative form-group">
-                            <label class="" for="CLFLeaders">CLF Leaders</label>
-                            <div class="checkbox">
-                                <span class="check-spacer">
-                                    <input id="CLFLeadersPresident" name="CLFLeaders" type="checkbox" value="1"> President
-                                </span>
-                                <span class="check-spacer">
-                                    <input id="CLFLeadersSecretary" name="CLFLeaders" type="checkbox" value="2"> Secretary
-                                </span>
-                                <span class="check-spacer">
-                                    <input id="CLFLeadersTreasurer" name="CLFLeaders" type="checkbox" value="3"> Treasurer
-                                </span>
-                                <br />
-                                <span class="text-danger" id="error-CLFLeaders" style="display:none">Please select atleast one leader</span>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <div class="modal-footer">
                     <div class="col-sm-12 col-xl-12">
-                        <button type="button" class="btn btn-primary float-right" id="modalOk" onclick="modalAchievementDetailsOk()">Validate</button>
+                        <div class="row" style="width:100%">
+                            <div class="col-sm-6 col-xl-6">
+                                Selected Activities: <span id="selectedActivities">0</span>
+                            </div>
+                            <div class="col-sm-6 col-xl-6">
+                                <button type="button" class="btn btn-primary float-right" style="float:right" id="modalOk" onclick="modalAchievementDetailsOk()">Validate</button>
+                                <span id="already-submited" class="text-danger">You have already submitted!</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -240,8 +253,8 @@
     <script>
         $(document).ready(function () {
 
-            GetYearList("PlanYear", 0);
-            GetMonthList("PlanMonth", 0);
+            GetYearList("PlanYear", @(DateTime.Now.Year));
+            GetMonthList("PlanMonth", @DateTime.Now.Month);
             GetDistrict("DistrictId_fk", 0);
 
             $('#DistrictId_fk').change(function () {
@@ -254,14 +267,7 @@
                 GetPanchayat("PanchayatId_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $(this).val());
                 BindData();
             });
-            //$('#PanchayatId_fk').change(function () {
-            //    // GetVillage("VOId", 0, $('#DistrictId').val(), $('#BlockId').val(), $('#CLFId').val(), $(this).val());
-            //    GetVOrg(".Void_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $('#ClusterId_fk').val(), $(this).val());
-            //    BindData();
-            //});
-            //if ($('#PanchayatId_fk').val() != "") {
-            //    GetVOrg(".Void_fk", 0, $('#DistrictId_fk').val(), $('#BlockId_fk').val(), $('#ClusterId_fk').val(), $(this).val());
-            //}
+
             /* Role Wise */
             BindRolewise("DistrictId_fk", "BlockId_fk", "ClusterId_fk");//,"PanchayatId_fk", "VOId_fk"
 
@@ -293,24 +299,14 @@
                     changeYear: true,
                     maxdate: new Date(),
                     onSelect: function (dateText, inst) {
-                        //$(this).val(moment(dateText).format("DD-MM-YYYY"));
-                        console.log(dateText);
                         var dt = moment(dateText).format("DD-MM-YYYY");
-                        console.log(inst);
-                        console.log(dt);
-                        //document.getElementById(this.id).value = `${dt.selectedDay}-${dt.selectedMonth+1}-${dt.selectedYear}`;
                     }
                 });
             });
 
-            //$("#formid").submit(function (e) {
-            //    e.preventDefault();
-            //    CUData();
-            //});
             $("#hrfid").click(function (e) {
                 e.preventDefault();
-                BindDataTable();
-               // document.getElementById("btnsubmit").disabled = false;
+                BindData();
             });
 
         });
@@ -341,27 +337,6 @@
                             pageLength: 500,
                             lengthChange: false
                         });
-                        //if ($.fn.dataTable.isDataTable('#DataList')) {
-                        //    $("#tblPlan").dataTable().fnDestroy();
-                        //}
-                        //table = $('#tblPlan').DataTable({
-                        //    pageLength: 100,
-                        //    fixedColumns: {
-                        //        leftColumns: 1,
-                        //        rightColumns: 1
-                        //    },
-                        //    buttons: [{
-                        //        extend: 'excel', text: '<span><i class="fa fa-download"></i>Export</span>', title: 'Achievement Plan Lists',//$('#IDDistrict option:selected').text() +
-                        //        className: 'btn btn-primary button-icon mr-3 mt-1 mb-1',
-                        //        filename: 'Achievement Plan List',
-                        //        exportOptions: { modifier: { page: 'all' } }
-                        //    }],
-                        //});
-                        //$('.dataTables_filter input[type="search"]').css(
-                        //    { 'width': '500px', 'display': 'inline-block' }
-                        //);
-                        //$('#div-download').empty();
-                        //table.buttons().container().appendTo($('#div-download'));
                     }
                     else {
                         $("#subdata").html(res.Data);
@@ -528,9 +503,10 @@
 
         }
 
-        function AchievementDetailsByUser(empId, eName, CLFValidation, CLFValidationDate, CLFLeadersPresident, CLFLeadersSecretary, CLFLeadersTreasurer) {
+        function AchievementDetailsByUser(empId, eName, CLFValidation, CLFValidationDate, CLFLeadersPresident, CLFLeadersSecretary, CLFLeadersTreasurer, Level1ApproveRejectDt) {
 
             $('#modalAchievementDetails #myModalTitle').html(eName);
+            $('#modalAchievementDetails #already-submited').html(`You have already submitted at ${Level1ApproveRejectDt}!`);
             $("#div-achv-table").html('');
 
             $("input[name=CLFValidation]").prop('checked', false);
@@ -544,7 +520,7 @@
                 $("#CLFValidationDateDiv").hide();
                 $("#CLFLeaders").show();
             }
-            
+
 
             if (CLFLeadersPresident == 'True') {
                 $("#CLFLeadersPresident").prop('checked', true);
@@ -581,6 +557,7 @@
                     else {
                         $("#div-achv-table").html(res.Data);
                     }
+                    selectedActivities();
                 },
                 error: function (req, error) {
                     if (error === 'error') { error = req.statusText; }
@@ -595,16 +572,21 @@
 
             var isValid = CalculateApprovedAmount();
             if (isValid) {
-                CUData();
-
+                var year = $('#PlanYear option:selected').text();
+                var month = $('#PlanMonth option:selected').text();
+                if (confirm(`Once validated for the month of ${month} ${year}, it cannot be modified after submission. Are you sure you want to continue?`)) {
+                    CUData();
+                }
+            } else {
+                toastr.error("Error", "Please check activities selections!");
             }
-
         }
 
         function CalculateApprovedAmount() {
 
             var isvalid = true;
-            $('input[name=chkApprove]').each(function (i, item) {
+            var i = 0;
+            $("input[name=chkApprove][name='chkApprove']").each(function (i, item) {
                 console.log(this);
                 $('span[id=remark-' + achvplanid + '-error]').html('');
                 var achvplanid = $(this).attr('data-achvplanid');
@@ -612,12 +594,17 @@
                 var empid = $(this).attr('data-empid');
                 var tr = $('#DataList tr[data-empid=' + empid + ']');
                 var noOfCheckedRows = $('input[name=chkApprove][data-empid=' + empid + ']:checked').length;
+                if (noOfCheckedRows > 10) {
+                    toastr.error("Error", "You can not select more than 10 activities!");
+                    return false;
+                }
                 var amount = noOfCheckedRows * @((int)@Enums.eAmount.CNRMonthly);
                 $('#appvamount-' + empid, tr).html(amount);
                 $('#appvItem-' + empid, tr).html(noOfCheckedRows);
                 if ($(this).is(':checked')) {
                     $('textarea[id=remark-' + achvplanid + ']').removeAttr('requied');
                     $('span[id=remark-' + achvplanid + '-error]').hide();
+                    i++;
                 }
                 else {
                     $('textarea[id=remark-' + achvplanid + ']').attr('requied', 'requied');
@@ -628,10 +615,38 @@
                         isvalid = false;
                     }
                 }
-
             });
+            if (i > 10) {
+                isvalid = false;
+            }
             return isvalid;
         }
+
+        $(document).on("click", "input[type='checkbox'][name='chkApprove']", function () {
+            selectedActivities(this);
+        });
+
+        function selectedActivities(ele = null) {
+            var total = $("input[type='checkbox'][name='chkApprove']:checked").length;
+            if (total > 10) {
+                total = 10;
+                if (ele) {
+                    $(ele).prop('checked', false);
+                }
+                toastr.error("Error", "You can not select more than 10 activities!");
+            }
+            $("#selectedActivities").text(total);
+
+            if ($("#div-achv-table table tr.trdisableAprroved, #div-achv-table table tr.trdisableReject").length > 0) {
+                $("#modalOk").hide();
+                $("#already-submited").show();
+            } else {
+                $("#modalOk").show();
+                $("#already-submited").hide();
+            }
+        }
+
+
     </script>
 }
 

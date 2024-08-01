@@ -641,6 +641,9 @@ function GetYearList(Ele, Sel, IsAll = 0) {
                     $('#' + Ele).append($("<option>").val(exp.Value).text(exp.Text));
                 });
                 $('#' + Ele + ' option:contains("' + GetCurrentYear() + '")').prop('selected', true);
+                if (Sel) {
+                    $('#' + Ele + ' option:contains("' + Sel + '")').prop('selected', true);
+                }
             }
         },
         error: function (req, error) {
@@ -673,6 +676,9 @@ function GetMonthList(Ele, Sel, IsAll = 0) {
                 });
                 $('#' + Ele + ' option[value="' + GetCurrentMonth() + '"]').prop('selected', true);
                 console.log('Month Loaded');
+                if (Sel) {
+                    $('#' + Ele + ' option[value="' + Sel + '"]').prop('selected', true);
+                }
             }
         },
         error: function (req, error) {

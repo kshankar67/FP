@@ -124,9 +124,9 @@
             </div>
             <div>
                 <label>Comments : </label>
-                 <textarea id="ApprovedRemarks" name="ApprovedRemarks" class="form-control" cols="2" rows="4" required></textarea>
+                <textarea id="ApprovedRemarks" name="ApprovedRemarks" class="form-control" cols="2" rows="4" required></textarea>
             </div>
-           
+
             <br />
             <div class="mb-3 offset-10">
                 <span class="check-spacer">
@@ -147,8 +147,8 @@
     <script>
         $(document).ready(function () {
 
-            GetYearList("Year", 0, 0);
-            //GetMonthList("Month", 0, 0);
+             GetYearList("Year", @(DateTime.Now.Year));
+             GetMonthList("Month", @DateTime.Now.Month);
             GetDistrict("DistrictId", 0);
             $('#DistrictId').change(function () {
                 GetBlock("BlockId", 0, $(this).val());
