@@ -174,32 +174,33 @@
                 <div class="modal-footer">
                     <div class="col-sm-12 col-xl-12">
                         <div class="row" style="width:100%">
-                            <div class="col-sm-4 col-xl-4">
-                                <div class="position-relative form-group">
-                                    <label class="" for="CLFValidation">CLF Validation</label>
-                                    <div class="checkbox">
+                            <div class="col-sm-12 col-xl-12">
+                                <div class="position-relative form-group" style="margin-bottom: 7px;">
+                                    <label class="" for="CLFValidation" style="margin-right: 15px;">CLF Validation during CLF meeting</label>
+                                    <div class="checkbox" style="display: contents; width:120px;">
                                         <span class="check-spacer">
                                             <input id="CLFValidationYes" name="CLFValidation" required="required" type="radio" value="1"> Yes
                                         </span>
                                         <span class="check-spacer">
                                             <input id="CLFValidationNo" name="CLFValidation" required="required" type="radio" value="0"> No
+                                            <i class="fa fa-info-circle" data-toggle="tooltip" title="In case NO, choose CLF Leaders present"></i>
                                         </span>
                                         <span class="text-danger" id="error-CLFValidation" style="display:none;">Required</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-8 col-xl-8" id="CLFValidationDateDiv" style="display:none;">
-                                <div class="position-relative form-group">
-                                    <label class="" for="CLFValidation">CLF Validation Date</label>
-                                    <input type="text" name="CLFValidationDate" value="" class="form-control col-md-4" id="CLFValidationDate">
+                            <div class="col-sm-12 col-xl-12" id="CLFValidationDateDiv" style="display:none;">
+                                <div class="position-relative form-group" style="margin-bottom: 7px;">
+                                    <label class="" for="CLFValidation" style="margin-right: 15px;">CLF Validation Date</label>
+                                    <input type="text" name="CLFValidationDate" value="" class="form-control col-md-4" id="CLFValidationDate" style=" width: 200px;display:inline-block;">
                                 </div>
                             </div>
 
-                            <div class="col-sm-8 col-xl-8" id="CLFLeaders" style="display:none;">
-                                <div class="position-relative form-group">
-                                    <label class="" for="CLFLeaders">CLF Leaders</label>
-                                    <div class="checkbox">
+                            <div class="col-sm-12 col-xl-12" id="CLFLeaders" style="display:none;">
+                                <div class="position-relative form-group" style="margin-bottom: 7px;">
+                                    <label class="" for="CLFLeaders" style="margin-right: 15px;">In case NO, choose CLF Leaders present</label>
+                                    <div class="checkbox" style=" width: 265px;display:inline-block;">
                                         <span class="check-spacer">
                                             <input id="CLFLeadersPresident" name="CLFLeaders" type="checkbox" value="1"> President
                                         </span>
@@ -252,6 +253,10 @@
 
     <script>
         $(document).ready(function () {
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
 
             GetYearList("PlanYear", @(DateTime.Now.Year));
             GetMonthList("PlanMonth", @DateTime.Now.Month);

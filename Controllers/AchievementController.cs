@@ -43,13 +43,26 @@ namespace FP.Controllers
                     var mlist = JsonConvert.DeserializeObject<List<AVPlanModel>>(resAchvPlanlist);
                     if (mlist != null)
                     {
-                        if (mlist.Count() > 0 && mlist.Count <= 10)
+                        if (mlist.Count() > 0 //&& mlist.Count <= 10
+                            )
                         {
                             tbl_AchievementPlan tbl;
                             List<tbl_AchievementPlan> tbl_list = new List<tbl_AchievementPlan>();
                             if (model.DistrictId_fk != null && model.BlockId_fk != null && model.ClusterId_fk != null
                                 && model.PanchayatId_fk != null && model.PlanYear != null && model.PlanMonth != null)
                             {
+                                var exisgingItems = db_.tbl_AchievementPlan.Where(x => x.DistrictId_fk == model.DistrictId_fk && x.BlockId_fk == model.BlockId_fk
+                                          && x.ClusterId_fk == model.ClusterId_fk && x.PanchayatId_fk == model.PanchayatId_fk && x.PlanYear == model.PlanYear
+                                          && x.PlanMonth == model.PlanMonth).ToList();
+                                if (exisgingItems != null && exisgingItems.Any())
+                                {
+                                    var deleteItems = exisgingItems.Where(x => !mlist.Any(y => y.AchieveId_pk == x.AchieveId_pk)).ToList();
+                                    if (deleteItems!=null && deleteItems.Any())
+                                    {
+                                        db_.tbl_AchievementPlan.RemoveRange(deleteItems);
+                                        db_.SaveChanges();
+                                    }
+                                }
                                 foreach (var m in mlist)
                                 {
                                     var existsRow = db_.tbl_AchievementPlan.FirstOrDefault(x => x.DistrictId_fk == model.DistrictId_fk && x.BlockId_fk == model.BlockId_fk
@@ -119,7 +132,7 @@ namespace FP.Controllers
                 resResponse3.MaxJsonLength = int.MaxValue;
                 return resResponse3;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = "There was a communication error.", Data = null };
                 var resResponse1 = Json(response, JsonRequestBehavior.AllowGet);
@@ -187,7 +200,7 @@ namespace FP.Controllers
                 var items = db_.TBL_Beneficiary.Where(x => VoIds_fk.Any(s => s == x.VillageOId_fk)).ToList();
                 if (items != null && items.Count > 0)
                 {
-                   // var data = JsonConvert.SerializeObject(items);
+                    // var data = JsonConvert.SerializeObject(items);
                     var html = ConvertViewToString("_BFList", items);
                     return Json(new { IsSuccess = true, Data = html }, JsonRequestBehavior.AllowGet);
                 }

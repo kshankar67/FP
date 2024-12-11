@@ -47,8 +47,17 @@
                     {
                         if (indx <= 9)
                         {
-                            strchecked = "checked=checked";
+                            if (Convert.ToInt32(dr1["Noofparticipant"]) != 0)
+                            {
+                                strchecked = "checked=checked";
+                            }
+
                         }
+                    }
+                    if (Convert.ToInt32(dr1["Noofparticipant"]) == 0)
+                    {
+                        strchecked = "";
+                        distbl = "";
                     }
 
                     <tr class="@("empname-" + EmpName.Replace(" ", "_").ToLower()) index-@indx @distbl">
@@ -58,7 +67,7 @@
                                    data-disid="@dr1["DistrictId_pk"]" data-blckid="@dr1["BlockId_pk"]"
                                    data-clfid="@dr1["CLF_ID_pk"]" data-pchytid="@dr1["Panchayatid_pk"]" data-vorgid="@dr1["Void_pk"]"
                                    data-planstatus="@dr1["PlanStatus"]"
-                                   value="@dr1["AchieveId_pk"]" @strchecked />
+                                   value="@dr1["AchieveId_pk"]" @strchecked @(Convert.ToInt32(dr1["Noofparticipant"]) == 0 ? "disabled" : "") />
                         </td>
                         <td data-title="Panchayat">@dr1["Activity"]</td>
                         <td data-title="Panchayat">@dr1["Panchayat"]</td>

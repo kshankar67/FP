@@ -109,14 +109,14 @@ namespace FP.Controllers
                     resResponse3.MaxJsonLength = int.MaxValue;
                     return resResponse3;
                 }
-                if (_db.tbl_BFYService.Any(x => x.ServiceMonthId == model.ServiceMonthId && x.ServiceYearId == model.ServiceYearId && (x.ServiceBFYId_pk != model.ServiceBFYId_pk && model.ServiceBFYId_pk == Guid.Empty)
-                 && x.BFYId_fk == model.BFYId_fk))
-                {
-                    response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = Enums.GetEnumDescription(Enums.eReturnReg.Already), Data = null };
-                    var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
-                    resResponse3.MaxJsonLength = int.MaxValue;
-                    return resResponse3;
-                }
+                //if (_db.tbl_BFYService.Any(x => x.ServiceMonthId == model.ServiceMonthId && x.ServiceYearId == model.ServiceYearId && (x.ServiceBFYId_pk != model.ServiceBFYId_pk && model.ServiceBFYId_pk == Guid.Empty)
+                // && x.BFYId_fk == model.BFYId_fk))
+                //{
+                //    response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = Enums.GetEnumDescription(Enums.eReturnReg.Already), Data = null };
+                //    var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
+                //    resResponse3.MaxJsonLength = int.MaxValue;
+                //    return resResponse3;
+                //}
                 if (model != null)
                 {
                     var dt = DateTime.Now;

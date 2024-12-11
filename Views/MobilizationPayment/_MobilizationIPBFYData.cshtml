@@ -26,9 +26,9 @@
                 <th>Check All<br /><input type="checkbox" class="allChecked" name="selectAll" id="selectAll" value="all" @strcheckedAll onchange="CheckUnchecked(this)" /></th>
                 <th>Beneficiary<br /> ID</th>
                 <th>Name of<br />Beneficiary</th>
-                <th>Month/Year</th>
-                <th>@CommonModel.RoleNameCont.CM</th>
+                @*<th>Month/Year</th>*@
                 <th>Service <br />Reporting <br />Month </th>
+                <th>@CommonModel.RoleNameCont.CM</th>
                 <th>@CommonModel.RoleNameCont.CNRP </th>
                 <th>@FP.Models.DisplayFollowBFY.Ct</th>
                 <th>@FP.Models.DisplayFollowBFY.Ctusemethod</th>
@@ -80,16 +80,16 @@
                         }
                         <tr class="@bgcolor @strchecked">
                             <td class="text-center">
-                                <input type="checkbox" class="check" name="check" id="check@(srno)" @chked  onchange="CheckUnchecked(this)"
+                                <input type="checkbox" class="check" name="check" id="check@(srno)" @chked onchange="CheckUnchecked(this)"
                                        data-serviceid="@dr["ServiceBFYId_pk"]" data-bfyid="@dr["BFYId_fk"]" />
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0);" onclick="BFYDetailView('@dr["BFYId_fk"]')" class="btn btn-warning btn-sm"><i class="fa fa-view"></i>@dr["BFYRegId"]</a>
                             </td>
                             <td class="text-left fw-bold">@dr["BFYName"]</td>
-                            <td class="text-center">@dr["BFYReportingDate"]</td>
-                            <td class="text-center text-warning fw-bold">@dr["ReportedBy"]</td>
+                            @*<td class="text-center">@dr["BFYReportingDate"]</td>*@
                             <td class="text-center">@dr["BFYServiceRMY"]</td>
+                            <td class="text-center text-warning fw-bold">@dr["CMName"]</td>
                             <td class="text-center text-warning fw-bold">@dr["ServiceReportingBy"]</td>
                             <td class="text-center">@dr["Contraceptive_Name"]</td>
                             <td class="text-center">@dr["Use_MethodName"]</td>
@@ -134,59 +134,59 @@
                                 }
                             }
                             @*@if ((CommonModel.RoleNameCont.CC == MvcApplication.CUser.Role || CommonModel.RoleNameCont.Admin == MvcApplication.CUser.Role))
-                                {
-                                    if (dr["Approved1Statusval"].ToString() == "1")
-                                    {
-                                        <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.MRP Validated @dr["Approved1dt"]</td>
-                                        if (dr["Approved2Statusval"].ToString() == "1")
-                                        {
-                                            <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.CC Checked @dr["Approved2dt"]</td>
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                        }
-                                        if (dr["Approved3Statusval"].ToString() == "1")
-                                        {
-                                            <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.BPM Approved @dr["Approved3dt"]</td>
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <td></td>
-                                    }
-                                }
-                                @if ((CommonModel.RoleNameCont.BPM == MvcApplication.CUser.Role || CommonModel.RoleNameCont.Admin == MvcApplication.CUser.Role))
-                                {
-                                    if (dr["Approved1Statusval"].ToString() == "1")
-                                    {
-                                        <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.MRP Validated @dr["Approved1dt"]</td>
-                                        if (dr["Approved2Statusval"].ToString() == "1")
-                                        {
-                                            <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.CC Checked @dr["Approved2dt"]</td>
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                        }
-                                        if (dr["Approved3Statusval"].ToString() == "1")
-                                        {
-                                            <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.BPM Approved @dr["Approved3dt"]</td>
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <td></td>
-                                    }
-                                }*@
+        {
+            if (dr["Approved1Statusval"].ToString() == "1")
+            {
+                <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.MRP Validated @dr["Approved1dt"]</td>
+                if (dr["Approved2Statusval"].ToString() == "1")
+                {
+                    <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.CC Checked @dr["Approved2dt"]</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                if (dr["Approved3Statusval"].ToString() == "1")
+                {
+                    <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.BPM Approved @dr["Approved3dt"]</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+            else
+            {
+                <td></td>
+            }
+        }
+        @if ((CommonModel.RoleNameCont.BPM == MvcApplication.CUser.Role || CommonModel.RoleNameCont.Admin == MvcApplication.CUser.Role))
+        {
+            if (dr["Approved1Statusval"].ToString() == "1")
+            {
+                <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.MRP Validated @dr["Approved1dt"]</td>
+                if (dr["Approved2Statusval"].ToString() == "1")
+                {
+                    <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.CC Checked @dr["Approved2dt"]</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                if (dr["Approved3Statusval"].ToString() == "1")
+                {
+                    <td class="text-centxer text-warning fw-bold">@CommonModel.RoleNameCont.BPM Approved @dr["Approved3dt"]</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+            else
+            {
+                <td></td>
+            }
+        }*@
                         </tr>
                     }
                 }
