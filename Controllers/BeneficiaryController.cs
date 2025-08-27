@@ -1,6 +1,7 @@
 ﻿using FP.Manager;
 using FP.Models;
 using Microsoft.AspNetCore.Cors;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -132,6 +133,7 @@ namespace FP.Controllers
                         tbl.ReportingMonth = item.ReportingMonth;
                         tbl.ReportingYear = item.ReportingYear;
                         tbl.BFYVillageName = item.BFYVillageName;
+                        tbl.Q1 = leftBFYmobile;
                         tbl.Q2 = item.Q2;
                         tbl.Q3 = item.Q3;
                         //tbl.Q4 = item.Q4;
@@ -210,7 +212,8 @@ namespace FP.Controllers
             }
             catch (Exception ex)
             {
-                response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = Enums.GetEnumDescription(Enums.eReturnReg.Error), Data = null };
+                var errorMessage = JsonConvert.SerializeObject(ex);
+                response = new JsonResponseData { StatusType = eAlertType.error.ToString(), Message = Enums.GetEnumDescription(Enums.eReturnReg.Error), Data = errorMessage };
                 var resResponse3 = Json(response, JsonRequestBehavior.AllowGet);
                 resResponse3.MaxJsonLength = int.MaxValue;
                 return resResponse3;

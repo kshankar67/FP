@@ -54,7 +54,7 @@ namespace FP.Models
         //[Required]
         [ExpressiveAnnotations.Attributes.RequiredIf("(IsPeerPresent==true || IsFollowUpHV == true)")]
         [Display(Name = DisplayAchBFY.IsPPrIsCt)]
-        public Nullable<bool> IsContraception { get; set; }
+        public Nullable<bool> IsContraception { get; set; } = true;
         [RequiredIf("IsContraception", true)]
         [Display(Name = DisplayAchBFY.Ct)]
         public Nullable<int> ContraceptionId_fk { get; set; }
@@ -118,8 +118,8 @@ namespace FP.Models
         public const string IsFUpHV = "FollowUp/HV in Current Month (वर्तमान माह में फॉलोअप/एचवी)";
         public const string IsPPrIsCt = "Want to use contraception after meeting/HV (मीटिंग/एचवी के बाद गर्भनिरोधक का उपयोग करना चाहते हैं)";
         public const string Ct = "Method of contraception (गर्भनिरोधन की विधि)";
-        public const string Ctusemethod = "Use method (विधि का प्रयोग करें)";
-        public const string CtusemethodOther = "Other use method (अन्य उपयोग विधि)";
+        public const string Ctusemethod = "Use method (साधन का चयन करें)";
+        public const string CtusemethodOther = "Other use method (अन्य साधन का चयन करें)";
         public const string Isservice = "Linked to ASHA for service (सेवा के लिए आशा से जुड़े)";
         public const string ServiceRevcDt = "Service Received Date (सेवा प्राप्त होने की तिथि)";
         public const string ServiceProvider = "Service Provider (सेवा प्रदाता)";

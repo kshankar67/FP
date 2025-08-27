@@ -82,13 +82,13 @@ namespace FP.Models
         public const string IsPPresent = "Present in Peer Group Meeting (सहकर्मी समूह की बैठक में उपस्थित)";
         public const string IsFUpHV = "Followup/HV in Current Month (वर्तमान माह में फॉलोअप/एचवी)";
         public const string IsPPrIsCt = "Want to use contraception after meeting/HV (मीटिंग/एचवी के बाद गर्भनिरोधक का उपयोग करना चाहते हैं)";
-        public const string Ct = "Method of contraception (गर्भनिरोधन की विधि)";
-        public const string Ctusemethod = "Use method (विधि का प्रयोग करें)";
-        public const string CtusemethodOther = "Other use method (अन्य उपयोग विधि)";
+        public const string Ct = "Method of contraception (गर्भनिरोधन की साधन)";
+        public const string Ctusemethod = "Use method (साधन का चयन करें)";
+        public const string CtusemethodOther = "Other use method (अन्य उपयोग साधन)";
         public const string ModuleRollout = "Number of SHGs where module was rolled out (एसएचजी की संख्या जहां मॉड्यूल शुरू किया गया था)";
         public const string ModuleRolloutId_fk = "Medium of module rollout (मॉड्यूल रोलआउट का माध्यम)";
-        public const string Totalnoof_malechild = "No of male child at present (वर्तमान में पुत्र संतान की संख्या)";
-        public const string Totalnoof_Femalechild = "No of female child at present (वर्तमान में कन्या शिशु की संख्या)";
+        public const string Totalnoof_malechild = "No of male child at present (वर्तमान में लड़कों की संख्या)";
+        public const string Totalnoof_Femalechild = "No of female child at present (वर्तमान में लड़कियों की संख्या)";
         public const string BeneficiaryRegID = "Beneficiary ID (लाभार्थी आईडी)";
     }
 }

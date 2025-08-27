@@ -98,8 +98,8 @@ namespace FP.Controllers
             }
             catch (Exception ex)
             {
-                string er = ex.Message;
-                return Json(new { IsSuccess = IsCheck, Data = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) }, JsonRequestBehavior.AllowGet);
+                var errorMessage = JsonConvert.SerializeObject(ex);
+                return Json(new { IsSuccess = IsCheck, Data = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError), Error = errorMessage }, JsonRequestBehavior.AllowGet);
             }
         }
 

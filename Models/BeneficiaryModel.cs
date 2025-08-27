@@ -448,7 +448,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "जन्म का वर्ष";
+                    CN = "उम्र (साल में)";
                 }
                 
                 return CN;
@@ -805,7 +805,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "अस्थायी विधि";
+                    CN = "अस्थाई साधन";
                 }
                 return CN;
             }
@@ -821,7 +821,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "अस्थायी विधि";
+                    CN = "स्थाई साधन";
                 }
                 return CN;
             }
@@ -837,7 +837,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "अस्थायी विधि";
+                    CN = "अन्य साधन";
                 }
                 return CN;
             }

@@ -460,7 +460,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "अस्थायी विधि";
+                    CN = "अस्थायी साधन";
                 }
                 return CN;
             }
@@ -476,7 +476,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "अस्थायी विधि";
+                    CN = "स्थायी साधन";
                 }
                 return CN;
             }
@@ -492,7 +492,7 @@ namespace FP.Models
                 }
                 else if (HindiEng == 2)
                 {
-                    CN = "अस्थायी विधि";
+                    CN = "अन्य साधन";
                 }
                 return CN;
             }
