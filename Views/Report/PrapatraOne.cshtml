@@ -10,6 +10,7 @@
     table td {
         font-size: 11px !important;
     }
+
     .actives5 {
         color: #009A3F !important;
         background: #FFFFFF;
@@ -70,7 +71,7 @@
                                 <div class="col-sm-4">
                                     <div class="position-relative form-group">
                                         @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label" })<span class="text-danger">*</span>
-                                        @Html.DropDownListFor(m => m.Year, new List<SelectListItem>(), null, new { @class = "form-select ", @required= "required" })
+                                        @Html.DropDownListFor(m => m.Year, new List<SelectListItem>(), null, new { @class = "form-select ", @required = "required" })
                                         @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -89,6 +90,10 @@
                                 <span class="check-spacer">
                                     <a href="~/Report/PrapatraOne" class="btn btn-info"><i class="fa fa-refresh"></i>Refresh</a>
                                 </span>
+
+                                <span class="check-spacer div-download" style="display:none;">
+                                    <a href="javascipt:void(0);" class="btn btn-success" id="btnExport" onclick="return printDiv('subdata', 'प्रपत्र-1_@(DateTime.Now.ToString("dd-MMM-yyyy"))');"><i class="fa fa-file-excel-o"></i>Export</a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -100,11 +105,7 @@
 
     <div class="row">
         <div class="col=md-12"></div>
-        <div class="col=md-6 div-download" style="display:none;">
-            <span class="check-spacer">
-                <a href="javascipt:void(0);" class="btn btn-success" id="btnExport" onclick="return ExportExcel('btnExport', 'प्रपत्र-1');"><i class="fa fa-file-excel-o"></i>Export</a>
-            </span>
-        </div>
+
         <div class="col-md-12">
             <div id="subdata" class="divclass" style="overflow-y: scroll; height: 400px;">
             </div>
@@ -128,14 +129,14 @@
     <script>
         $(document).ready(function () {
 
-            GetYearList("Year", 0,1);
-            GetMonthList("Month", 0,1);
+            GetYearList("Year", 0, 1);
+            GetMonthList("Month", 0, 1);
             GetDistrict("DistrictId", 0);
             $('#DistrictId').change(function () {
                 GetBlock("BlockId", 0, $(this).val());
             });
             $('#BlockId').change(function () {
-               // GetPanchayat("PanchayatId", 0, $('#DistrictId').val(), $(this).val());
+                // GetPanchayat("PanchayatId", 0, $('#DistrictId').val(), $(this).val());
                 GetCLF("CLFId", 0, $('#DistrictId').val(), $(this).val());
             });
             $('#CLFId').change(function () {
@@ -149,12 +150,12 @@
             /* Role Wise */
             BindRolewise("DistrictId", "BlockId", "CLFId", "PanchayatId", "VOId");
 
-            BindData();
+            //BindData();
 
             $("#formid").submit(function (e) {
                 e.preventDefault();
                 BindData();
-               
+
             });
 
         });
@@ -168,50 +169,17 @@
             filtermodel.CLFId = $('#CLFId').val() == '' ? '' : $('#CLFId').val();
             filtermodel.PanchayatId = $('#PanchayatId').val() == '' ? '' : $('#PanchayatId').val();
             filtermodel.VoId = $('#VOId').val() == '' ? '' : $('#VOId').val();
-            // filtermodel.Year = $('#Year option:selected').text() == '' ? '' : $('#Year option:selected').text();
             filtermodel.Year = $('#Year').val() == '' ? '' : $('#Year').val();
             filtermodel.Month = $('#Month').val() == '' ? '' : $('#Month').val();
-            var formData = $('#formid').serialize();
-
 
             $.ajax({
                 type: "GET",
                 url: document.baseURI + "/Report/GetPrapatraOne",
-                data: filtermodel,//JSON.stringify({ 'Roles': '' }),
-                // cache: false,
-                // data: formData,
-                //contentType: "application/json; charset=utf-8",
-                //dataType: "json",
+                data: filtermodel,
                 success: function (res) {
                     if (res.IsSuccess) {
-                        $(".div-download").css('display','block');
+                        $(".div-download").css('display', '');
                         $("#subdata").html(res.Data);
-
-                        //if ($.fn.dataTable.isDataTable('#tbl')) {
-                        //    $("#tbl").dataTable().fnDestroy();
-                        //}
-                        //table = $('#tbl').DataTable({
-                        //    //scrollY: "400px",
-                        //    //scrollX: true,
-                        //    //scrollCollapse: true,
-                        //    //paging: false,
-                        //    pageLength: 100,
-                        //    fixedColumns: {
-                        //        leftColumns: 1,
-                        //        rightColumns: 1
-                        //    },
-                        //    buttons: [{
-                        //        extend: 'excel', text: '<span><i class="fa fa-download"></i>Export</span>', title: 'Beneficiary Lists',//$('#IDDistrict option:selected').text() +
-                        //        className: 'btn btn-primary button-icon mr-3 mt-1 mb-1',
-                        //        filename: 'Beneficiary List',
-                        //        exportOptions: { modifier: { page: 'all' } }
-                        //    }],
-                        //});
-                        //$('.dataTables_filter input[type="search"]').css(
-                        //    { 'width': '500px', 'display': 'inline-block' }
-                        //);
-                        //$('#div-download').empty();
-                        //table.buttons().container().appendTo($('#div-download'));
                     }
                     else {
                         $("#subdata").html(res.Data);

@@ -169,7 +169,10 @@
                         </a>
                     </li>
                     <ul class="sub-menu collapse" id="Beneficiary">
-                        <li><a href="~/Beneficiary/Beneficiary?HindiEng=2">Add Beneficiary</a></li>
+                        @if (HttpContext.Current.User.IsInRole(CommonModel.RoleNameCont.CM))
+                        {
+                            <li><a href="~/Beneficiary/Beneficiary?HindiEng=2">Add Beneficiary</a></li>
+                        }
                         <li><a href="~/Beneficiary/BFYList">Beneficiary List</a></li>
                     </ul>
                     <li> <a href="~/Beneficiary/BFYFollow"> <i class="fa fa-fa fa-arrow-up me-2"></i> Follow up </a> </li>
@@ -208,7 +211,10 @@
                         <li><a href="~/Beneficiary/FollowupList">Follow List</a></li>
                         <li><a href="~/Report/PrapatraOne">Prapatra-1 List</a></li>
                         <li><a href="~/Report/Prapatra2">Prapatra-2</a></li>
-                        <li><a href="~/Report/Prapatra8">Prapatra-8</a></li>
+                        @if (HttpContext.Current.User.IsInRole(CommonModel.RoleNameCont.CNRP))
+                        {
+                            <li><a href="~/Report/Prapatra8">Prapatra-8</a></li>
+                        }
                         <li><a href="~/Report/AchivmentByParity">Parity</a></li>
                         <li><a href="~/Report/ServiceBFYList">Service Details</a></li>
                     </ul>

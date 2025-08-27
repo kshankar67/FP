@@ -77,11 +77,11 @@
                                                                     </div>
                                                                     @if (dt.Rows[0]["IsContraception"].ToString().ToLower() == "true")
                                                                     {
-                                                                        <div class="col-sm-12">
+                                                                        @*<div class="col-sm-12">
                                                                             <div class="position-relative form-group">
                                                                                 @DisplayAchBFY.IsPPrIsCt <strong>: @dt.Rows[0]["IsContraceptionText"].ToString()</strong>
                                                                             </div>
-                                                                        </div>
+                                                                        </div>*@
                                                                         <div class="col-sm-12">
                                                                             <div class="position-relative form-group">
                                                                                 @DisplayAchBFY.Ct <strong>: @dt.Rows[0]["C_Name"].ToString()</strong>

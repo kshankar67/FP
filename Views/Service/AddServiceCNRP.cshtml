@@ -149,14 +149,21 @@
             $('#IsPlanAchv').change(function () {
                 bindIsPlanAch();
             });
-
+            
             /* Achievement Function Start Cont */
             $(document).on('change',".Cont",function () {
                 var value = $('input[name=IsPeerPresent]:checked').val();
                 $('#div-IsContraception').hide();
                 var value1 = $('input[name=IsFollowUpHV]:checked').val();
                 if (value == "true" || value1 == "true") {
-                    $('#div-IsContraception').show();
+                    //$('#div-IsContraception').show();
+                    $("input[name=IsContraception]").prop('checked', true);
+                    Inputclear();
+                    $('#div-ContraceptionId_fk').hide(); $('#div-Service').hide();
+                    if (value == "true") {
+                        GetBFYData();
+                        $('#div-ContraceptionId_fk').show();
+                    }
                 }
                 else {
                     $("input[name=IsContraception]").prop('checked', false);

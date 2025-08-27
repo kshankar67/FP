@@ -437,7 +437,7 @@
             filtermodel.Month = $('#planMonth').val() == '' ? '' : $('#PlanMonth').val();
             //var formData = $('#formid').serialize();
 
-            if (isCurrentOrSpecialLastMonth(parseInt($('#PlanYear').text()), parseInt( filtermodel.Month))) {
+            if (isCurrentOrSpecialLastMonth(parseInt($('#PlanYear option:selected').text()), parseInt( filtermodel.Month))) {
                 $("#btnsubmit").show();
             }
             else {

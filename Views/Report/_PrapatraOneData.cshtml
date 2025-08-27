@@ -5,6 +5,11 @@
     dt = Model;
 }
 <style>
+
+    .rounded {
+        border-radius: 5px !important;
+    }
+
     .box-title {
         background: #4CAF50;
         color: #fff;
@@ -21,21 +26,24 @@
         .box-title .mb-3 span {
             margin-left: 12px;
         }
+
         .box-title .mb-3 {
             font-size: 13px;
             margin-bottom: 6px !important;
         }
+
         .box-title .p-4 {
             padding: 0rem 0.5rem !important;
         }
-        .table-box {
-            margin-bottom: 15px;
-            background: #DEFFDF;
-            padding: 12px 0 12px 12px;
-            /*border-spacing: 10px;*/
-            border-collapse: separate;
-            word-wrap: break-word;
-        }
+
+    .table-box {
+        margin-bottom: 15px;
+        background: #DEFFDF;
+       /* padding: 12px 0 12px 12px;*/
+        /*border-spacing: 10px;*/
+        border-collapse: separate;
+        word-wrap: break-word;
+    }
 
     table {
         border-collapse: separate;
@@ -60,123 +68,125 @@
     int sno = 1;
     foreach (DataRow dr in dt.Rows)
     {
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-center"> <strong>परिवार नियोजन अभिसरण कार्यक्रम</strong></p>
-                <p class="text-center"><strong>सी. एम. के द्वारा भरा जाने वाला योग्य दम्पत्ति सूची (लाइन लिस्ट फॉर्मेट सह फॉलो अप) प्रपत्र</strong>  </p>
-                <p class="text-center"><strong>प्रपत्र-1</strong> </p>
-            </div>
-            <div class="box-title">
-                <div class="rounded h-100 p-4 row g-4">
-                    <div class="col-sm-12 col-xl-4">
-                        <div class="mb-3">
-                            सीएम का नाम :<span>@dr["UpName"]</span>
+
+        <table style="width:95%;" class="table-box">
+
+            <thead>
+                <tr>
+                    <td colspan="22" style="text-align:left">
+                        <div class="col-md-12">
+                            <p class="text-center"> <strong>परिवार नियोजन अभिसरण कार्यक्रम</strong></p>
+                            <p class="text-center"><strong>सी. एम. के द्वारा भरा जाने वाला योग्य दम्पत्ति सूची (लाइन लिस्ट फॉर्मेट सह फॉलो अप) प्रपत्र</strong>  </p>
+                            <p class="text-center"><strong>प्रपत्र-1</strong> </p>
                         </div>
-                        <div class="mb-3">
-                            मोबाईल नंबर:<span>@dr["UpPhoneNo"]</span>
+                        <div class="box-title">
+                            <div class="rounded h-100 p-4 row g-4">
+                                <div class="col-sm-12 col-xl-4">
+                                    <div class="mb-3">
+                                        सीएम का नाम :<span>@dr["UpName"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        मोबाईल नंबर:<span>@dr["UpPhoneNo"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        ग्राम संगठन का नाम :<span>@dr["VO"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        कुल समूहों की संख्या :<span>@dr["Q20"]</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xl-4">
+                                    <div class="mb-3">
+                                        गाँव      :<span>@dr["ReportedVillage"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        पँचायत         :<span>@dr["Panchayat"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        प्रखंड        :<span>@dr["Block"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        जिला         :<span>@dr["DistrictName"]</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xl-4">
+                                    <div class="mb-3">
+                                        सी.एन. आर.पी का नाम      :<span>@dr["EmpName"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        सी. एन. आर. पी.का
+                                        मोबाइल नंबर          :<span>@dr["PhoneNo"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        स्वास्थ्य उपकेन्द्र
+                                        का नाम स्थान        :<span>@dr["HealthCenter"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        माह &amp; वर्ष          :<span>@dr["ReportingDate"]</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            ग्राम संगठन का नाम :<span>@dr["VO"]</span>
-                        </div>
-                        <div class="mb-3">
-                            कुल समूहों की संख्या :<span>@dr["Q20"]</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-xl-3">
-                        <div class="mb-3">
-                            गाँव      :<span>@dr["ReportedVillage"]</span>
-                        </div>
-                        <div class="mb-3">
-                            पँचायत         :<span>@dr["Panchayat"]</span>
-                        </div>
-                        <div class="mb-3">
-                            प्रखंड        :<span>@dr["Block"]</span>
-                        </div>
-                        <div class="mb-3">
-                            जिला         :<span>@dr["DistrictName"]</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-xl-5">
-                        <div class="mb-3">
-                            सी.एन. आर.पी का नाम      :<span>@dr["EmpName"]</span>
-                        </div>
-                        <div class="mb-3">
-                            सी. एन. आर. पी.का
-                            मोबाइल नंबर          :<span>@dr["PhoneNo"]</span>
-                        </div>
-                        <div class="mb-3">
-                            स्वास्थ्य उपकेन्द्र
-                            का नाम स्थान        :<span>@dr["HealthCenter"]</span>
-                        </div>
-                        <div class="mb-3">
-                            माह &amp; वर्ष          :<span>@dr["ReportingDate"]</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-box">
-                <table style="width:95%;" class="table-box">
-                    <thead>
-                        <tr>
-                            <th rowspan="2">क्र. सं.</th>
-                            <th rowspan="2">समूह का नाम</th>
-                            <th rowspan="2">लाभार्थी आईडी</th>
-                            <th rowspan="2">लाभार्थी का नाम</th>
-                            <th rowspan="2">लाभार्थी की उम्र (वर्ष मे)</th>
-                            <th rowspan="2">लाभार्थी के पति का नाम </th>
-                            <th rowspan="2">लाभार्थी की शादी की तिथि (वर्ष मे)</th>
-                            <th rowspan="2">लाभार्थी का मोबाईल नंबर</th>
-                            <th rowspan="2">समूह से जुड़ाव (यदि समूह से स्वयं जुड़े हों तो कोड-1 यदि परिवार का कोई सदस्य जुड़े हों तो कोड-2 लिखें)</th>
-                            <th rowspan="2">लाभार्थी के परिवार का जो सदस्य समूह से जुड़ी हैं उस महिला का नाम लिखें</th>
-                            <th colspan="2">वर्तमान में बच्चों की संख्या</th>
-                            <th colspan="2">सबसे छोटे बच्चे से सम्बंधित जानकारी</th>
-                            <th rowspan="2">सम्बन्धित आंगनवाड़ी केन्द्र का कोड संख्या</th>
-                            <th rowspan="2">संबंधित आशा का नाम</th>
-                            <th colspan="4">वर्तमान मे कौन सा गर्भनिरोधक साधन का रुपयोग करना चाह रहे हैं (कोड लिखे)</th>
-                            <th colspan="2">कौन सा गर्भनिरोधक साधन का रुपयोग करना चाह रहे हैं (कोड लिखे)</th>
-                        </tr>
-                        <tr>
-                            <th>लड़का</th>
-                            <th>लड़का</th>
-                            <th>लिंग (लड़का/ लड़की)</th>
-                            <th>उम्र (माह / वर्ष में लिखें)</th>
-                            <th>अस्थायी साधन</th>
-                            <th>स्थायी साधन</th>
-                            <th>कोई अन्य साधन तो नाम लिखे</th>
-                            <th>कोई भी साधन नहीं</th>
-                            <th>अस्थायी साधन</th>
-                            <th>स्थायी साधन</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@(sno++)</td>
-                            <td>@dr["SHG"]</td>
-                            <td>@dr["BFYID"]</td>
-                            <td>@dr["BFYName"]</td>
-                            <td>@dr["BFYAge"]</td>
-                            <td>@dr["Husband"]</td>
-                            <td>@(CommonModel.FormateDtDMY(dr["DOM"].ToString()))</td>
-                            <td>@dr["BFYMobileNo"]</td>
-                            <td>@dr["Q8Text"]</td>
-                            <td>@dr["SHGFamily"]</td>
-                            <td>@dr["NoofMaleChild"]</td>
-                            <td>@dr["NofFemalehild"]</td>
-                            <td>0</td>
-                            <td>@dr["Q12"]</td>
-                            <td>@dr["AWCCode"]</td>
-                            <td>@dr["ASHA"]</td>
-                            <td>@dr["CNameTM"]</td>
-                            <td>@dr["CNamePM"]</td>
-                            <td>@dr["CNameOM"]</td>
-                            <td>@(dr["CNameOT"]+"/"+ dr["OtherMethod"])</td>
-                            <td>@dr["MethodName4"]</td>
-                            <td>@dr["MethodName5"]</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th rowspan="2">क्र. सं.</th>
+                    <th rowspan="2">समूह का नाम</th>
+                    <th rowspan="2">लाभार्थी आईडी</th>
+                    <th rowspan="2">लाभार्थी का नाम</th>
+                    <th rowspan="2">लाभार्थी की उम्र (वर्ष मे)</th>
+                    <th rowspan="2">लाभार्थी के पति का नाम </th>
+                    <th rowspan="2">लाभार्थी की शादी की तिथि (वर्ष मे)</th>
+                    <th rowspan="2">लाभार्थी का मोबाईल नंबर</th>
+                    <th rowspan="2">समूह से जुड़ाव (यदि समूह से स्वयं जुड़े हों तो कोड-1 यदि परिवार का कोई सदस्य जुड़े हों तो कोड-2 लिखें)</th>
+                    <th rowspan="2">लाभार्थी के परिवार का जो सदस्य समूह से जुड़ी हैं उस महिला का नाम लिखें</th>
+                    <th colspan="2">वर्तमान में बच्चों की संख्या</th>
+                    <th colspan="2">सबसे छोटे बच्चे से सम्बंधित जानकारी</th>
+                    <th rowspan="2">सम्बन्धित आंगनवाड़ी केन्द्र का कोड संख्या</th>
+                    <th rowspan="2">संबंधित आशा का नाम</th>
+                    <th colspan="4">वर्तमान मे कौन सा गर्भनिरोधक साधन का रुपयोग करना चाह रहे हैं (कोड लिखे)</th>
+                    <th colspan="2">कौन सा गर्भनिरोधक साधन का रुपयोग करना चाह रहे हैं (कोड लिखे)</th>
+                </tr>
+                <tr>
+                    <th>लड़का</th>
+                    <th>लड़का</th>
+                    <th>लिंग (लड़का/ लड़की)</th>
+                    <th>उम्र (माह / वर्ष में लिखें)</th>
+                    <th>अस्थायी साधन</th>
+                    <th>स्थायी साधन</th>
+                    <th>कोई अन्य साधन तो नाम लिखे</th>
+                    <th>कोई भी साधन नहीं</th>
+                    <th>अस्थायी साधन</th>
+                    <th>स्थायी साधन</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@(sno++)</td>
+                    <td>@dr["SHG"]</td>
+                    <td>@dr["BFYID"]</td>
+                    <td>@dr["BFYName"]</td>
+                    <td>@dr["BFYAge"]</td>
+                    <td>@dr["Husband"]</td>
+                    <td>@(CommonModel.FormateDtDMY(dr["DOM"].ToString()))</td>
+                    <td>@dr["BFYMobileNo"]</td>
+                    <td>@dr["Q8Text"]</td>
+                    <td>@dr["SHGFamily"]</td>
+                    <td>@dr["NoofMaleChild"]</td>
+                    <td>@dr["NofFemalehild"]</td>
+                    <td>0</td>
+                    <td>@dr["Q12"]</td>
+                    <td>@dr["AWCCode"]</td>
+                    <td>@dr["ASHA"]</td>
+                    <td>@dr["CNameTM"]</td>
+                    <td>@dr["CNamePM"]</td>
+                    <td>@dr["CNameOM"]</td>
+                    <td>@(dr["CNameOT"]+"/"+ dr["OtherMethod"])</td>
+                    <td>@dr["MethodName4"]</td>
+                    <td>@dr["MethodName5"]</td>
+                </tr>
+            </tbody>
+        </table>
     }
 }
 else
